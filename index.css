@@ -1,2 +1,15 @@
 h1 {font-family: 'Times New Roman'; color:darkgreen;}
 body {background-color: blanchedalmond;}
+
+.page-title{
+    text-align: center;
+}
+
+.prova{
+    margin-left: auto;
+    margin-right: auto;
+	height: 100vh; /* vh stands for viewport units */
+    
+    background-color:burlywood;
+    width: 90%;
+}
