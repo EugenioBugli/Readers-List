@@ -1,5 +1,5 @@
 h1 {font-family: 'Times New Roman'; color:darkgreen;}
-body {background-color: blanchedalmond;}
+body {background-color: darkgreen;}
 
 .page-title{
     text-align: center;
@@ -8,8 +8,14 @@ body {background-color: blanchedalmond;}
 .central-sheet{
     margin-left: auto;
     margin-right: auto;
-	height: 100vh; /* vh stands for viewport units */
+    border-radius: 15px;
+	height: 95vh; /* vh stands for viewport units */
     
-    background-color:burlywood;
+    background-color:blanchedalmond;
     width: 90%;
+}
+
+.col{
+    margin-left: 3%;
+    margin-right: 3%;
 }
