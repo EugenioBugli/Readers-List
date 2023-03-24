@@ -19,7 +19,6 @@ grandezze
 Foto
 Login
 Config lunghezza e componenti password
-sistemare js per signin
 
 
 
