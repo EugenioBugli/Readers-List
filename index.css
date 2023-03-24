@@ -27,3 +27,7 @@ body {font-family:'Times New Roman'; background-color: rgb(7, 70, 33);}
     margin-left: auto;
     margin-right: auto;
 }
+
+.textInput {
+    border-radius: 5px;
+}
