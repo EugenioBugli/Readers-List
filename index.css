@@ -22,3 +22,8 @@ body {font-family:'Times New Roman'; background-color: rgb(7, 70, 33);}
     margin-top: 1%;
     margin-bottom: 1%;
 }
+
+.info-table{
+    margin-left: auto;
+    margin-right: auto;
+}
