@@ -16,3 +16,12 @@ function CheckForm() {
 function ClickPassword() {
     alert("La Password deve essere composta da ");
 }
+function ValidateEmail() {
+    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (!document.form.mail.value.match(validRegex)) {
+        alert("Invalid email address!");
+        return false;   
+    }
+    alert("Valid email address!");
+    return true;
+  }

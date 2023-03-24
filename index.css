@@ -1,5 +1,5 @@
-h1 {font-family: 'Times New Roman'; color:darkgreen;}
-body {background-color: darkgreen;}
+h1 {font-family: 'Times New Roman'; color:rgb(7, 70, 33);}
+body {font-family:'Times New Roman'; background-color: rgb(7, 70, 33);}
 
 .page-title{
     text-align: center;
@@ -16,6 +16,7 @@ body {background-color: darkgreen;}
 }
 
 .col{
+    text-align: center;
     margin-left: 3%;
     margin-right: 3%;
     margin-top: 1%;
