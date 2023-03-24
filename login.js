@@ -18,7 +18,7 @@ function ClickPassword() {
 }
 
 //live email validation
-var validEmailRegex = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+";
+var validEmailRegex = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+[.][a-zA-Z0-9]+";
 const email = document.getElementById('emailInput');
 
 const emailHandler = function(e) {

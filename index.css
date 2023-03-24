@@ -31,3 +31,8 @@ body {font-family:'Times New Roman'; background-color: rgb(7, 70, 33);}
 .textInput {
     border-radius: 5px;
 }
+
+.dateInput{
+    text-align: center;
+    width: 80%;
+}
