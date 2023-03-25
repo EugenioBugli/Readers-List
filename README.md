@@ -21,7 +21,9 @@ Login
 Config lunghezza e componenti password
 
 
-
+https://mojoaxel.github.io/bootstrap-select-country/index.html
+select bar with flags
+modifica allineamento select
 
 
 git add .

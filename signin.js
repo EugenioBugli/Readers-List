@@ -165,3 +165,6 @@ window.onload = function(){
         hover.style.display = 'none';
     }, false);
 }
+
+//nationality validation :
+isNationality = document.form.nationality;
