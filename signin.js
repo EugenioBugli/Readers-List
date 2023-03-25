@@ -83,31 +83,52 @@ bdate.addEventListener('input', bdateHandler);
 const pwd1 = document.form.firstpw;
 const pwd2 = document.form.secondpw;
 
+var isPasswordValid = true;
+
 const passwordHandler = function(e){
     lowerCase = false;
     upperCase = false;
     digit = false;
 
+    const hover = document.getElementById("pwd-hover-text");
+    var message = "Your password must contain at least:";
+
     s = e.target.value;
     if(s.length < 8){
+        message = "Your password must be at least 8 characters long";
+        hover.innerHTML = message;
         e.target.style.borderColor = colorError;
+        isPasswordValid = false;
         return;
     }
     for(let i = 0; i < s.length; i++){
         if(s.charAt(i) == s.charAt(i).toLowerCase()){
             lowerCase = true;
         }
-        if(s.charAt(i) == s.charAt(i).toUpperCase()){
+        if(s.charAt(i) == s.charAt(i).toUpperCase() && s.charAt(i) >= "A" && s.charAt(i) <= "Z"){
             upperCase = true;
         }
         if(s.charAt(i) >= '0' && s.charAt(i) <= '9') {
             digit = true;
         }
     }
+    if(!lowerCase){
+        message += "<br>- one lower case character.";
+    }
+    if(!upperCase){
+        message += "<br>- one upper case character.";
+    }
+    if(!digit){
+        message += "<br>- one number.";
+    }
+    hover.innerHTML = message;
     if(lowerCase && upperCase && digit){
+        hover.style.display = 'none';
         e.target.style.borderColor = colorOK;
+        isPasswordValid = true;
     }else{
         e.target.style.borderColor = colorError;
+        isPasswordValid = false;
     }
 }
 
@@ -122,3 +143,25 @@ const confirmHandler = function(e){
 pwd1.addEventListener('input', passwordHandler);
 pwd2.addEventListener('input', confirmHandler);
 /////////
+
+
+// window.onload is optional since it depends on the way in which you fire events
+window.onload = function(){
+    // selecting the elements for which we want to add a tooltip
+    const target = document.form.firstpw;
+    const hover = document.getElementById("pwd-hover-text");
+
+    var hovering = false;
+    
+    // change display to 'block' on mouseover
+    target.addEventListener('mouseover', () => {
+        hovering = true;
+        if(!isPasswordValid)
+            hover.style.display = 'block';
+    }, false);
+    
+    // change display to 'none' on mouseleave
+    target.addEventListener('mouseleave', () => {
+        hover.style.display = 'none';
+    }, false);
+}
