@@ -15,15 +15,14 @@ Password
 Conferma Password
 
 TODO :
-grandezze
-Foto
-Login
-Config lunghezza e componenti password
 
+Select Bar Border
 
+Select bar with flags :
 https://mojoaxel.github.io/bootstrap-select-country/index.html
-select bar with flags
-modifica allineamento select
+
+Captcha :
+https://www.makeuseof.com/captcha-validation-html-css-javascript/
 
 
 git add .

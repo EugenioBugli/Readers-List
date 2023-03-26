@@ -42,4 +42,5 @@ body {font-family:'Times New Roman'; background-color: rgb(7, 70, 33);}
 .nationalityInput{
     text-align: center;
     width: 80%;
+    border-radius: 5px;
 }

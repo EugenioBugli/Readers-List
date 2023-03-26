@@ -76,8 +76,27 @@ const bdateHandler = function(e){
 }
 bdate.addEventListener('input', bdateHandler);
 /////////
+//nationality validation :
+const isNationality = document.form.nationality;
+const natHandler = function(e){
+    if(isNationality.value==""){
+        e.target.style.borderColor = colorError;
+    }else{
+        e.target.style.borderColor = colorOK;
+    }
+}
+isNationality.addEventListener('input',natHandler);
+/////////
 //username validation
-
+const isUser = document.form.username;
+const userHandler = function(e){
+    if(isUser.value=="") {
+        e.target.style.borderColor = colorError;
+    }else {
+        e.target.style.borderColor = colorOK;
+    }
+}
+isUser.addEventListener('input',userHandler);
 /////////
 //password validation
 const pwd1 = document.form.firstpw;
@@ -166,5 +185,4 @@ window.onload = function(){
     }, false);
 }
 
-//nationality validation :
-isNationality = document.form.nationality;
+
