@@ -2,7 +2,9 @@ h1 {font-family: 'Times New Roman'; color:rgb(7, 70, 33);}
 body {font-family:'Times New Roman'; background-color: rgb(7, 70, 33);}
 
 .page-title{
-    text-align: center;
+    text-align: left;
+    color:blanchedalmond;
+    margin-left:75px;
 }
 
 .central-sheet{
@@ -13,11 +15,12 @@ body {font-family:'Times New Roman'; background-color: rgb(7, 70, 33);}
     
     background-color:blanchedalmond;
     width: 90vw;
-
+    
     overflow-y: scroll;
 }
 
 .col{
+    background-color:blanchedalmond;
     text-align: center;
     margin-left: 3%;
     margin-right: 3%;
@@ -44,3 +47,55 @@ body {font-family:'Times New Roman'; background-color: rgb(7, 70, 33);}
     width: 80%;
     border-radius: 5px;
 }
+
+  .button {
+    background-color: #6d2d8d;
+    text-align: center;
+    border-radius: 5px;
+    border-width: 0;
+    bottom: auto;
+    box-sizing: border-box;
+    color: lightseagreen;
+    cursor: pointer;
+    display: block;
+    flex: 1;
+    float: right;
+    left: auto;
+    line-height: 25px;
+    margin-top: 17px;
+    padding: 5px 15px;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    transition: background-color 150ms;
+    font-size: 12px;
+    letter-spacing: 1px;
+    position: absolute;
+    font-family: Poppins, sans-serif;
+    text-decoration: none;
+  }
+   
+  .button:active {
+    outline: 0;
+  }
+   
+  .button:hover {
+    background-color: blanchedalmond;
+    font-weight: 400;
+    outline: 0;
+  }
+
+.loginButton {
+    margin-left: -300px;
+    margin-right: 300px;
+  }
+
+  .contactsButton {
+    margin-left: -200px;
+    margin-right: 200px;
+  }
+
+  .homeButton {
+    margin-left: -380px;
+    margin-right: 380px;
+  }
