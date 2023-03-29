@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Reader's List Web Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width = device - width, initial - scale =1.0 ">
+        <meta name="viewport" content="initial-scale=0.9, maximum-scale=1.0, user-scalable=no" />
+        <link rel=stylesheet href="index.css" type="text/css">
+        <link rel=stylesheet href="boxhover.css" type="text/css">
+        <!--<script src="index.js" type = "application/javascript"></script>-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h1 class="page-title">Reader's LIST</h1>
+        <a ms-hide-element="true" href="./signin.html" class="loginButton button">Login</a>
+        <a ms-hide-element="true" href="./contacts.html" class="contactsButton button">Contacts</a>
+        <a ms-hide-element="true" href="./index.html" class="homeButton button">Home</a>
+        <div class="central-sheet">
+            <h2 class="col">Please enter all your data correctly</h2>
+            <form class="col" method="post" action="" name="form">
+                <table class="info-table">
+                        <td>Username:</td>
+                        <td>
+                            <input type="text" class="textInput" name="username" maxlength="40" size="40">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td>
+                            <div class="hover-container">
+                                <p id="pwd-hover-text">Invalid password.</p>
+                                <input type="password" class="textInput" name="firstpw" size="40"></td>
+                            </div>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox">Remember Me</td>
+                        <td><input type="button" value="Login" class="logb" onclick="return;"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </body>
+    <script src="signin.js"></script>
+</html>
