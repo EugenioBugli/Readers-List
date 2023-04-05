@@ -47,3 +47,23 @@ git commit -m
 git pull
 merge 
 git push
+
+DataBase:
+
+-host : localhost
+-dbname : ReadersListDB
+-password : postgres
+-user : postgres
+-port : 5432
+
+create table Utente(
+	nome varchar(40) not null,
+	cognome  varchar(40) not null,
+	birth Date not null,
+	sex char(1) not null,
+	nazionalita varchar(40) not null,
+	username varchar(40),
+	email varchar(40),
+	passw varchar(40),
+	primary key(username,email,passw)
+)

@@ -11,6 +11,26 @@ function CheckForm() {
         alert("La conferma della Password non è corretta");
         return false;
     }
+    if(document.form.nationality.value=="") {
+        alert("Inserisci la tua Nazionalità");
+        return false;
+    }
+    if(document.form.username.value=="") {
+        alert("Inserisci il tuo username");
+        return false;
+    }
+    if(document.form.email.value=="") {
+        alert("Inserisci la tua email");
+        return false;
+    }
+    if(document.form.firstpw.value=="") {
+        alert("Inserisci la tua password");
+        return false;
+    }
+    if(document.form.secondpw.value=="") {
+        alert("Inserisci la conferma della tua password");
+        return false;
+    }
     return true;
 }
 function ClickPassword() {

@@ -12,9 +12,11 @@
     </head>
     <body>
         <h1 class="page-title">Reader's LIST</h1>
-        <a ms-hide-element="true" href="./signin.html" class="loginButton button">Login</a>
-        <a ms-hide-element="true" href="./contacts.html" class="contactsButton button">Contacts</a>
-        <a ms-hide-element="true" href="./index.html" class="homeButton button">Home</a>
+        <div class="navigation">
+            <a ms-hide-element="true" href="./index.html" class="homeButton button">Home</a>
+            <a ms-hide-element="true" href="./login.html" class="loginButton button">Login</a>
+            <a ms-hide-element="true" href="./contacts.html" class="contactsButton button">Contacts</a>
+        </div>
         <div class="central-sheet">
             <h2 class="col">Please enter all your data correctly</h2>
             <form class="col" method="post" action="" name="form">
@@ -42,6 +44,9 @@
                     </tr>
                 </table>
             </form>
+            <p class="col">Don't have an account yet? 
+                <a class="contactLink" href="./signin.html">Sign-in here!</a>
+            </p>
         </div>
     </body>
     <script src="signin.js"></script>
