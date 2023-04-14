@@ -6,6 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel=stylesheet href="./login.css" type="text/css">
     <title>Reading List</title>
+    <style>
+        .grid {
+            display:grid ;
+            grid-template:
+            'a b c' 50 px 1fr 1fr;
+        }
+        .read {
+            grid-area: a;
+        }
+        .current {
+            grid-area: b;}
+        .want {
+            grid-area: c;}
+    </style>
 </head>
 <body>
     <header>
@@ -13,10 +27,21 @@
         <div class="navigation">
             <a href="indexprova.html">Home</a>
             <a href="logprova.html">Login</a>
-            <a href="contacts.html">Contacts</a>
             <a href="readinglist.html">Reading List</a>
+            <a href="contacts.html">Contacts</a>
+
         </div>
     </header>
-</body>
+    <div class="grid">
+        <div class="read">
+            READ
+        </div>
+        <div class="current">
+            CURRENT 
+        </div>
+        <div class="want">
+            WANT
+        </div>
+    </div>
 </body>
 </html>
