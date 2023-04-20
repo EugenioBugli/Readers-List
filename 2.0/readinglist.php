@@ -67,9 +67,12 @@
     <script>
         $(document).ready(function(){
             $("input[type='checkbox']").click(function(){
-                $(this).fadeOut();
-                $("#current_table").append(this);
-                $(this).fadeIn();
+                e = document.getElementById("row"+this.value);
+                $("#row"+this.value).fadeOut();
+                setTimeout(() => {
+                    $("#current_table").append($("#row"+this.value));
+                    $("#row"+this.value).fadeIn();
+                }, 400); //400 is the default duration for jquery fadeOut
             });
         })
     </script>
@@ -83,18 +86,14 @@
                 <th>
                     <h2>Read</h2><hr>
                 </th>
-                <tr>
-                    <td>Libro 1 letto</td>
-                    <td><input type="checkbox"></td>
-                </tr>
-                <tr>
-                    <td>Libro 1 letto</td>
-                    <td><input type="checkbox"></td>
-                </tr>                
-                <tr>
-                    <td>Libro 1 letto</td>
-                    <td><input type="checkbox"></td>
-                </tr>
+                <?php
+                    for($i = 0; $i < 3; $i++){
+                        echo("<tr id=row1".$i.">
+                                <td>Libro ".$i."</td>
+                                <td><input type='checkbox' value='1".$i."'></td>
+                            </tr>");
+                    }
+                ?>
             </table>
         </div>
         <div class="current grid-col">
@@ -102,18 +101,14 @@
                 <th>
                     <h2>Reading</h2><hr>
                 </th>
-                <tr>
-                    <td>Libro 2 letto</td>
-                    <td><input type="checkbox"></td>
-                </tr>
-                <tr>
-                    <td>Libro 2 letto</td>
-                    <td><input type="checkbox"></td>
-                </tr>                
-                <tr>
-                    <td>Libro 2 letto</td>
-                    <td><input type="checkbox"></td>
-                </tr>
+                <?php
+                    for($i = 0; $i < 3; $i++){
+                        echo("<tr id=row2".$i.">
+                                <td>Libro ".$i."</td>
+                                <td><input type='checkbox' value='2".$i."'></td>
+                            </tr>");
+                    }
+                ?>
             </table>
         </div>
         <div class="want grid-col">
@@ -121,18 +116,14 @@
                 <th>
                     <h2>Want to Read</h2><hr>
                 </th>
-                <tr>
-                    <td>Libro 3 letto</td>
-                    <td><input type="checkbox"></td>
-                </tr>
-                <tr>
-                    <td>Libro 3 letto</td>
-                    <td><input type="checkbox"></td>
-                </tr>                
-                <tr>
-                    <td>Libro 3 letto</td>
-                    <td><input type="checkbox"></td>
-                </tr>
+                <?php
+                    for($i = 0; $i < 3; $i++){
+                        echo("<tr id=row3".$i.">
+                                <td>Libro ".$i."</td>
+                                <td><input type='checkbox' value='3".$i."'></td>
+                            </tr>");
+                    }
+                ?>
             </table>
         </div>
     </div>
