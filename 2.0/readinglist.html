@@ -66,8 +66,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         $(document).ready(function(){
-            $("checkbox").click(function(){
-                $("current").hide() && $("read").add(this);
+            $("input[type='checkbox']").click(function(){
+                $(this).fadeOut();
+                $("#current_table").append(this);
+                $(this).fadeIn();
             });
         })
     </script>
@@ -85,7 +87,7 @@
 
     <div class="grid ">
         <div class="read grid-col">
-            <table class="table">
+            <table class="read_table table">
                 <th>
                     <h2>Read</h2><hr>
                 </th>
@@ -104,39 +106,39 @@
             </table>
         </div>
         <div class="current grid-col">
-            <table class="table">
+            <table class="current_table table" id="current_table">
                 <th>
                     <h2>Reading</h2><hr>
                 </th>
                 <tr>
-                    <td>Libro 1 letto</td>
+                    <td>Libro 2 letto</td>
                     <td><input type="checkbox"></td>
                 </tr>
                 <tr>
-                    <td>Libro 1 letto</td>
+                    <td>Libro 2 letto</td>
                     <td><input type="checkbox"></td>
                 </tr>                
                 <tr>
-                    <td>Libro 1 letto</td>
+                    <td>Libro 2 letto</td>
                     <td><input type="checkbox"></td>
                 </tr>
             </table>
         </div>
         <div class="want grid-col">
-            <table class="table">
+            <table class="want_table table">
                 <th>
                     <h2>Want to Read</h2><hr>
                 </th>
                 <tr>
-                    <td>Libro 1 letto</td>
+                    <td>Libro 3 letto</td>
                     <td><input type="checkbox"></td>
                 </tr>
                 <tr>
-                    <td>Libro 1 letto</td>
+                    <td>Libro 3 letto</td>
                     <td><input type="checkbox"></td>
                 </tr>                
                 <tr>
-                    <td>Libro 1 letto</td>
+                    <td>Libro 3 letto</td>
                     <td><input type="checkbox"></td>
                 </tr>
             </table>
