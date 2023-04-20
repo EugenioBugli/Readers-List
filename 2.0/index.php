@@ -8,14 +8,6 @@
     <title>Reader's List</title>
 </head>
 <body>
-    <header>
-        <h1 class="title">Reader's LIST</h1>
-        <div class="navigation">
-            <a href="index.html">Home</a>
-            <a href="login.html">Login</a>
-            <a href="readinglist.html">Reading List</a>
-            <a href="../contacts.html">Contacts</a>
-        </div>
-    </header>
+    <?php include("navbar.php"); ?>
 </body>
 </html>

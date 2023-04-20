@@ -132,25 +132,6 @@ header {
 
   }
   
-  select {
-    color: blanchedalmond;
-    background-color: transparent;
-    text-align: center;
-    font-size: 16px;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    padding: 0 35px;
-    border: none;
-    outline: none;
-    font-size: 16px;
-    border-bottom: 2px solid blanchedalmond;
-    border-top: 2px solid transparent;
-    transition: all 0.2s ease;
-  }
-  select:hover:after {
-    color: rgba(46, 43, 43, 0.222);
-  }
 
   .input-field i {
     position: absolute;

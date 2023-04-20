@@ -13,16 +13,8 @@
 </head>
 <body>
 
-    <header>
-        <h1 class="title">Reader's LIST</h1>
-        <div class="navigation">
-            <a href="index.html">Home</a>
-            <a href="login.html">Login</a>
-            <a href="readinglist.html">Reading List</a>
-            <a href="../contacts.html">Contacts</a>
-            
-        </div>
-    </header>
+    <?php include("navbar.php"); ?>
+
     <div class="form">
         <h2>Log in</h2>
         <form action="" method="post">
@@ -47,7 +39,7 @@
             </div>
 
             <div class="login-signup">
-                <p>Don't have an account yet? <a href="./signup.html">Sign up</a></p>
+                <p>Don't have an account yet? <a href="./signup.php">Sign up</a></p>
             </div>
         </form>
     </div>

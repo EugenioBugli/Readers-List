@@ -75,15 +75,7 @@
     </script>
 </head>
 <body>
-    <header>
-        <h1 class="title">Reader's List</h1>
-        <div class="navigation">
-            <a href="index.html">Home</a>
-            <a href="login.html">Login</a>
-            <a href="readinglist.html">Reading List</a>
-            <a href="../contacts.html">About us</a>
-        </div>
-    </header>
+    <?php include("navbar.php"); ?>
 
     <div class="grid ">
         <div class="read grid-col">
