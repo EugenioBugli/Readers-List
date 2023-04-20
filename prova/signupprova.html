@@ -240,12 +240,24 @@
             </div>
             <div class="input-field">
                 <input type="password" placeholder="Enter your Password" id="passwordInput" required />
-                <i class="fa-regular fa-eye-slash showHidePassword"></i>
+                <i class="fa-regular fa-eye-slash showHidePassword" onclick="showPassword('passwordInput')"></i>
             </div>
             <div class="input-field">
                 <input type="password" placeholder="Confirm your Password" id="confirmInput" required />
-                <i class="fa-regular fa-eye-slash showHidePassword"></i>
+                <i class="fa-regular fa-eye-slash showHidePassword" onclick="showPassword('confirmInput')"></i>
             </div>
+            <style>
+                @keyframes fadeOK {
+                    0% {border-bottom-color: green;}
+                    75% {border-bottom-color: green;}
+                    100% {border-bottom-color: blanchedalmond;}
+                }
+                .fadeOKanimation{
+                    animation: fadeOK 2s linear;
+                    animation-fill-mode: forwards;
+                }
+            </style>
+            <script src="passwordValidator.js"></script>
             <div class="checkbox-text">
                 <div class="checkbox-content">
                     <input type="checkbox" />
