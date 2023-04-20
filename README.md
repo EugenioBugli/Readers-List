@@ -67,3 +67,11 @@ create table Utente(
 	passw varchar(40),
 	primary key(username,email,passw)
 )
+
+
+
+
+
+
+
+da completare jquery , formattazione tabella reading list

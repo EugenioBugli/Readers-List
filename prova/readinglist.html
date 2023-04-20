@@ -10,37 +10,136 @@
         .grid {
             display:grid ;
             grid-template:
-            'a b c' 50 px 1fr 1fr;
+            'a b c';
+            text-align: center;
+            column-gap: 70px;
         }
         .read {
             grid-area: a;
         }
         .current {
-            grid-area: b;}
+            grid-area: b;
+        }
         .want {
-            grid-area: c;}
+            grid-area: c;
+            
+        }
+        .grid-col {
+            position: relative;
+            padding: 190px 180px;
+            background-color: rgba(46, 43, 43, 0.522); 
+            box-shadow: 0 0 10px;
+            border-radius: 30px;
+            height: 70vh;
+        }
+
+        hr {
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 5px solid blanchedalmond;
+            margin: 1em 0;
+            padding: 0;
+        }
+
+        th {
+            text-align: center;
+            font-size: 30px;
+            font-weight: 1000;
+            letter-spacing: 1px;
+            color:rgb(127, 238, 30);
+        }
+        .table {
+            width: auto;
+            font-size: 20px;
+            font-weight: 300;  
+            padding: 20px;
+            color:blanchedalmond;
+            table-layout: auto;
+        }
+
+        input[type="checkbox"] {
+            background:blanchedalmond;
+        }
+        
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("checkbox").click(function(){
+                $("current").hide() && $("read").add(this);
+            });
+        })
+    </script>
 </head>
 <body>
     <header>
-        <h1 class="title">Reader's LIST</h1>
+        <h1 class="title">Reader's List</h1>
         <div class="navigation">
             <a href="indexprova.html">Home</a>
             <a href="logprova.html">Login</a>
             <a href="readinglist.html">Reading List</a>
-            <a href="contacts.html">Contacts</a>
-
+            <a href="contacts.html">About us</a>
         </div>
     </header>
-    <div class="grid">
-        <div class="read">
-            READ
+
+    <div class="grid ">
+        <div class="read grid-col">
+            <table class="table">
+                <th>
+                    <h2>Read</h2><hr>
+                </th>
+                <tr>
+                    <td>Libro 1 letto</td>
+                    <td><input type="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Libro 1 letto</td>
+                    <td><input type="checkbox"></td>
+                </tr>                
+                <tr>
+                    <td>Libro 1 letto</td>
+                    <td><input type="checkbox"></td>
+                </tr>
+            </table>
         </div>
-        <div class="current">
-            CURRENT 
+        <div class="current grid-col">
+            <table class="table">
+                <th>
+                    <h2>Reading</h2><hr>
+                </th>
+                <tr>
+                    <td>Libro 1 letto</td>
+                    <td><input type="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Libro 1 letto</td>
+                    <td><input type="checkbox"></td>
+                </tr>                
+                <tr>
+                    <td>Libro 1 letto</td>
+                    <td><input type="checkbox"></td>
+                </tr>
+            </table>
         </div>
-        <div class="want">
-            WANT
+        <div class="want grid-col">
+            <table class="table">
+                <th>
+                    <h2>Want to Read</h2><hr>
+                </th>
+                <tr>
+                    <td>Libro 1 letto</td>
+                    <td><input type="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Libro 1 letto</td>
+                    <td><input type="checkbox"></td>
+                </tr>                
+                <tr>
+                    <td>Libro 1 letto</td>
+                    <td><input type="checkbox"></td>
+                </tr>
+            </table>
         </div>
     </div>
 </body>
