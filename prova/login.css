@@ -5,11 +5,13 @@
     box-sizing: border-box;
 }
 body {
+    padding-top:100px;
     height: 100vh;
     display: flex;
     background: url(./trinitycollegedublin.jpeg);
-    background-size: cover;
+    background-size:  cover;
     background-position: center;
+    background-attachment: fixed;
     align-items: center;
     justify-content: center;
   }
@@ -25,6 +27,7 @@ header {
     align-items: center;
     z-index: 99;
     background-color: rgb(7, 70, 33);
+    margin-bottom:100px;
   }
 .title {
     color: blanchedalmond;
