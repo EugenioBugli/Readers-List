@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,18 +14,29 @@
 
 </head>
 <body>
+    <?php
+        if(isset($_POST["email"]) && isset($_POST["password"])){
+            //login database
+            $login_ok = true;
+            $user = "username";
+            if($login_ok){
+                $_SESSION["username"] = $user;
+            }
+        }
+        if(isset($_SESSION["username"])){echo("<script>window.location.href = 'index.php'</script>");} 
+    ?>
 
     <?php include("navbar.php"); ?>
 
     <div class="form">
         <h2>Log in</h2>
-        <form action="" method="post">
+        <form action="login.php" method="post">
             <div class="input-field">
                 <input type="text" placeholder="Enter your email" name="email" required />
                 <i class="fa-regular fa-envelope"></i>
             </div>
             <div class="input-field">
-                <input type="password" placeholder="Enter your password" id="passwordInput" required />
+                <input type="password" placeholder="Enter your password" id="passwordInput" name="password" required />
                 <i class="uil uil-lock icon"></i>
                 <i class="fa-regular fa-eye-slash showHidePassword"></i>
             </div>
