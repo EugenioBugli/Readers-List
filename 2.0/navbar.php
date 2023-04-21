@@ -68,15 +68,20 @@ ul {
 }
 </style>
 <?php
+    session_start();
     echo("<header>
             <h1 class='title'>Reader's List</h1>
             <div class='navigation'>
                 <ul>
                     <li><a href='index.php'>Home</a></li>
-                    <li><a href='login.php'>Login</a></li>
                     <li><a href='readinglist.php'>Reading List</a></li>
-                    <li><a href='../contacts.html'>About us</a></li>
-                </ul>
+                    <li><a href='../contacts.html'>About us</a></li>");
+    if(!isset($_SESSION["username"])){
+        echo("      <li><a href='login.php'>Login</a></li>");
+    }else{
+        echo("      <li><a href='profile.php' class='menu'>".$_SESSION["username"]." </a></li>");
+    }
+    echo("      </ul>
             </div>
         </header>");
 ?>
