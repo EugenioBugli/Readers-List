@@ -12,7 +12,7 @@
             grid-template:
             'a b c';
             text-align: center;
-            column-gap: 70px;
+            column-gap: 8vh;
         }
         .read {
             grid-area: a;
@@ -26,11 +26,9 @@
         }
         .grid-col {
             position: relative;
-            padding: 190px 180px;
             background-color: rgba(46, 43, 43, 0.522); 
             box-shadow: 0 0 10px;
             border-radius: 30px;
-            height: 70vh;
         }
 
         hr {
@@ -49,8 +47,14 @@
             letter-spacing: 1px;
             color:rgb(127, 238, 30);
         }
+
+        tr>td {
+                padding-bottom: 5px;  /*spazio tra una riga e la successiva*/
+        }
+
         .table {
-            width: auto;
+            height: auto;
+            width: 40vh;
             font-size: 20px;
             font-weight: 300;  
             padding: 20px;
@@ -72,7 +76,7 @@
                 setTimeout(() => {
                     $("#current_table").append($("#row"+this.value));
                     $("#row"+this.value).fadeIn();
-                }, 400); //400 is the default duration for jquery fadeOut
+                }, 400); //400 is the default duration for fadeOut
             });
         })
     </script>
