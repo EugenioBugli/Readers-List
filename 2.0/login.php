@@ -60,5 +60,8 @@
     <div class="note">
         <h3>Trinity College Dublin</h3>
     </div>
+    <?php
+    $dbconn = pg_connect("host=localhost dbname=ReadersListDB password=postgres user=postgres port=5432");
+    ?>
 </body>
 </html>

@@ -10,6 +10,7 @@
         .grid {
             display:grid ;
             grid-template:
+            'a b c'
             'a b c';
             text-align: center;
             column-gap: 8vh;
@@ -22,8 +23,8 @@
         }
         .want {
             grid-area: c;
-            
         }
+
         .grid-col {
             position: relative;
             background-color: rgba(46, 43, 43, 0.522); 
@@ -81,6 +82,16 @@
             border-radius: 10px;
             color:blanchedalmond;
         }
+        
+        .divbutton {
+        }
+
+        .addbutton {
+            color: blanchedalmond;
+            background-color: rgb(7, 70, 33);
+            height: 50px;
+            width: 350px;
+        }
 
         
     </style>
@@ -133,6 +144,7 @@
                 ?>
             </table>
         </div>
+
         <div class="current grid-col">
             <table class="current_table table" id="current_table">
                 <th>
@@ -148,6 +160,7 @@
                 ?>
             </table>
         </div>
+
         <div class="want grid-col">
             <table class="want_table table" id="want_table">
                 <th>
@@ -162,6 +175,10 @@
                     }
                 ?>
             </table>
+        </div>
+
+        <div class="divbutton">
+            <button class="addbutton">Add a Book</button>
         </div>
     </div>
 </body>

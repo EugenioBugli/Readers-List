@@ -1,3 +1,8 @@
+<?php 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <style>
 header {
     position: fixed;
@@ -68,14 +73,13 @@ ul {
 }
 </style>
 <?php
-    session_start();
     echo("<header>
             <h1 class='title'>Reader's List</h1>
             <div class='navigation'>
                 <ul>
                     <li><a href='index.php'>Home</a></li>
                     <li><a href='readinglist.php'>Reading List</a></li>
-                    <li><a href='../contacts.html'>About us</a></li>");
+                    <li><a href='aboutus.php'>About us</a></li>");
     if(!isset($_SESSION["username"])){
         echo("      <li><a href='login.php'>Login</a></li>");
     }else{
