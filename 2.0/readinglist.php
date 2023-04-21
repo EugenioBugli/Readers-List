@@ -65,18 +65,51 @@
         input[type="checkbox"] {
             background:blanchedalmond;
         }
+
+        #progressbar {
+            background-color: rgb(7, 70, 33);
+            border-radius: 13px;
+            /* (height of inner div) / 2 + padding */
+            padding: 3px;
+        }
+
+        #progressbar > div {
+            background-color: green;
+            width: 100%;
+            /* Adjust with JavaScript */
+            height: 20px;
+            border-radius: 10px;
+            color:blanchedalmond;
+        }
+
         
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         $(document).ready(function(){
-            $("input[type='checkbox']").click(function(){
+            $("#want_table input[type='checkbox']").click(function(){
                 e = document.getElementById("row"+this.value);
                 $("#row"+this.value).fadeOut();
                 setTimeout(() => {
                     $("#current_table").append($("#row"+this.value));
+                    $("#current_table").append("<tr> <td> <div id='progressbar'><div>100%</div></div> </td> </tr>");
                     $("#row"+this.value).fadeIn();
                 }, 400); //400 is the default duration for fadeOut
+                $(this).prop("checked",false);
+            });
+
+            $("#current_table input[type='checkbox']").click(function(){
+                e = document.getElementById("row"+this.value);
+                $("#row"+this.value).fadeOut();
+                setTimeout(() => {
+                    $("#read_table").append($("#row"+this.value));
+                    $("#row"+this.value).fadeIn();
+                }, 400); //400 is the default duration for fadeOut
+                $(this).prop("checked",false);  
+            });
+
+            $("#progressbar").click(function(){
+                /*quando viene cliccata la barra deve aprirsi un popup in cui possono inserire la quantita delle pagine lette e modificare di conseguenza la width di progressbar > div */
             });
         })
     </script>
@@ -86,7 +119,7 @@
 
     <div class="grid ">
         <div class="read grid-col">
-            <table class="read_table table">
+            <table class="read_table table" id="read_table">
                 <th>
                     <h2>Read</h2><hr>
                 </th>
@@ -105,7 +138,7 @@
                 <th>
                     <h2>Reading</h2><hr>
                 </th>
-                <?php
+                <?php /*da cambiare con un ciclo che itera sui risultati della query risultante dal database dei libri*/
                     for($i = 0; $i < 3; $i++){
                         echo("<tr id=row2".$i.">
                                 <td>Libro ".$i."</td>
@@ -116,7 +149,7 @@
             </table>
         </div>
         <div class="want grid-col">
-            <table class="want_table table">
+            <table class="want_table table" id="want_table">
                 <th>
                     <h2>Want to Read</h2><hr>
                 </th>
