@@ -2,6 +2,13 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+$SESSION_TIME = 5*60;
+if(time() - $_SESSION["time"] > $SESSION_TIME){
+    //session expired
+    session_destroy();
+}else{
+    $_SESSION["time"] = time();
+}
 ?>
 <style>
 header {
@@ -61,8 +68,12 @@ li a {
     transition: 0.3s;
 }
 
-li a:hover {
+li .navbtn:hover {
     background-color: #006110;
+}
+
+li .logout:hover {
+    background-color: rgb(212, 0, 25);
 }
 
 ul {
@@ -72,20 +83,59 @@ ul {
     overflow: hidden;
 }
 </style>
+<style>
+ul .dropdown {
+  display: inline-block;
+}
+
+ul .dropdown a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.dropdown-menu {
+  height: 0; /* set height to 0 to hide it */
+  overflow: hidden;
+  transition: opacity 0.3s ease-out;
+  opacity: 0;
+  position: absolute;
+  background-color: rgb(1, 56, 15, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+  padding-right: 20px;
+  list-style-type: none;
+}
+
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  height: auto;
+}
+
+.logout {
+    background-color: rgb(7, 70, 33);
+}
+
+</style>
 <?php
     echo("<header>
             <h1 class='title'>Reader's List</h1>
             <div class='navigation'>
                 <ul>
-                    <li><a href='index.php'>Home</a></li>
-                    <li><a href='readinglist.php'>Reading List</a></li>
-                    <li><a href='aboutus.php'>About us</a></li>");
+                    <li><a class='navbtn' href='index.php'>Home</a></li>
+                    <li><a class='navbtn' href='readinglist.php'>Reading List</a></li>
+                    <li><a class='navbtn' href='aboutus.php'>About us</a></li>");
     if(!isset($_SESSION["username"])){
         echo("      <li><a href='login.php'>Login</a></li>");
     }else{
-        echo("      <li><a href='profile.php' class='menu'>".$_SESSION["username"]." </a></li>");
+        echo("
+                    <li class='dropdown'>
+                        <a class='navbtn' href='profile.php'>".$_SESSION["username"]."</a>
+                        <ul class='dropdown-menu'>
+                            <li ><a href='logout.php' class='logout'>Logout</a></li>
+                        </ul>
+                    </li>");
     }
-    echo("      </ul>
+     echo("         </ul>
             </div>
         </header>");
 ?>

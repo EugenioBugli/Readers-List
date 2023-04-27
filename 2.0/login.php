@@ -21,6 +21,7 @@
             $user = "username";
             if($login_ok){
                 $_SESSION["username"] = $user;
+                $_SESSION["time"] = time();
             }
         }
         if(isset($_SESSION["username"])){echo("<script>window.location.href = 'index.php'</script>");} 
