@@ -72,7 +72,7 @@
 
     function connect(){
         try {
-            $dbconn = pg_connect("host=localhost dbname=ReaderListDB password=filo200011 user=postgres port=5432");
+            $dbconn = pg_connect("host=localhost dbname=ReaderListDB password=postgres user=postgres port=5432");
             return $dbconn;
         } Catch (exception $e) {
             die($e->getMessage());
