@@ -99,18 +99,18 @@
     <script>
         $(document).ready(function(){
             $("#want_table input[type='checkbox']").click(function(){
-                e = document.getElementById("row"+this.value);
+                e = document.getElementById("#row"+this.value);
                 $("#row"+this.value).fadeOut();
                 setTimeout(() => {
                     $("#current_table").append($("#row"+this.value));
-                    $("#current_table").append("<tr> <td> <div id='progressbar'><div>100%</div></div> </td> </tr>");
+                    $("#current_table").append("<tr> <td> <div id='progressbar'><div>0%</div></div> </td> </tr>");
                     $("#row"+this.value).fadeIn();
                 }, 400); //400 is the default duration for fadeOut
                 $(this).prop("checked",false);
             });
 
             $("#current_table input[type='checkbox']").click(function(){
-                e = document.getElementById("row"+this.value);
+                e = document.getElementById("#row"+this.value);
                 $("#row"+this.value).fadeOut();
                 setTimeout(() => {
                     $("#read_table").append($("#row"+this.value));
@@ -126,7 +126,8 @@
     </script>
 </head>
 <body>
-    <?php include("navbar.php"); ?>
+    <?php include("navbar.php");
+    ?>
 
     <div class="grid ">
         <div class="read grid-col">
@@ -135,12 +136,26 @@
                     <h2>Read</h2><hr>
                 </th>
                 <?php
-                    for($i = 0; $i < 3; $i++){
-                        echo("<tr id=row1".$i.">
-                                <td>Libro ".$i."</td>
-                                <td><input type='checkbox' value='1".$i."'></td>
-                            </tr>");
-                    }
+                    require("db_utils.php");
+                    $dbconn = connect();
+                    $sql = "select id from users where username = '".$_SESSION['username']."' ";
+                    $result_log = pg_query($sql);
+                    $tupla = pg_fetch_array($result_log , null , PGSQL_ASSOC);
+                        foreach($tupla as $rw) {
+                            $query = "select book from books where id ='".$rw."'";
+                            $result = pg_query($query);
+                            while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
+                                $num = 1;
+                                foreach($line as $row) {
+                                    echo("<tr id=row3>
+                                        <td>".$row."</td>
+                                        <td><input type='checkbox' value='".$num."'></td>
+                                        </tr>");
+                                    $num++;
+                                }
+                            }
+                        }
+                    
                 ?>
             </table>
         </div>
@@ -167,12 +182,24 @@
                     <h2>Want to Read</h2><hr>
                 </th>
                 <?php
-                    for($i = 0; $i < 3; $i++){
-                        echo("<tr id=row3".$i.">
-                                <td>Libro ".$i."</td>
-                                <td><input type='checkbox' value='3".$i."'></td>
-                            </tr>");
-                    }
+                    $dbconn = connect();
+                    $sql = "select id from users where username = '".$_SESSION['username']."' ";
+                    $result_log = pg_query($sql);
+                    $tupla = pg_fetch_array($result_log , null , PGSQL_ASSOC);
+                        foreach($tupla as $rw) {
+                            $query = "select book from books where id ='".$rw."' ";
+                            $result = pg_query($query);
+                            while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
+                                $num = 1;
+                                foreach($line as $row) {
+                                    echo("<tr id=row1".$num.">
+                                        <td>".$row."</td>
+                                        <td><input type='checkbox' value='1".$num."'></td>
+                                        </tr>");
+                                    $num++;
+                                }
+                            }
+                        }
                 ?>
             </table>
         </div>

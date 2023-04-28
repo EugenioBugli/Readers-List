@@ -27,7 +27,7 @@
                 echo("<script>alert('".$ret["res"]."');</script>");
             }
         }
-        //if(isset($_SESSION["username"])){echo("<script>window.location.href = 'index.php'</script>");} 
+        if(isset($_SESSION["username"])){echo("<script>window.location.href = 'profile.php'</script>");} 
     ?>
 
     <?php include("navbar.php"); ?>
