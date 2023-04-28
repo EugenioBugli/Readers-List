@@ -15,16 +15,19 @@
 </head>
 <body>
     <?php
+        require("db_utils.php");
         if(isset($_POST["email"]) && isset($_POST["password"])){
             //login database
-            $login_ok = true;
-            $user = "username";
-            if($login_ok){
-                $_SESSION["username"] = $user;
+            $ret = signin($_POST["email"], $_POST["password"]);
+            if($ret["res"] == 0){
+                echo("<script>alert('".$ret["birth"]."');</script>");
+                $_SESSION["username"] = $ret["username"];//////////////////////
                 $_SESSION["time"] = time();
+            }else{
+                echo("<script>alert('".$ret["res"]."');</script>");
             }
         }
-        if(isset($_SESSION["username"])){echo("<script>window.location.href = 'index.php'</script>");} 
+        //if(isset($_SESSION["username"])){echo("<script>window.location.href = 'index.php'</script>");} 
     ?>
 
     <?php include("navbar.php"); ?>
@@ -62,7 +65,7 @@
         <h3>Trinity College Dublin</h3>
     </div>
     <?php
-    $dbconn = pg_connect("host=localhost dbname=ReadersListDB password=postgres user=postgres port=5432");
+    //$dbconn = pg_connect("host=localhost dbname=ReadersListDB password=postgres user=postgres port=5432");
     ?>
 </body>
 </html>

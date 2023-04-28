@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +11,28 @@
     <title>Document</title>
 </head>
 <body>
+    <?php
+        require("db_utils.php");
+        if(isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["birth"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confpassword"])){
+            //verify valid input
 
-    
-    <?php include("navbar.php"); ?>
+            ////////////////////////////////
+            $id = signup($_POST["name"], $_POST["surname"], $_POST["birth"], $_POST["username"], $_POST["email"], $_POST["password"]);
+            if($id > 0){
+                echo("<script>window.location.href = 'login.php';</script>");
+            }elseif($id == -1){
+                echo('<script>alert("È gia presente un account con l'."'".'email selezionata!");</script>');
+            }
+        }
+    ?>
+
+    <?php 
+        include("navbar.php");
+    ?>
 
     <div class="form">
         <h2>Sign up</h2>
-        <form action="profile.php" method="post">
+        <form action="signup.php" method="post">
             <div class="input-field">
                 <input type="text" placeholder="Enter your Name" name="name" required>
             </div>
@@ -33,11 +49,11 @@
                 <input type="text" placeholder="Enter your Email" name="email" required />
             </div>
             <div class="input-field">
-                <input type="password" placeholder="Enter your Password" id="passwordInput" required />
+                <input type="password" placeholder="Enter your Password" id="passwordInput" name="password" required />
                 <i class="fa-regular fa-eye-slash showHidePassword" onclick="showPassword('passwordInput')"></i>
             </div>
             <div class="input-field">
-                <input type="password" placeholder="Confirm your Password" id="confirmInput" required />
+                <input type="password" placeholder="Confirm your Password" id="confirmInput" name="confpassword" required />
                 <i class="fa-regular fa-eye-slash showHidePassword" onclick="showPassword('confirmInput')"></i>
             </div>
             <!--style for green animation when the password is valid-->
