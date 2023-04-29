@@ -21,7 +21,11 @@
             $ret = signin($_POST["email"], $_POST["password"]);
             if($ret["res"] == 0){
                 echo("<script>alert('".$ret["birth"]."');</script>");
+                $_SESSION["name"] = $ret["name"];
+                $_SESSION["surname"] = $ret["surname"];
+                $_SESSION["birth"] = $ret["birth"];
                 $_SESSION["username"] = $ret["username"];//////////////////////
+                $_SESSION["email"] = $ret["email"];
                 $_SESSION["time"] = time();
             }else{
                 echo("<script>alert('".$ret["res"]."');</script>");

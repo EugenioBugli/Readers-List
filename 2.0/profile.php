@@ -102,13 +102,13 @@
             </div>
             <div class='info infophotogrid'>
                 <h3 class='attrib'>Name:</h3>
-                <h3 class='link'>".$_SESSION["username"]."</h3><br>
+                <h3 class='link'>".$_SESSION["name"]."</h3><br>
                 
                 <h3 class='attrib'>Surname:</h3>
-                <h3 class='link'>".$_SESSION["username"]."</h3><br>
+                <h3 class='link'>".$_SESSION["surname"]."</h3><br>
 
                 <h3 class='attrib'>BirthDay:</h3>
-                <p><h3 class='link'>".$_SESSION["username"]."</h3><br>
+                <p><h3 class='link'>".$_SESSION["birth"]."</h3><br>
 
                 <h3 class='attrib'>User from:</h3>
                 <p><h3 class='link'>2023</h3><br>
