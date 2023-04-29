@@ -63,7 +63,7 @@
             return array("res"=>-2);
         }
 
-        $ret = array("res"=>0, "name"=>decrypt($row["name"], $password), "surname"=>decrypt($row["surname"], $password), "birth"=>decrypt($row["birth"], $password), "username"=>$row["username"], "email"=>$row["email"]);
+        $ret = array("res"=>0, "id"=>$row["id"], "name"=>decrypt($row["name"], $password), "surname"=>decrypt($row["surname"], $password), "birth"=>decrypt($row["birth"], $password), "username"=>$row["username"], "email"=>$row["email"]);
 
         pg_free_result($result);
         pg_close($dbconn);
@@ -72,7 +72,7 @@
 
     function connect(){
         try {
-            $dbconn = pg_connect("host=localhost dbname=ReadersListDB password=postgres user=postgres port=5432");
+            $dbconn = pg_connect("host=localhost dbname=ReadersListDB password=filo200011 user=postgres port=5432");
             return $dbconn;
         } Catch (exception $e) {
             die($e->getMessage());

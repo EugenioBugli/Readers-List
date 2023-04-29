@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,11 +97,9 @@
             font-size: 16px;
         }
 
-        /*#dialog {
+        #dialog {
             transform: scale(0);
-            color: blanchedalmond;
-        }*/
-
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
@@ -146,6 +145,7 @@
                 <?php
                     require("db_utils.php");
                     $dbconn = connect();
+                    //////////////////////basta fare $id = $_SESSION["id"]
                     $sql = "select id from users where username = '".$_SESSION['username']."' ";
                     $result_log = pg_query($sql);
                     $tupla = pg_fetch_array($result_log , null , PGSQL_ASSOC);
