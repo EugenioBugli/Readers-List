@@ -11,7 +11,8 @@
             display:grid ;
             grid-template:
             'a b c'
-            'a b c';
+            'a b c'
+            '. d .';
             text-align: center;
             column-gap: 8vh;
         }
@@ -84,6 +85,7 @@
         }
         
         .divbutton {
+            grid-area: d;
         }
 
         .addbutton {
@@ -91,15 +93,20 @@
             background-color: rgb(7, 70, 33);
             height: 50px;
             width: 350px;
+            font-size: 16px;
         }
 
-        
+        /*#dialog {
+            transform: scale(0);
+            color: blanchedalmond;
+        }*/
+
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         $(document).ready(function(){
             $("#want_table input[type='checkbox']").click(function(){
-                e = document.getElementById("#row"+this.value);
+                e = document.getElementById("#row1"+this.value);
                 $("#row"+this.value).fadeOut();
                 setTimeout(() => {
                     $("#current_table").append($("#row"+this.value));
@@ -107,6 +114,7 @@
                     $("#row"+this.value).fadeIn();
                 }, 400); //400 is the default duration for fadeOut
                 $(this).prop("checked",false);
+                
             });
 
             $("#current_table input[type='checkbox']").click(function(){
@@ -119,8 +127,9 @@
                 $(this).prop("checked",false);  
             });
 
-            $("#progressbar").click(function(){
+            $(".addbutton").click(function(){
                 /*quando viene cliccata la barra deve aprirsi un popup in cui possono inserire la quantita delle pagine lette e modificare di conseguenza la width di progressbar > div */
+                $("#dialog").css('tranform','scale(1)');
             });
         })
     </script>
@@ -128,7 +137,6 @@
 <body>
     <?php include("navbar.php");
     ?>
-
     <div class="grid ">
         <div class="read grid-col">
             <table class="read_table table" id="read_table">
@@ -144,12 +152,12 @@
                         foreach($tupla as $rw) {
                             $query = "select book from books where id ='".$rw."'";
                             $result = pg_query($query);
+                            $num = 0;
                             while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
-                                $num = 1;
                                 foreach($line as $row) {
                                     echo("<tr id=row3>
                                         <td>".$row."</td>
-                                        <td><input type='checkbox' value='".$num."'></td>
+                                        <td><input type='checkbox' value='3".$num."'></td>
                                         </tr>");
                                     $num++;
                                 }
@@ -189,13 +197,13 @@
                         foreach($tupla as $rw) {
                             $query = "select book from books where id ='".$rw."' ";
                             $result = pg_query($query);
+                            $num = 0;
                             while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
-                                $num = 1;
                                 foreach($line as $row) {
                                     echo("<tr id=row1".$num.">
-                                        <td>".$row."</td>
-                                        <td><input type='checkbox' value='1".$num."'></td>
-                                        </tr>");
+                                    <td>".$row."</td>
+                                    <td><input type='checkbox' value='1".$num."'></td>
+                                    </tr>");
                                     $num++;
                                 }
                             }
@@ -206,6 +214,7 @@
 
         <div class="divbutton">
             <button class="addbutton">Add a Book</button>
+            <div id="dialog">Puppalo forte CABRON</div>
         </div>
     </div>
 </body>
