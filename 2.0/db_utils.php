@@ -70,9 +70,25 @@
         return $ret;
     }
 
+    function book_addition($id, $name, $author, $num_pages) {
+        //$dbconn = connect();
+
+        $sql = "select count(book) from books where book='".$name."' and id='".$id."'";
+        $result = pg_query($sql) or die('Error message: ' . pg_last_error());
+        if(pg_fetch_row($result)[0] > 0){
+            return -1;
+        }
+        $pag = 0;
+        $sql = "INSERT INTO books (id, book, num_pages, author, current_page) VALUES ('".$id."', '".$name."', '".$num_pages."', '".$author."', '".$pag."')";
+        $result = pg_query($sql) or die('Error message: ' . pg_last_error());
+        pg_free_result($result);
+        //pg_close($dbconn);
+        return 1;
+    }
+
     function connect(){
         try {
-            $dbconn = pg_connect("host=localhost dbname=ReadersListDB password=filo200011 user=postgres port=5432");
+            $dbconn = pg_connect("host=localhost dbname=ReadersListDB password=postgres user=postgres port=5432");
             return $dbconn;
         } Catch (exception $e) {
             die($e->getMessage());

@@ -89,17 +89,94 @@
             grid-area: d;
         }
 
-        .addbutton {
+        .divbutton button{
             color: blanchedalmond;
             background-color: rgb(7, 70, 33);
             height: 50px;
             width: 350px;
             font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .divbutton button:hover {
+            background-color: #078c57;
         }
 
         #dialog {
             transform: scale(0);
+            text-align: center;
         }
+        .book-form {
+            position: relative;
+            padding: 40px 30px;
+            background-color: rgba(46, 43, 43, 0.622); 
+            box-shadow: 0 0 10px ;
+            border-radius: 20px;
+            text-align: center;
+        }
+        .book-field {
+            position: relative;
+            height: 90px;
+        }
+        .book-field input{
+            position: relative;
+            color: blanchedalmond;
+            color: blanchedalmond;
+            height: 40px;
+            width: 350px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid blanchedalmond;
+            border-top: 2px solid transparent;
+        }
+        .book-field ::placeholder{
+            color: blanchedalmond;
+        }
+        input[type="text"], input[type="number"] {
+          background-color: transparent;
+          color: white;
+        }
+        .book-field button{
+            position: relative;
+            color: blanchedalmond;
+            background-color: rgb(7, 70, 33);
+            color: blanchedalmond;
+            height: 50px;
+            width: 350px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            
+        }
+        .book-field button:hover {
+            background-color: #078c57;
+        }
+        .closebutton button{
+            color:blanchedalmond;
+            /*background-color: rgba(7, 70, 33,0.622);*/
+            background-color: transparent;
+            height: 30px;
+            width: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            outline: none;
+        }
+
+        .closebutton button:hover {
+            background-color: red;
+        }
+
+        .closebutton {
+            position: fixed;
+            right: 0;
+            top: 0;
+        }
+
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
@@ -126,16 +203,19 @@
                 $(this).prop("checked",false);  
             });
 
-            $(".addbutton").click(function(){
-                /*quando viene cliccata la barra deve aprirsi un popup in cui possono inserire la quantita delle pagine lette e modificare di conseguenza la width di progressbar > div */
-                $("#dialog").css('tranform','scale(1)');
+            $(".divbutton button").click(function(){
+                $("#dialog").css('transform','scale(1)');
+            });
+            
+            $(".closebutton button").click(function(){
+                $("#dialog").css('transform','scale(0)');
             });
         })
     </script>
 </head>
 <body>
-    <?php include("navbar.php");
-    ?>
+    <?php include("navbar.php");?>
+    
     <div class="grid ">
         <div class="read grid-col">
             <table class="read_table table" id="read_table">
@@ -145,25 +225,23 @@
                 <?php
                     require("db_utils.php");
                     $dbconn = connect();
-                    //////////////////////basta fare $id = $_SESSION["id"]
-                    $sql = "select id from users where username = '".$_SESSION['username']."' ";
-                    $result_log = pg_query($sql);
-                    $tupla = pg_fetch_array($result_log , null , PGSQL_ASSOC);
-                        foreach($tupla as $rw) {
-                            $query = "select book from books where id ='".$rw."'";
-                            $result = pg_query($query);
-                            $num = 0;
-                            while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
-                                foreach($line as $row) {
-                                    echo("<tr id=row3>
-                                        <td>".$row."</td>
-                                        <td><input type='checkbox' value='3".$num."'></td>
-                                        </tr>");
-                                    $num++;
-                                }
-                            }
+                    if(isset($_POST["book_name"]) && isset($_POST["author_name"]) && isset($_POST["num_pages"]) && isset($_SESSION["id"])){
+                        $add = book_addition($_SESSION["id"], $_POST["book_name"], $_POST["author_name"], $_POST["num_pages"]);
+                        if($add == -1) echo("<script>alert('Libro Già Inserito');</script>");
+                        else echo("<script>alert('Libro Inserito Correttamente');</script>");
+                    }
+                    $query = "select book from books where id ='".$_SESSION["id"]."'";
+                    $result = pg_query($query);
+                    $num = 0;
+                    while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
+                        foreach($line as $row) {
+                            echo("<tr id=row3>
+                                <td>".$row."</td>
+                                <td><input type='checkbox' value='3".$num."'></td>
+                                </tr>");
+                            $num++;
                         }
-                    
+                    }
                 ?>
             </table>
         </div>
@@ -191,30 +269,43 @@
                 </th>
                 <?php
                     $dbconn = connect();
-                    $sql = "select id from users where username = '".$_SESSION['username']."' ";
-                    $result_log = pg_query($sql);
-                    $tupla = pg_fetch_array($result_log , null , PGSQL_ASSOC);
-                        foreach($tupla as $rw) {
-                            $query = "select book from books where id ='".$rw."' ";
-                            $result = pg_query($query);
-                            $num = 0;
-                            while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
-                                foreach($line as $row) {
-                                    echo("<tr id=row1".$num.">
-                                    <td>".$row."</td>
-                                    <td><input type='checkbox' value='1".$num."'></td>
-                                    </tr>");
-                                    $num++;
-                                }
-                            }
+                    $query = "select book from books where id ='".$_SESSION["id"]."' ";
+                    $result = pg_query($query);
+                    $num = 0;
+                    while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
+                        foreach($line as $row) {
+                            echo("<tr id=row1".$num.">
+                            <td>".$row."</td>
+                            <td><input type='checkbox' value='1".$num."'></td>
+                            </tr>");
+                            $num++;
                         }
+                    }
                 ?>
             </table>
         </div>
 
         <div class="divbutton">
-            <button class="addbutton">Add a Book</button>
-            <div id="dialog">Puppalo forte CABRON</div>
+            <button>Add a Book</button>
+        </div>
+        <div id="dialog">
+            <form class="book-form" method="post" action="readinglist.php">
+                <div class="book-field">
+                    <input type="text" placeholder="Enter Book's Name" name="book_name" required>
+                </div>
+                <div class="book-field">
+                    <input type="text" placeholder="Enter Author's Name" name="author_name" required>
+                </div>
+                <div class="book-field">
+                    <input type="number" placeholder="Enter Number of pages" name="num_pages" required>
+                </div>
+                <div class="book-field"> 
+                    <button type="submit">Add Book</button>
+                </div>
+                <div class="closebutton">
+                    <button class="closebutton">X</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>

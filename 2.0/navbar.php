@@ -96,7 +96,7 @@ if(isset($_SESSION["time"]) && time() - $_SESSION["time"] > $SESSION_TIME){
         transition: opacity 0.3s ease-out;
         opacity: 0;
         position: absolute;
-        background-color: rgb(1, 56, 15, 0.2);
+        /*background-color: rgb(1, 56, 15, 0.2);*/
         border-radius: 10px;
         padding: 10px;
         padding-right: 20px;
