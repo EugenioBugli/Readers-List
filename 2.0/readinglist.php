@@ -9,13 +9,35 @@
     <title>Reading List</title>
     <style>
         .grid {
-            display:grid ;
-            grid-template:
-            'a b c'
-            'a b c'
-            '. d .';
+            display: grid;
             text-align: center;
-            column-gap: 8vh;
+            grid-column-gap: 5vw;
+            grid-row-gap: 8vh;
+        }
+        @media only screen and (max-width: 1000px) {
+            .grid {
+                grid-template:
+                    '. a .'
+                    '. b .'
+                    '. c .'
+                    '. d .';
+            }
+
+            .grid-col{
+                width: 40vw;
+                margin-right: 50vw;
+            }
+        }
+        @media only screen and (min-width: 1000px) {
+            .grid {
+                grid-template:
+                    'a b c'
+                    '. d .';
+            }
+
+            .grid-col {
+                width: 25vw;
+            }
         }
         .read {
             grid-area: a;
@@ -28,10 +50,10 @@
         }
 
         .grid-col {
-            position: relative;
             background-color: rgba(46, 43, 43, 0.522); 
             box-shadow: 0 0 10px;
             border-radius: 30px;
+            overflow: hidden;
         }
 
         hr {
@@ -52,17 +74,18 @@
         }
 
         tr>td {
-                padding-bottom: 5px;  /*spazio tra una riga e la successiva*/
+            padding-bottom: 5px;  /*spazio tra una riga e la successiva*/
         }
 
         .table {
             height: auto;
-            width: 40vh;
+            width: 23vw;
             font-size: 20px;
             font-weight: 300;  
             padding: 20px;
             color:blanchedalmond;
             table-layout: auto;
+            margin: auto auto;
         }
 
         input[type="checkbox"] {
@@ -85,21 +108,21 @@
             color:blanchedalmond;
         }
         
-        .divbutton {
+        .addbutton {
             grid-area: d;
         }
 
-        .divbutton button{
+        .addbutton button{
             color: blanchedalmond;
             background-color: rgb(7, 70, 33);
             height: 50px;
-            width: 350px;
+            width: 20vw;
             font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .divbutton button:hover {
+        .addbutton button:hover {
             background-color: #078c57;
         }
 
@@ -203,7 +226,7 @@
                 $(this).prop("checked",false);  
             });
 
-            $(".divbutton button").click(function(){
+            $(".addbutton button").click(function(){
                 $("#dialog").css('transform','scale(1)');
             });
             
@@ -242,6 +265,7 @@
                             $num++;
                         }
                     }
+                    pg_close($dbconn);
                 ?>
             </table>
         </div>
@@ -285,7 +309,7 @@
             </table>
         </div>
 
-        <div class="divbutton">
+        <div class="addbutton">
             <button>Add a Book</button>
         </div>
         <div id="dialog">
