@@ -7,6 +7,10 @@
     <link rel=stylesheet href="./login.css" type="text/css">
     <title>Profile</title>
     <style>
+        .user_img {
+            width: 70%
+        }
+
         .central-sheet {
             position: relative;
             background-color: rgb(7, 70, 33); 
@@ -93,7 +97,7 @@
         <div class='grid'>
         
             <div class='photo infophotogrid'>
-                <img src='https://th.bing.com/th/id/OIP.q-cdNfHrqcd8sGbscdNjzQHaKx?pid=ImgDet&rs=1'>
+                <img class='user_img' src='https://th.bing.com/th/id/OIP.q-cdNfHrqcd8sGbscdNjzQHaKx?pid=ImgDet&rs=1'>
                 <h3 class='creator'>".$_SESSION["username"]."</h3>
             </div>
             <div class='history infophotogrid'>
