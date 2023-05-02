@@ -128,7 +128,7 @@
             background-color: #078c57;
         }
 
-        #dialog {
+        #dialog-books {
             transform: scale(0);
             text-align: center;
             grid-area: e;
@@ -152,7 +152,6 @@
         }
         .book-field input{
             position: relative;
-            color: blanchedalmond;
             color: blanchedalmond;
             height: 40px;
             width: 350px;
@@ -208,16 +207,31 @@
             top: 0;
         }
 
+        #dialog-pages {
+            grid-area: e;
+            transform: scale(0);
+            text-align: center;
+            margin-left: 26vw;
+            margin-right: 26vw;
+            margin-bottom: 10vh;
+        }
+        #dialog-pages h3 {
+            color: blanchedalmond;
+            height: 40px;
+            font-size: 16px;
+            text-align: center;
+        }
+
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         $(document).ready(function(){
             $("#want_table input[type='checkbox']").click(function(){
-                e = document.getElementById("#row1"+this.value);
+                e = document.getElementById("#row"+this.value);
                 $("#row"+this.value).fadeOut();
                 setTimeout(() => {
                     $("#current_table").append($("#row"+this.value));
-                    $("#current_table").append("<tr> <td> <div id='progressbar'><div>0%</div></div> </td> </tr>");
+                    $("#current_table").append("<tr> <td> <div id='progressbar'><button class='progressbutton'>0%</button></div> </td> </tr>");
                     $("#row"+this.value).fadeIn();
                 }, 400); //400 is the default duration for fadeOut
                 $(this).prop("checked",false);
@@ -235,17 +249,18 @@
             });
 
             $(".addbutton button").click(function(){
-                $("#dialog").css('transform','scale(1)');
+                $("#dialog-pages").css('transform','scale(1)');
                 $(".addbutton").css('transform','scale(0)');
             });
             
             $(".closebutton button").click(function(){
-                $("#dialog").css('transform','scale(0)');
+                $("#dialog-pages").css('transform','scale(0)');
                 $(".addbutton").css('transform','scale(1)');
             });
 
-            $("#progressbar").click(function(){
-
+            $(".progressbutton").click(function(){
+                /*$("progressbar > div").css('width',)*/
+                $("#dialog-pages").css('transform','scale(1)');
             });
         })
     </script>
@@ -296,7 +311,7 @@
                     $num = 0;
                     while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
                         foreach($line as $row) {
-                            echo("<tr id=row3>
+                            echo("<tr id=row2>
                                 <td>".$row."</td>
                                 <td><input type='checkbox' value='3".$num."'></td>
                                 </tr>");
@@ -327,6 +342,7 @@
                             $num++;
                         }
                     }
+                    pg_close($dbconn);
                 ?>
             </table>
         </div>
@@ -334,7 +350,7 @@
         <div class="addbutton button">
             <button>Add a Book</button>
         </div>
-        <div id="dialog">
+        <div id="dialog-books">
             <form class="book-form" method="post" action="readinglist.php">
                 <div class="book-field">
                     <input type="text" placeholder="Enter Book's Name" name="book_name" required>
@@ -347,6 +363,34 @@
                 </div>
                 <div class="book-field"> 
                     <button type="submit">Add Book</button>
+                </div>
+                <div class="closebutton">
+                    <button type="reset">X</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="dialog-pages">
+            <form class="book-form" method="post" action="readinglist.php">
+                <div class="book-field">
+                    <input type="number" placeholder="Update your Current Page" name="current_page" required>
+                </div>
+                <?php
+                    $dbconn = connect();
+                    $query = "select num_pages from books where id ='".$_SESSION["id"]."' ";
+                    $result = pg_query($query);
+                    while($line = pg_fetch_array($result, null , PGSQL_ASSOC)) {
+                        foreach($line as $row) {
+                            echo("
+                                <div class='book-field'>
+                                    <h3>Total Number of Pages : ".$row."</h3>
+                                </div>
+                                ");
+                        }
+                    }
+                ?>
+                <div class="book-field">
+                    <button type="submit">Update</button>
                 </div>
                 <div class="closebutton">
                     <button type="reset">X</button>
