@@ -109,7 +109,7 @@
 
         #progressbar > div {
             background-color: green;
-            width: 100%;
+            width: 0%;
             /* Adjust with JavaScript */
             height: 20px;
             border-radius: 10px;
@@ -132,8 +132,8 @@
             transform: scale(0);
             text-align: center;
             grid-area: e;
-            margin-left: 10vw;
-            margin-right: 10vw;
+            margin-left: 26vw;
+            margin-right: 26vw;
             margin-bottom: 10vh;
         }
 
@@ -236,10 +236,16 @@
 
             $(".addbutton button").click(function(){
                 $("#dialog").css('transform','scale(1)');
+                $(".addbutton").css('transform','scale(0)');
             });
             
             $(".closebutton button").click(function(){
                 $("#dialog").css('transform','scale(0)');
+                $(".addbutton").css('transform','scale(1)');
+            });
+
+            $("#progressbar").click(function(){
+
             });
         })
     </script>
@@ -284,12 +290,20 @@
                     <h2>Reading</h2><hr>
                 </th>
                 <?php /*da cambiare con un ciclo che itera sui risultati della query risultante dal database dei libri*/
-                    for($i = 0; $i < 3; $i++){
-                        echo("<tr id=row2".$i.">
-                                <td>Libro ".$i."</td>
-                                <td><input type='checkbox' value='2".$i."'></td>
-                            </tr>");
+                    $dbconn = connect();
+                    $query = "select book from books where id ='".$_SESSION["id"]."' and current_page <> 0";
+                    $result = pg_query($query);
+                    $num = 0;
+                    while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
+                        foreach($line as $row) {
+                            echo("<tr id=row3>
+                                <td>".$row."</td>
+                                <td><input type='checkbox' value='3".$num."'></td>
+                                </tr>");
+                            $num++;
+                        }
                     }
+                    pg_close($dbconn);
                 ?>
             </table>
         </div>
@@ -335,7 +349,7 @@
                     <button type="submit">Add Book</button>
                 </div>
                 <div class="closebutton">
-                    <button class="closebutton">X</button>
+                    <button type="reset">X</button>
                 </div>
             </form>
         </div>
