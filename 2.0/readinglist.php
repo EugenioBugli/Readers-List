@@ -27,6 +27,10 @@
                 width: 40vw;
                 margin-right: 50vw;
             }
+
+            .addbutton{
+                margin-right: 50vw;
+            }
         }
         @media only screen and (min-width: 1000px) {
             .grid {
