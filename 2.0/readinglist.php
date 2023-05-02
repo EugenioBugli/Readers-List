@@ -14,29 +14,26 @@
             grid-column-gap: 5vw;
             grid-row-gap: 8vh;
         }
-        @media only screen and (max-width: 1000px) {
+        @media only screen and (max-width: 800px) {
             .grid {
                 grid-template:
                     '. a .'
                     '. b .'
                     '. c .'
-                    '. d .';
+                    '. d .'
+                    'e e e';
             }
 
             .grid-col{
                 width: 40vw;
-                margin-right: 50vw;
-            }
-
-            .addbutton{
-                margin-right: 50vw;
             }
         }
-        @media only screen and (min-width: 1000px) {
+        @media only screen and (min-width: 801px) {
             .grid {
                 grid-template:
                     'a b c'
-                    '. d .';
+                    '. d .'
+                    'e e e';
             }
 
             .grid-col {
@@ -81,9 +78,16 @@
             padding-bottom: 5px;  /*spazio tra una riga e la successiva*/
         }
 
+        td{
+            max-width: 20vw;
+            overflow: hidden;
+            text-overflow: ellipsis;  /*adds ... to the name of a book if too long*/
+            white-space: nowrap;
+        }
+
         .table {
             height: auto;
-            width: 23vw;
+            max-width: 23vw;
             font-size: 20px;
             font-weight: 300;  
             padding: 20px;
@@ -117,13 +121,7 @@
         }
 
         .addbutton button{
-            color: blanchedalmond;
-            background-color: rgb(7, 70, 33);
-            height: 50px;
             width: 20vw;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
 
         .addbutton button:hover {
@@ -133,7 +131,12 @@
         #dialog {
             transform: scale(0);
             text-align: center;
+            grid-area: e;
+            margin-left: 10vw;
+            margin-right: 10vw;
+            margin-bottom: 10vh;
         }
+
         .book-form {
             position: relative;
             padding: 40px 30px;
@@ -142,6 +145,7 @@
             border-radius: 20px;
             text-align: center;
         }
+
         .book-field {
             position: relative;
             height: 90px;
@@ -313,7 +317,7 @@
             </table>
         </div>
 
-        <div class="addbutton">
+        <div class="addbutton button">
             <button>Add a Book</button>
         </div>
         <div id="dialog">

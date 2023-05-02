@@ -94,21 +94,4 @@
             die($e->getMessage());
         }
     }
-
-    //$hash_password = hash('sha256', $password)
-    //$crypted_email = 
-/*
-    $dbconn = connect();
-    $sql = "select * from users";
-    $result = pg_query($sql) or die('Error message: ' . pg_last_error());
-    while ($row = pg_fetch_row($result)) {
-        var_dump($row);
-        $clear = "aaaaaaaaaafilippoa2000@gmail.com";
-        echo("<br>".strlen($clear)."<br>");
-        echo(encrypt($clear, hash('sha256', $row[2])));
-        echo("<br>".strlen(encrypt($clear, hash('sha256', $row[2]))));
-    }
-
-    pg_free_result($result);
-    pg_close($dbconn);*/
 ?>
