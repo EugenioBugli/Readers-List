@@ -85,12 +85,13 @@
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.css">
 </head>
 <body>
     <?php include("navbar.php"); ?>
+    <?php if(!isset($_SESSION["username"])){echo("<script>window.location.href = 'login.php'</script>");} ?>
     
-        <?php
-        echo("<div class='central-sheet'>
+    <div class='central-sheet'>
         <h1 class='about'>Personal Profile:</h1>
         <hr>
         
@@ -98,28 +99,30 @@
         
             <div class='photo infophotogrid'>
                 <img class='user_img' src='https://th.bing.com/th/id/OIP.q-cdNfHrqcd8sGbscdNjzQHaKx?pid=ImgDet&rs=1'>
-                <h3 class='creator'>".$_SESSION["username"]."</h3>
+                <h3 class='creator'><?php echo($_SESSION["username"]); ?></h3>
             </div>
             <div class='history infophotogrid'>
                 <h3 class='attrib'>History: </h3>
-                <h3 class='link'>".$_SESSION["username"]."</h3><br>
+                <h3 class='link'><?php echo($_SESSION["username"]); ?></h3><br>
             </div>
             <div class='info infophotogrid'>
                 <h3 class='attrib'>Name:</h3>
-                <h3 class='link'>".$_SESSION["name"]."</h3><br>
+                <h3 class='link'><?php echo($_SESSION["name"]); ?></h3><br>
                 
                 <h3 class='attrib'>Surname:</h3>
-                <h3 class='link'>".$_SESSION["surname"]."</h3><br>
+                <h3 class='link'><?php echo($_SESSION["surname"]); ?></h3><br>
 
                 <h3 class='attrib'>BirthDay:</h3>
-                <p><h3 class='link'>".$_SESSION["birth"]."</h3><br>
+                <p><h3 class='link'><?php echo($_SESSION["birth"]); ?></h3><br>
 
                 <h3 class='attrib'>User from:</h3>
                 <p><h3 class='link'>2023</h3><br>
+
+                <i class="fa-solid fa-gear settings" onclick="window.location.href = 'login.php';"></i><br>
+
             </div>
 
         </div>
-    </div>");
-        ?>  
+    </div>
 </body>
 </html>
