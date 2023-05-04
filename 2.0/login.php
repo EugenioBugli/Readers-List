@@ -8,8 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel=stylesheet href="login.css" type="text/css">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
-    <script src="https://kit.fontawesome.com/1a8c6dd550.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.css">
     <title>Log in</title>
 
 </head>
@@ -42,13 +41,14 @@
         <form action="login.php" method="post">
             <div class="input-field">
                 <input type="text" placeholder="Enter your email" name="email" required />
-                <i class="fa-regular fa-envelope"></i>
+                <i class="fa-solid fa-envelope"></i>
             </div>
             <div class="input-field">
                 <input type="password" placeholder="Enter your password" id="passwordInput" name="password" required />
-                <i class="uil uil-lock icon"></i>
-                <i class="fa-regular fa-eye-slash showHidePassword"></i>
+                <i class="fa-regular fa-lock"></i>
+                <i class="fa-regular fa-eye-slash showHidePassword" onclick="showPassword('passwordInput')"></i>
             </div>
+            <script src="passwordValidator.js"></script>
             <div class="checkbox-text">
                 <div class="checkbox-content">
                     <input type="checkbox" />
