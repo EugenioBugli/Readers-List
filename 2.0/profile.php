@@ -8,7 +8,17 @@
     <title>Profile</title>
     <style>
         .user_img {
-            width: 70%
+            width: 40%
+        }
+
+        .grid {
+            display: grid;
+            grid-template:
+            'a b'
+            'c c';
+            text-align: center;
+            column-gap: 1vw;
+            row-gap: 8vh;
         }
 
         .central-sheet {
@@ -37,14 +47,6 @@
             padding: 0;
         }
         
-        .grid {
-            display: grid;
-            grid-template:
-            'a c'
-            'a b';
-            text-align: center;
-            column-gap: 8vh;
-        }
         .infophotogrid {
             text-align: center;
             position: relative;
@@ -57,14 +59,16 @@
             grid-area: b;
         }
         
-        .history {
+
+        .creator {
+            background-color:blue;
             grid-area: c;
         }
 
-        .creator {
+        .user h3{
             text-align: center;
-            font-size: 30px;
-            font-weight: 1000;
+            font-size: 35px;
+            font-weight: 8000;
             letter-spacing: 1px;
             color:rgb(127, 238, 30);
         }
@@ -83,6 +87,21 @@
             letter-spacing: 1px;
             color: rgb(32, 178, 170);
         }
+        .creator button{
+            color:blanchedalmond;
+            background-color: rgba(7, 70, 33,0.622);
+            height: 40px;
+            width: 180px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            outline: none;
+        }
+
+        .creator button:hover {
+            background-color: red;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.css">
@@ -96,15 +115,19 @@
         <hr>
         
         <div class='grid'>
-        
+
             <div class='photo infophotogrid'>
                 <img class='user_img' src='https://th.bing.com/th/id/OIP.q-cdNfHrqcd8sGbscdNjzQHaKx?pid=ImgDet&rs=1'>
-                <h3 class='creator'><?php echo($_SESSION["username"]); ?></h3>
+                <?php echo("
+                <div class='user'>
+                <h3>".$_SESSION["username"]."</h3>
+                </div>
+                "); ?>
             </div>
-            <div class='history infophotogrid'>
-                <h3 class='attrib'>History: </h3>
-                <h3 class='link'><?php echo($_SESSION["username"]); ?></h3><br>
+            <div class="creator">
+                <button id="logout">Logout</button>
             </div>
+            
             <div class='info infophotogrid'>
                 <h3 class='attrib'>Name:</h3>
                 <h3 class='link'><?php echo($_SESSION["name"]); ?></h3><br>
@@ -118,9 +141,7 @@
                 <h3 class='attrib'>User from:</h3>
                 <p><h3 class='link'>2023</h3><br>
 
-                <div class="button">
-                    <button id="logout">logout</button>
-                </div>
+                
                 <i class="fa-regular fa-gear fa-xl settings" onclick="window.location.href = 'profilesettings.php';"></i>
             </div>
         </div>
