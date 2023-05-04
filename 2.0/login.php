@@ -19,7 +19,6 @@
             //login database
             $ret = signin($_POST["email"], $_POST["password"]);
             if($ret["res"] == 0){
-                echo("<script>alert('".$ret["birth"]."');</script>");
                 $_SESSION["id"] = $ret["id"];
                 $_SESSION["name"] = $ret["name"];
                 $_SESSION["surname"] = $ret["surname"];

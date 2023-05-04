@@ -1,4 +1,5 @@
 <?php
+    session_start();
     //max username length = 32 -> max aes128CTR length = 44
     //max email length = 320 -> max aes128CTR length = 428
     //sha256 length = 32
@@ -86,29 +87,52 @@
         return 1;
     }
 
-    function changes($id, $name, $surname, $email, $user){
-        //$dbconn = connect();
-        
-
-            $sql = "select count(email) from users where email='".$email."'";
-            $result = pg_query($sql) or die('Error message: ' . pg_last_error());
-            if(pg_fetch_row($result)[0] > 0){
-                return -1;
-            }   
-
-            $sql_in = "select name,surname,user,email from users where username='".$user."' and email='".$email."' and id='".$id."'";
-            
-            $query = "UPDATE users SET
-                        name='".$name."',
-                        surname='".$surname."',
-                        email='".$email."',
-                        user='".$username."'
-                        WHERE id='".$id."' ";
-            $query_result = pg_query($query) or die('Error Message: ' . preg_last_error());
-            pg_free_result($query_result);
-            return 1;
-            
+    function verify_pwd($id, $password){
+        $dbconn = connect();
+        $sql = "select count(id) from users where password='".sha256($password)."'";
+        $result = pg_query($sql) or die('Error message: ' . pg_last_error());
+        if(pg_fetch_row($result)[0] == 0){
+            return FALSE; // wrong password
+        } else {
+            return TRUE; //password ok
+        }
+        pg_free_result($result);
+        pg_close($dbconn);
     }
+
+    function applyChanges($id, $name, $surname, $email, $user, $password){
+        if(!verify_pwd($id, $password)){return -1;}
+        
+        $dbconn = connect();
+        $query = "update users set
+                    name='".encrypt($name, $password)."',
+                    surname='".encrypt($surname, $password)."',
+                    email='".$email."',
+                    username='".$user."' where id='".$id."' ";
+        $query_result = pg_query($query) or die('Error Message: ' . preg_last_error());
+        pg_free_result($query_result);
+        pg_close($dbconn);
+        return 0;
+    }
+
+    function changePassword($old, $new){
+        echo("gay");
+        if(!verify_pwd($_SESSION["id"], $old)){return -1;}
+        
+        $dbconn = connect();
+        $query = "update users set
+                    name='".encrypt($_SESSION["name"], $new)."',
+                    surname='".encrypt($_SESSION["surname"], $new)."',
+                    birth='".encrypt($_SESSION["birth"], $new)."',
+                    password='".sha256($new)."' where id='".$_SESSION["id"]."' ";
+        echo($query);
+        $query_result = pg_query($query) or die('Error Message: ' . preg_last_error());
+        echo("aaa");
+        pg_free_result($query_result);
+        pg_close($dbconn);
+        return 0;
+    }
+
     function connect(){
         try {
             $dbconn = pg_connect("host=localhost dbname=ReadersListDB password=postgres user=postgres port=5432");

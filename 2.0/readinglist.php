@@ -14,7 +14,7 @@
             grid-column-gap: 5vw;
             grid-row-gap: 8vh;
         }
-        @media only screen and (max-width: 800px) {
+        @media screen and (max-width: 800px) and (min-width: 501px) {
             .grid {
                 grid-template:
                     '. a .'
@@ -28,7 +28,7 @@
                 width: 40vw;
             }
         }
-        @media only screen and (min-width: 801px) {
+        @media screen and (min-width: 801px) {
             .grid {
                 grid-template:
                     'a b c'
@@ -38,6 +38,20 @@
 
             .grid-col {
                 width: 25vw;
+            }
+        }
+        @media screen and (max-width: 500px) {
+            .grid {
+                grid-template:
+                    '. a .'
+                    '. b .'
+                    '. c .'
+                    '. d .'
+                    'e e e';
+            }
+
+            .grid-col{
+                width: 80vw;
             }
         }
         .read {
