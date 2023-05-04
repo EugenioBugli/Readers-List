@@ -118,10 +118,11 @@
                 <h3 class='attrib'>User from:</h3>
                 <p><h3 class='link'>2023</h3><br>
 
-                <i class="fa-solid fa-gear settings" onclick="window.location.href = 'profilesettings.php';"></i><br>
-
+                <div class="button">
+                    <button id="logout">logout</button>
+                </div>
+                <i class="fa-regular fa-gear fa-xl settings" onclick="window.location.href = 'profilesettings.php';"></i>
             </div>
-
         </div>
     </div>
 </body>
