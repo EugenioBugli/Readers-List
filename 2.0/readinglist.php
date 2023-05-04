@@ -215,7 +215,7 @@
             margin-right: 26vw;
             margin-bottom: 10vh;
         }
-        #dialog-pages h3 {
+        #dialog-pages h2 {
             color: blanchedalmond;
             height: 40px;
             font-size: 16px;
@@ -244,12 +244,10 @@
                 obj.click(function(){
                     /*$("progressbar > div").css('width',)*/
                     $("#dialog-pages").css('transform','scale(1)');
-                    b_name = e.text();
-                    $.ajax({
-                        url:'updatepages.php',
-                        data: b_name,
-                        type: 'post'
-                    });
+                    $("#dialog-books").css('transform','scale(0)');
+                    $(".addbutton").css('transform','scale(1)');
+                    document.getElementById("bookname").value = e.text();
+                    document.getElementById("updatetitle").innerHTML = "Update your current page for ".concat(e.text());
                 });
             });
 
@@ -266,6 +264,7 @@
             $(".addbutton button").click(function(){
                 $("#dialog-books").css('transform','scale(1)');
                 $(".addbutton").css('transform','scale(0)');
+                $("#dialog-pages").css('transform','scale(0)');
             });
             
             $(".closebutton button").click(function(){
@@ -373,7 +372,7 @@
                 <div class="book-field">
                     <input type="number" placeholder="Enter Number of pages" name="num_pages" required>
                 </div>
-                <div class="book-field"> 
+                <div class="book-field button"> 
                     <button type="submit">Add Book</button>
                 </div>
                 <div class="closebutton">
@@ -384,13 +383,15 @@
 
         <div id="dialog-pages">
             <form class="book-form" method="post" action="readinglist.php">
+                <input name="bookname" id="bookname" type="text" hidden></input>
+                <h2 id="updatetitle"></h2>
                 <div class="book-field">
-                    <input type="number" placeholder="Update your Current Page" name="current_page" required>
+                    <input type="number" placeholder="New page" name="current_page" id="current_page" required>
                 </div>
                 <?php
                     include("updatepages.php");
                 ?>
-                <div class="book-field">
+                <div class="book-field button">
                     <button type="submit">Update</button>
                 </div>
                 <div class="closebutton">
