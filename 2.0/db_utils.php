@@ -99,11 +99,11 @@
             $sql_in = "select name,surname,user,email from users where username='".$user."' and email='".$email."' and id='".$id."'";
             
             $query = "UPDATE users SET
-                        name = '".$name."',
-                        surname = '".$surname."',
-                        email = '".$email."',
-                        user = '".$username."'
-                        WHERE '".$sql_in."' ";
+                        name='".$name."',
+                        surname='".$surname."',
+                        email='".$email."',
+                        user='".$username."'
+                        WHERE id='".$id."' ";
             $query_result = pg_query($query) or die('Error Message: ' . preg_last_error());
             pg_free_result($query_result);
             return 1;
