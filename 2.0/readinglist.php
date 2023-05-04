@@ -282,7 +282,7 @@
                         if($add == -1) echo("<script>alert('Libro Già Inserito');</script>");
                         else echo("<script>alert('Libro Inserito Correttamente');</script>");
                     }
-                    $query = "select book from books where id ='".$_SESSION["id"]."'";
+                    $query = "select book from books where id ='".$_SESSION["id"]."' and finished is true";
                     $result = pg_query($query);
                     $num = 0;
                     while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
