@@ -86,6 +86,29 @@
         return 1;
     }
 
+    function changes($id, $name, $surname, $email, $user){
+        //$dbconn = connect();
+        
+
+            $sql = "select count(email) from users where email='".$email."'";
+            $result = pg_query($sql) or die('Error message: ' . pg_last_error());
+            if(pg_fetch_row($result)[0] > 0){
+                return -1;
+            }   
+
+            $sql_in = "select name,surname,user,email from users where username='".$user."' and email='".$email."' and id='".$id."'";
+            
+            $query = "UPDATE users SET
+                        name = '".$name."',
+                        surname = '".$surname."',
+                        email = '".$email."',
+                        user = '".$username."'
+                        WHERE '".$sql_in."' ";
+            $query_result = pg_query($query) or die('Error Message: ' . preg_last_error());
+            pg_free_result($query_result);
+            return 1;
+            
+    }
     function connect(){
         try {
             $dbconn = pg_connect("host=localhost dbname=ReadersListDB password=postgres user=postgres port=5432");

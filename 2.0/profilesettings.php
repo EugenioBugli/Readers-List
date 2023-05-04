@@ -60,29 +60,21 @@
 <body>
     <?php include("navbar.php"); ?>
     <?php if(!isset($_SESSION["username"])){echo("<script>window.location.href = 'login.php'</script>");} 
+        require("db_utils.php");
+        $dbconn = connect();
+
         $name = $_POST["change_name"];
         $surname = $_POST["change_surname"];
         $user = $_POST["change_username"];
         $email = $_POST["change_email"];
         $id = $_SESSION["id"];
+
         if(isset($name) && isset($surname) && isset($user) && isset($email)){
-
-            $sql = "select count(email) from users where email='".$email."'";
-            $result = pg_query($sql) or die('Error message: ' . pg_last_error());
-            if(pg_fetch_row($result)[0] > 0){
-                return -1;
-            }   
-
-            $sql_in = "select name,surname,user,email from users where username='".$username."' and email='".$email."' and id='".$id."'";
-            
-            $query = "UPDATE users SET
-                        name = '".$name."',
-                        surname = '".$surname."',
-                        email = '".$email."',
-                        user = '".$username."',
-                        ";
-            
+            $change = changes($id, $name, $surname, $email, $user);
+            if($change == -1) echo("<script>alert('Libro Già Inserito');</script>");
+            else echo("<script>alert('Libro Inserito Correttamente');</script>");
         }
+        
     ?>
     <div id="change-form">
         <form class="change-form" action="profilesettings.php" method="post">
