@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +10,42 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <link rel=stylesheet href="fontawesome-free-6.4.0-web/css/all.css">
     <style>
+        .grid{
+            display: grid;
+            grid-template:
+                    'a'
+                    'b';
+            grid-row-gap: 20px;
+            grid-column-gap: 20px;
+            padding-top: 20px;
+        }
+
+        .change-data{
+            grid-area: a;
+        }
+
+        .change-pwd{
+            grid-area: b;
+        }
+        @media only screen and (min-width: 451px)  {
+            .change-field input{
+                width: 350px;
+            }
+        }
+
+        @media only screen and (max-width: 450px)  {
+            body{
+                padding-left:20px;
+            }
+
+            .change-form{
+                margin: 10px;
+                width: 80vw;
+            }
+            .change-field input{
+                width: 95%;
+            }
+        }
         .change-form {
             position: relative;
             padding: 40px 30px;
@@ -16,6 +53,10 @@
             box-shadow: 0 0 10px ;
             border-radius: 20px;
             text-align: center;
+        }
+
+        form{
+            overflow:hidden;
         }
 
         .change-field {
@@ -26,7 +67,6 @@
             position: relative;
             color: blanchedalmond;
             height: 40px;
-            width: 350px;
             font-size: 16px;
             border: none;
             outline: none;
@@ -55,46 +95,98 @@
         .change-field button:hover{
             background-color: #078c57;
         }
+        .button button{
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
     <?php include("navbar.php"); ?>
-    <?php if(!isset($_SESSION["username"])){echo("<script>window.location.href = 'login.php'</script>");} 
-        require("db_utils.php");
-        $dbconn = connect();
+    <?php 
+        if(!isset($_SESSION["username"])){echo("<script>window.location.href = 'login.php'</script>");} 
+        if(isset($_POST["password"]) && (isset($_POST["change_name"]) || isset($_POST["change_surname"]) || isset($_POST["change_username"]) || isset($_POST["change_email"]))){
+            require("db_utils.php");
+            
+            $name = $_SESSION["name"];
+            if(isset($_POST["change_name"]) && $_POST["change_name"] != ""){$name = $_POST["change_name"];}
 
-        $name = $_POST["change_name"];
-        $surname = $_POST["change_surname"];
-        $user = $_POST["change_username"];
-        $email = $_POST["change_email"];
-        $id = $_SESSION["id"];
+            $surname = $_SESSION["surname"];
+            if(isset($_POST["change_surname"]) && $_POST["change_surname"] != ""){echo("bbb");$surname = $_POST["change_surname"];}
+            
+            $user = $_SESSION["username"];  ////check validity
+            if(isset($_POST["change_username"]) && $_POST["change_username"] != ""){$user = $_POST["change_username"];}
 
-        if(isset($name) && isset($surname) && isset($user) && isset($email)){
-            $change = changes($id, $name, $surname, $email, $user);
-            if($change == -1) echo("<script>alert('Libro Già Inserito');</script>");
-            else echo("<script>alert('Libro Inserito Correttamente');</script>");
+            $email = $_SESSION["email"];
+            if(isset($_POST["change_email"]) && $_POST["change_email"] != ""){$email = $_POST["change_email"];}
+
+            $id = $_SESSION["id"];
+
+            if(isset($name) && isset($surname) && isset($user) && isset($email)){
+                $change = applyChanges($id, $name, $surname, $email, $user, $_POST["password"]);
+                if($change == -1) echo("<script>alert('Wrong password');</script>");
+                else {
+                    echo("<script>alert('Updated correctly');</script>");
+                    $_SESSION["name"] = $name;
+                    $_SESSION["surname"] = $surname;
+                    $_SESSION["username"] = $user;
+                    $_SESSION["email"] = $email;
+                    echo("<script>window.location.href = 'profile.php'</script>");
+                }
+            }
         }
-        
+        if(isset($_POST["old_password"]) && isset($_POST["change_password"]) && isset($_POST["change_password2"])){
+            if($_POST["change_password"] != $_POST["change_password2"]){echo("<script>alert('The confirmation password is not correct');</script>");}
+            require("db_utils.php");
+            $change = changePassword($_POST["old_password"], $_POST["change_password"]);
+            if($change == -1){echo("<script>alert('Wrong old password');</script>");}
+            else{
+                echo("<script>alert('Password changed correctly');</script>");
+                echo("<script>window.location.href = 'profile.php'</script>");
+            }
+        }
+
     ?>
-    <div id="change-form">
-        <form class="change-form" action="profilesettings.php" method="post">
-            <div class="change-field">
-                <input type='text' name="change_name" placeholder="Change your Name Here" required>
-            </div>
-            <div class="change-field">
-                <input type='text' name="change_surname" placeholder="Change your Surname Here" required>
-            </div>
-            <div class="change-field">
-                <input type='text' name="change_username" placeholder="Change your Username Here" required>
-            </div>
-            <div class="change-field">
-                <input type='text' name="change_email" placeholder="Change your Email Here" required>
-            </div>
-            <div class="change-field">
-                <button type="submit">Apply Changes</button>
-                <button type="reset">Back to Profile</button>
-            </div>
-        </form>
+    <div class="grid">
+        <div id="change-form change-data">
+            <form class="change-form" action="profilesettings.php" method="post">
+                <div class="change-field">
+                    <input type='text' name="change_name" placeholder="Change your Name Here">
+                </div>
+                <div class="change-field">
+                    <input type='text' name="change_surname" placeholder="Change your Surname Here">
+                </div>
+                <div class="change-field">
+                    <input type='text' name="change_username" placeholder="Change your Username Here">
+                </div>
+                <div class="change-field">
+                    <input type='text' name="change_email" placeholder="Change your Email Here">
+                </div>
+                <div class="change-field">
+                    <input type='password' name="password" placeholder="Confirm your password" required>
+                </div>
+                <div class="change-field button">
+                    <button type="submit">Apply Changes</button>
+                    <button type="reset">Back to Profile</button>
+                </div>
+            </form>
+        </div>
+        <div id="change-form change-pwd">
+            <form class="change-form" action="profilesettings.php" method="post">
+                <div class="change-field">
+                    <input type='password' name="old_password" placeholder="Old password here" required>
+                </div>
+                <div class="change-field">
+                    <input type='password' id="change_password" name="change_password" placeholder="New password here">
+                </div>
+                <div class="change-field">
+                    <input type='password' id="change_password2" name="change_password2" placeholder="Confirm new password here">
+                </div>
+                <div class="change-field button">
+                    <button type="submit">Apply Changes</button>
+                    <button type="reset">Back to Profile</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>
