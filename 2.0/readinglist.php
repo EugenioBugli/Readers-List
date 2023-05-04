@@ -230,7 +230,7 @@
 
             $("#want_table input[type='checkbox']").click(function(){
                 e = $("#row"+this.value);
-                obj = $("<tr> <td> <div id='progressbar'><button class='progressbutton'>0%</button></div> </td> </tr>");
+                obj = $("<tr> <td> <div id='progressbar'><div>0%</div></div> </td> </tr>");
                 $(e).fadeOut();
                 setTimeout(() => {
                     $("#current_table").append($(e));
@@ -246,7 +246,7 @@
                     $("#dialog-pages").css('transform','scale(1)');
                     $("#dialog-books").css('transform','scale(0)');
                     $(".addbutton").css('transform','scale(1)');
-                    document.getElementById("bookname").value = e.text();
+                    document.getElementById("bookname").value = e.text().trim();
                     document.getElementById("updatetitle").innerHTML = "Update your current page for ".concat(e.text());
                 });
             });
@@ -309,7 +309,14 @@
                 ?>
             </table>
         </div>
-
+        <?php
+            $dbconn = connect();
+            require("updatepages.php");
+            if(isset($_POST["current_pag"]) && isset($_POST["bookname"])) {
+                change_page($_POST["current_pag"], $_POST["bookname"], $_SESSION["id"]);
+                echo("<script>alert('Page Update eseguito Correttamente');</script>");
+            }
+        ?>
         <div class="current grid-col">
             <table class="current_table table" id="current_table">
                 <th>
@@ -317,17 +324,19 @@
                 </th>
                 <?php /*da cambiare con un ciclo che itera sui risultati della query risultante dal database dei libri*/
                     $dbconn = connect();
-                    $query = "select book from books where id ='".$_SESSION["id"]."' and current_page <> 0";
+                    $query = "select book,current_page,num_pages from books where id ='".$_SESSION["id"]."' and current_page <> 0";
                     $result = pg_query($query);
                     $num = 0;
-                    while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
-                        foreach($line as $row) {
+                    while($row = pg_fetch_array($result , null , PGSQL_ASSOC)) {
+                            $value = ((int)$row["current_page"]) * 100 / ((int) $row["num_pages"]);
+                            $num = number_format((float) $value, 1 , '.', '');
                             echo("<tr id='row2".$num."'>
-                                <td>".$row."</td>
+                                <td>".$row["book"]."</td>
                                 <td><input type='checkbox' value='3".$num."'></td>
-                                </tr>");
+                                </tr>
+                                <tr> <td> <div id='progressbar'><div style='width:".$num."%;'> ".$num." % </div></div> </td> </tr>
+                                ");
                             $num++;
-                        }
                     }
                     pg_close($dbconn);
                 ?>
@@ -341,7 +350,7 @@
                 </th>
                 <?php
                     $dbconn = connect();
-                    $query = "select book from books where id ='".$_SESSION["id"]."' ";
+                    $query = "select book from books where id ='".$_SESSION["id"]."' and current_page = 0 ";
                     $result = pg_query($query);
                     $num = 0;
                     while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
@@ -386,11 +395,8 @@
                 <input name="bookname" id="bookname" type="text" hidden></input>
                 <h2 id="updatetitle"></h2>
                 <div class="book-field">
-                    <input type="number" placeholder="New page" name="current_page" id="current_page" required>
+                    <input type="number" placeholder="New page" name="current_pag" id="current_page" required>
                 </div>
-                <?php
-                    include("updatepages.php");
-                ?>
                 <div class="book-field button">
                     <button type="submit">Update</button>
                 </div>
