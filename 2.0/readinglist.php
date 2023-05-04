@@ -226,42 +226,54 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         $(document).ready(function(){
+            //var obj = $("<tr> <td> <div id='progressbar'><button class='progressbutton'>0%</button></div> </td> </tr>");
+
             $("#want_table input[type='checkbox']").click(function(){
-                e = document.getElementById("#row"+this.value);
-                $("#row"+this.value).fadeOut();
+                e = $("#row"+this.value);
+                obj = $("<tr> <td> <div id='progressbar'><button class='progressbutton'>0%</button></div> </td> </tr>");
+                $(e).fadeOut();
                 setTimeout(() => {
-                    $("#current_table").append($("#row"+this.value));
-                    $("#current_table").append("<tr> <td> <div id='progressbar'><button class='progressbutton'>0%</button></div> </td> </tr>");
-                    $("#row"+this.value).fadeIn();
+                    $("#current_table").append($(e));
+                    $("#current_table").append(obj);
+                    $(e).fadeIn();
                 }, 400); //400 is the default duration for fadeOut
                 $(this).prop("checked",false);
                 
+                //need to change the id 
+
+                obj.click(function(){
+                    /*$("progressbar > div").css('width',)*/
+                    $("#dialog-pages").css('transform','scale(1)');
+                    b_name = e.text();
+                    $.ajax({
+                        url:'updatepages.php',
+                        data: b_name,
+                        type: 'post'
+                    });
+                });
             });
 
             $("#current_table input[type='checkbox']").click(function(){
-                e = document.getElementById("#row"+this.value);
-                $("#row"+this.value).fadeOut();
+                var e = $("#row"+this.value);
+                $(e).fadeOut();
                 setTimeout(() => {
-                    $("#read_table").append($("#row"+this.value));
-                    $("#row"+this.value).fadeIn();
+                    $("#read_table").append($(e));
+                    $(e).fadeIn();
                 }, 400); //400 is the default duration for fadeOut
-                $(this).prop("checked",false);  
+                $(this).prop("checked",false); 
             });
 
             $(".addbutton button").click(function(){
-                $("#dialog-pages").css('transform','scale(1)');
+                $("#dialog-books").css('transform','scale(1)');
                 $(".addbutton").css('transform','scale(0)');
             });
             
             $(".closebutton button").click(function(){
-                $("#dialog-pages").css('transform','scale(0)');
+                $("#dialog-books").css('transform','scale(0)');
                 $(".addbutton").css('transform','scale(1)');
+                $("#dialog-pages").css('transform','scale(0)');
             });
 
-            $(".progressbutton").click(function(){
-                /*$("progressbar > div").css('width',)*/
-                $("#dialog-pages").css('transform','scale(1)');
-            });
         })
     </script>
 </head>
@@ -287,7 +299,7 @@
                     $num = 0;
                     while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
                         foreach($line as $row) {
-                            echo("<tr id=row3>
+                            echo("<tr id='row3".$num."'>
                                 <td>".$row."</td>
                                 <td><input type='checkbox' value='3".$num."'></td>
                                 </tr>");
@@ -311,7 +323,7 @@
                     $num = 0;
                     while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
                         foreach($line as $row) {
-                            echo("<tr id=row2>
+                            echo("<tr id='row2".$num."'>
                                 <td>".$row."</td>
                                 <td><input type='checkbox' value='3".$num."'></td>
                                 </tr>");
@@ -335,7 +347,7 @@
                     $num = 0;
                     while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
                         foreach($line as $row) {
-                            echo("<tr id=row1".$num.">
+                            echo("<tr id='row1".$num."'>
                             <td>".$row."</td>
                             <td><input type='checkbox' value='1".$num."'></td>
                             </tr>");
@@ -351,7 +363,7 @@
             <button>Add a Book</button>
         </div>
         <div id="dialog-books">
-            <form class="book-form" method="post" action="readinglist.php">
+            <form class="book-form" method="post" action="updatepages.php">
                 <div class="book-field">
                     <input type="text" placeholder="Enter Book's Name" name="book_name" required>
                 </div>
@@ -376,18 +388,7 @@
                     <input type="number" placeholder="Update your Current Page" name="current_page" required>
                 </div>
                 <?php
-                    $dbconn = connect();
-                    $query = "select num_pages from books where id ='".$_SESSION["id"]."' ";
-                    $result = pg_query($query);
-                    while($line = pg_fetch_array($result, null , PGSQL_ASSOC)) {
-                        foreach($line as $row) {
-                            echo("
-                                <div class='book-field'>
-                                    <h3>Total Number of Pages : ".$row."</h3>
-                                </div>
-                                ");
-                        }
-                    }
+                    include("updatepages.php");
                 ?>
                 <div class="book-field">
                     <button type="submit">Update</button>
