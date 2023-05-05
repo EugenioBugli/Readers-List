@@ -240,7 +240,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         $(document).ready(function(){
-            //var obj = $("<tr> <td> <div id='progressbar'><button class='progressbutton'>0%</button></div> </td> </tr>");
+            //obj = $("<tr> <td> <div id='progressbar'><div>0%</div></div> </td> </tr>");
 
             $("#want_table input[type='checkbox']").click(function(){
                 e = $("#row"+this.value);
@@ -256,7 +256,6 @@
                 //need to change the id 
 
                 obj.click(function(){
-                    /*$("progressbar > div").css('width',)*/
                     $("#dialog-pages").css('transform','scale(1)');
                     $("#dialog-books").css('transform','scale(0)');
                     $(".addbutton").css('transform','scale(1)');
@@ -266,14 +265,23 @@
             });
 
             $("#current_table input[type='checkbox']").click(function(){
-                var e = $("#row"+this.value);
+                e = $("#row"+this.value);
                 $(e).fadeOut();
                 setTimeout(() => {
                     $("#read_table").append($(e));
                     $(e).fadeIn();
                 }, 400); //400 is the default duration for fadeOut
-                $(this).prop("checked",false); 
+                $(this).prop("checked",false);
             });
+
+            $("#progressbar").click(function(){
+                    e = $("#row"+this.value);
+                    $("#dialog-pages").css('transform','scale(1)');
+                    $("#dialog-books").css('transform','scale(0)');
+                    $(".addbutton").css('transform','scale(1)');
+                    document.getElementById("bookname").value = e.text().trim();
+                    document.getElementById("updatetitle").innerHTML = "Update your current page for ".concat(e.text());
+                });
 
             $(".addbutton button").click(function(){
                 $("#dialog-books").css('transform','scale(1)');
@@ -327,8 +335,8 @@
             </table>
         </div>
         <?php
-            $dbconn = connect();
             require("updatepages.php");
+            $dbconn = connect();
             if(isset($_POST["current_pag"]) && isset($_POST["bookname"])) {
                 change_page($_POST["current_pag"], $_POST["bookname"], $_SESSION["id"]);
                 echo("<script>alert('Page Update eseguito Correttamente');</script>");
@@ -347,11 +355,12 @@
                     while($row = pg_fetch_array($result , null , PGSQL_ASSOC)) {
                             $value = ((int)$row["current_page"]) * 100 / ((int) $row["num_pages"]);
                             $num = number_format((float) $value, 1 , '.', '');
+                            $print = "<tr> <td> <div id='progressbar'><div style='width:".$num."%;'> ".$num." % </div></div> </td> </tr>";
                             echo("<tr id='row2".$num."'>
                                 <td>".$row["book"]."</td>
                                 <td><input type='checkbox' value='3".$num."'></td>
                                 </tr>
-                                <tr> <td> <div id='progressbar'><div style='width:".$num."%;'> ".$num." % </div></div> </td> </tr>
+                                ".$print."
                                 ");
                             $num++;
                     }
@@ -388,7 +397,7 @@
             <button>Add a Book</button>
         </div>
         <div id="dialog-books">
-            <form class="book-form" method="post" action="updatepages.php">
+            <form class="book-form" method="post" action="readinglist.php">
                 <div class="book-field">
                     <input type="text" placeholder="Enter Book's Name" name="book_name" required>
                 </div>
