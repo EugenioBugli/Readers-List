@@ -27,6 +27,10 @@
             .grid-col{
                 width: 40vw;
             }
+
+            .book-field input{
+                width: 350px;
+            }
         }
         @media screen and (min-width: 801px) {
             .grid {
@@ -38,6 +42,10 @@
 
             .grid-col {
                 width: 25vw;
+            }
+
+            .book-field input{
+                width: 350px;
             }
         }
         @media screen and (max-width: 500px) {
@@ -52,6 +60,22 @@
 
             .grid-col{
                 width: 80vw;
+            }
+
+            #dialog-books{
+                width: 90vw;
+            }
+
+            #dialog-books form{
+                width: 90vw;
+            }
+
+            .book-field input{
+                width: 90%;
+            }
+
+            .book-field button{
+                width:50%;
             }
         }
         .read {
@@ -168,7 +192,6 @@
             position: relative;
             color: blanchedalmond;
             height: 40px;
-            width: 350px;
             font-size: 16px;
             border: none;
             outline: none;
@@ -189,7 +212,6 @@
             background-color: rgb(7, 70, 33);
             color: blanchedalmond;
             height: 50px;
-            width: 350px;
             font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
