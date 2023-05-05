@@ -22,6 +22,8 @@
                 echo("<script>window.location.href = 'login.php';</script>");
             }elseif($id == -1){
                 echo('<script>alert("È gia presente un account con l'."'".'email selezionata!");</script>');
+            }elseif($id == -2){
+                echo('<script>alert("The selected username is already taken.");</script>');
             }
         }
     ?>
@@ -46,7 +48,7 @@
                 <input type="date" name="birth" required>
             </div>
             <div class="input-field">
-                <input type="text" placeholder="Enter your Email" name="email" required />
+                <input type="text" placeholder="Enter your Email" name="email" id="emailInput" required />
             </div>
             <div class="input-field">
                 <input type="password" placeholder="Enter your Password" id="passwordInput" name="password" required />
@@ -68,7 +70,6 @@
                     animation-fill-mode: forwards;
                 }
             </style>
-            <script src="passwordValidator.js"></script>
             <div class="checkbox-text">
                 <div class="checkbox-content">
                     <input type="checkbox" />
@@ -76,8 +77,9 @@
                 </div>
             </div>
             <div class="input-field button">
-                <button type="submit">Sign Up</button>
+                <button id="confirm" type="submit">Sign Up</button>
             </div>
+            <script src="passwordValidator.js"></script>
 
             <div class="login-signup">
                 <p>Already have an account? <a href="./login.php">Log in</a></p>

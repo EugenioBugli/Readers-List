@@ -47,7 +47,6 @@
                 <i class="fa-regular fa-lock"></i>
                 <i class="fa-regular fa-eye-slash showHidePassword" onclick="showPassword('passwordInput')"></i>
             </div>
-            <script src="passwordValidator.js"></script>
             <div class="checkbox-text">
                 <div class="checkbox-content">
                     <input type="checkbox" />

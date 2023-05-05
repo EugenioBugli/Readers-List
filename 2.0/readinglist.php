@@ -291,7 +291,10 @@
     </script>
 </head>
 <body>
-    <?php include("navbar.php");?>
+    <?php 
+        include("navbar.php");
+        if(!isset($_SESSION["id"])){echo("<script>window.location.href = 'login.php'</script>");}
+    ?>
     
     <div class="grid ">
         <div class="read grid-col">

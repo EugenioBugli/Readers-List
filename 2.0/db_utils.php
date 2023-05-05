@@ -1,5 +1,4 @@
 <?php
-    session_start();
     //max username length = 32 -> max aes128CTR length = 44
     //max email length = 320 -> max aes128CTR length = 428
     //sha256 length = 32
@@ -30,6 +29,12 @@
         $result = pg_query($sql) or die('Error message: ' . pg_last_error());
         if(pg_fetch_row($result)[0] > 0){
             return -1;
+        }
+
+        $sql = "select count(username) from users where username='".$username."'";
+        $result = pg_query($sql) or die('Error message: ' . pg_last_error());
+        if(pg_fetch_row($result)[0] > 0){
+            return -2;
         }
 
         $nID = 0;
@@ -116,7 +121,6 @@
     }
 
     function changePassword($old, $new){
-        echo("gay");
         if(!verify_pwd($_SESSION["id"], $old)){return -1;}
         
         $dbconn = connect();
@@ -127,7 +131,6 @@
                     password='".sha256($new)."' where id='".$_SESSION["id"]."' ";
         echo($query);
         $query_result = pg_query($query) or die('Error Message: ' . preg_last_error());
-        echo("aaa");
         pg_free_result($query_result);
         pg_close($dbconn);
         return 0;
