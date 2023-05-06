@@ -274,13 +274,18 @@
             background-color: #078c57;
         }
 
+        .fa-solid fa-play button {
+            color: blanchedalmond;
+            background-color: transparent;
+        }
+
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         $(document).ready(function(){
             //obj = $("<tr> <td> <div id='progressbar'><div>0%</div></div> </td> </tr>");
 
-            $("#want_table input[type='checkbox']").click(function(){
+            $("#want_table button").click(function(){
                 e = $("#row"+this.value);
                 obj = $("<tr> <td> <div class='progressbar'><div>0%</div></div> </td> </tr>");
                 $(e).fadeOut();
@@ -288,6 +293,7 @@
                     $("#current_table").append($(e));
                     $("#current_table").append(obj);
                     $(e).fadeIn();
+                    $(e).find("button").hide();
                 }, 400); //400 is the default duration for fadeOut
                 $(this).prop("checked",false);
                 
@@ -301,7 +307,6 @@
                     document.getElementById("updatetitle").innerHTML = "Update your current page for ".concat(e.text());
                 });
             });
-
             $("#current_table input[type='checkbox']").click(function(){
                 e = $("#row"+this.value);
                 $(e).fadeOut();
@@ -380,9 +385,9 @@
                         foreach($line as $row) {
                             echo("<tr id='row3".$num."'>
                                 <td>".$row."</td>
-                                <td><input type='checkbox' value='3".$num."'></td>
                                 </tr>");
                             $num++;
+                            //<td><input type='checkbox' value='3".$num."'></td>
                         }
                     }
                     pg_close($dbconn);
@@ -405,11 +410,11 @@
                             $print = "<tr> <td> <div class='progressbar'><div style='width:".$num."%;'> ".$num." % </div></div> </td> </tr>";
                             echo("<tr id='row2".$num."'>
                                 <td>".$row["book"]."</td>
-                                <td><input type='checkbox' value='3".$num."'></td>
                                 </tr>
                                 ".$print."
                                 ");
                             $num++;
+                            //<td><input type='checkbox' value='3".$num."'></td>
                     }
                     pg_close($dbconn);
                 ?>
@@ -430,10 +435,11 @@
                         foreach($line as $row) {
                             echo("<tr id='row1".$num."'>
                             <td>".$row."</td>
-                            <td><input type='checkbox' value='1".$num."'></td>
-                            <td><i class='fa-solid fa-play' value='1".$num."'></i></td>
+                            <td><button class='fa-solid fa-play' value='1".$num."'></button></td>
                             </tr>");
                             $num++;
+                            //alcune prove
+                            //<td><input type='checkbox' value='1".$num."'></td>
                         }
                     }
                     pg_close($dbconn); 

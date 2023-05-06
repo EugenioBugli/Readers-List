@@ -9,5 +9,8 @@
 </head>
 <body>
     <?php include("navbar.php"); ?>
+    <div>
+        <img src="https://vignette.wikia.nocookie.net/innoxia/images/c/c2/Books.gif/revision/latest?cb=20170805184836">
+    </div>
 </body>
 </html>
