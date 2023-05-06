@@ -125,7 +125,7 @@
                 "); ?>
             </div>
             <div class="creator">
-                <button id="logout">Logout</button>
+                <button id="logout" onClick="window.location.href = 'logout.php'">Logout</button>
             </div>
             
             <div class='info infophotogrid'>
@@ -142,7 +142,7 @@
                 <p><h3 class='link'>2023</h3><br>
 
                 
-                <i class="fa-regular fa-gear fa-xl settings" onclick="window.location.href = 'profilesettings.php';"></i>
+                <i class="fa-solid fa-gear fa-xl settings" onclick="window.location.href = 'profilesettings.php';"></i>
             </div>
         </div>
     </div>
