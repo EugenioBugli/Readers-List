@@ -59,6 +59,17 @@
                 <i class="fa-solid fa-lock"></i>
                 <i class="fa-regular fa-eye-slash showHidePassword" onclick="showPassword('passwordInput')"></i>
             </div>
+            <script>
+                var showingPassword = false;
+                function showPassword(id){
+                    showingPassword = !showingPassword;
+                    let e = document.getElementById(id);
+                    if(showingPassword)
+                        e.type = "text"
+                    else
+                        e.type = "password"
+                }
+            </script>
             <div class="checkbox-text">
                 <div class="checkbox-content">
                     <input type="checkbox" />
