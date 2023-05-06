@@ -231,7 +231,7 @@
                 <p><h3 class='link'>2023</h3><br>
 
                 
-                <i class="fa-solid fa-gear fa-xl settings" onclick="window.location.href = 'profilesettings.php';"></i>
+                <i class="fa-solid fa-gear fa-xl fa-spin settings" onclick="window.location.href = 'profilesettings.php';"></i>
             </div>
         </div>
     </div>
