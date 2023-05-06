@@ -138,14 +138,14 @@
             background:blanchedalmond;
         }
 
-        #progressbar {
+        .progressbar {
             background-color: rgb(7, 70, 33);
             border-radius: 13px;
             /* (height of inner div) / 2 + padding */
             padding: 3px;
         }
 
-        #progressbar > div {
+        .progressbar > div {
             background-color: green;
             width: 0%;
             /* Adjust with JavaScript */
@@ -266,7 +266,7 @@
 
             $("#want_table input[type='checkbox']").click(function(){
                 e = $("#row"+this.value);
-                obj = $("<tr> <td> <div id='progressbar'><div>0%</div></div> </td> </tr>");
+                obj = $("<tr> <td> <div class='progressbar'><div>0%</div></div> </td> </tr>");
                 $(e).fadeOut();
                 setTimeout(() => {
                     $("#current_table").append($(e));
@@ -296,14 +296,16 @@
                 $(this).prop("checked",false);
             });
 
-            $("#progressbar").click(function(){
-                    e = $("#row"+this.value);
-                    $("#dialog-pages").css('transform','scale(1)');
-                    $("#dialog-books").css('transform','scale(0)');
-                    $(".addbutton").css('transform','scale(1)');
-                    document.getElementById("bookname").value = e.text().trim();
-                    document.getElementById("updatetitle").innerHTML = "Update your current page for ".concat(e.text());
-                });
+            $(".progressbar").each(function(){
+                $(this).click(function(){
+                        e = $(this).parent().parent().prev(); //from progressbar to the book's name.
+                        $("#dialog-pages").css('transform','scale(1)');
+                        $("#dialog-books").css('transform','scale(0)');
+                        $(".addbutton").css('transform','scale(1)');
+                        document.getElementById("bookname").value = e.text().trim();
+                        document.getElementById("updatetitle").innerHTML = "Update your current page for ".concat(e.text());
+                    });
+            });
 
             $(".addbutton button").click(function(){
                 $("#dialog-books").css('transform','scale(1)');
@@ -377,7 +379,7 @@
                     while($row = pg_fetch_array($result , null , PGSQL_ASSOC)) {
                             $value = ((int)$row["current_page"]) * 100 / ((int) $row["num_pages"]);
                             $num = number_format((float) $value, 1 , '.', '');
-                            $print = "<tr> <td> <div id='progressbar'><div style='width:".$num."%;'> ".$num." % </div></div> </td> </tr>";
+                            $print = "<tr> <td> <div class='progressbar'><div style='width:".$num."%;'> ".$num." % </div></div> </td> </tr>";
                             echo("<tr id='row2".$num."'>
                                 <td>".$row["book"]."</td>
                                 <td><input type='checkbox' value='3".$num."'></td>

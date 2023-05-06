@@ -13,7 +13,6 @@
 
     function change_page($number, $name, $id) {
         $page = (int) $number;
-        //echo("<h2>".$name." has a total of ".$number." pages<h2>");
         $query_c = "update books set current_page=".$page." where id='".$id."' and book='".$name."'";
         $result_c = pg_query($query_c) or die('Error message: ' . pg_last_error());
         pg_free_result($result_c);
