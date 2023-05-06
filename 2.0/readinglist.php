@@ -279,6 +279,16 @@
             background-color: transparent;
         }
 
+        label {
+            position: relative;
+            color: blanchedalmond;
+            height: 40px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+        }
+
+
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
@@ -374,7 +384,12 @@
                 <?php
                     $dbconn = connect();
                     if(isset($_POST["book_name"]) && isset($_POST["author_name"]) && isset($_POST["num_pages"]) && isset($_SESSION["id"])){
-                        $add = book_addition($_SESSION["id"], $_POST["book_name"], $_POST["author_name"], $_POST["num_pages"]);
+                        if(isset($_POST["foreign_language"])) {
+                            $checkbox_value = true;
+                        } else {
+                            $checkbox_value = false;
+                        }                    
+                        $add = book_addition($_SESSION["id"], $_POST["book_name"], $_POST["author_name"], $_POST["num_pages"],$checkbox_value);
                         if($add == -1) echo("<script>alert('Libro Già Inserito');</script>");
                         else echo("<script>alert('Libro Inserito Correttamente');</script>");
                     }
@@ -466,7 +481,9 @@
                 <div class="closebutton">
                     <button type="reset">X</button>
                 </div>
-            </form>
+                <label for="logCheck">Foreign Language?</label>
+                <input type="checkbox" name="foreign_language"/>
+                </form>
         </div>
 
         <div id="dialog-pages">

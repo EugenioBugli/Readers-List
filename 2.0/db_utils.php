@@ -76,14 +76,15 @@
         return $ret;
     }
 
-    function book_addition($id, $name, $author, $num_pages) {
+    function book_addition($id, $name, $author, $num_pages, $foreign) {
         $sql = "select count(book) from books where book='".$name."' and id='".$id."'";
         $result = pg_query($sql) or die('Error message: ' . pg_last_error());
         if(pg_fetch_row($result)[0] > 0){
             return -1;
         }
         $pag = 0;
-        $sql = "INSERT INTO books (id, book, num_pages, author, current_page, finished) VALUES ('".$id."', '".$name."', '".$num_pages."', '".$author."', '".$pag."', FALSE)";
+        $bool = (boolean) filter_var($foreign, FILTER_VALIDATE_BOOLEAN); 
+        $sql = "INSERT INTO books (id, book, num_pages, author, current_page, finished, foreign_lang) VALUES ('".$id."', '".$name."', '".$num_pages."', '".$author."', ".$pag.", false, ".$bool.")";
         $result = pg_query($sql) or die('Error message: ' . pg_last_error());
         pg_free_result($result);
         return 1;
