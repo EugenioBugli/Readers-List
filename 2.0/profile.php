@@ -171,13 +171,48 @@
         <div class='grid'>
 
             <div class='photo infophotogrid'>
-                <img class='user_img' src='https://th.bing.com/th/id/OIP.q-cdNfHrqcd8sGbscdNjzQHaKx?pid=ImgDet&rs=1'>
+                <img class='user_img' id="user_img" src='https://th.bing.com/th/id/OIP.q-cdNfHrqcd8sGbscdNjzQHaKx?pid=ImgDet&rs=1'>
                 <?php echo("
                 <div class='user'>
                 <h3>".$_SESSION["username"]."</h3>
                 </div>
                 "); ?>
+                <input type="file" id="imgupload" accept="image/png, image/gif, image/jpeg" style="display:none"/> 
+                <i class="fa-solid fa-ellipsis" onClick="changePhoto()"></i>
+                <i class="fa-solid fa-x" id="removePhoto" onClick="removePhoto()"></i>
             </div>
+            <script>
+                //script for profile image handling
+                KEY = "<?php echo($_SESSION["username"]); ?>" + "img";
+
+                function changePhoto(){
+                    $('#imgupload').trigger('click');
+                }
+
+                function removePhoto(){
+                    localStorage.removeItem(KEY);
+                    location.reload();
+                }
+
+                const imgInput = document.getElementById('imgupload');
+                imgInput.onchange = () => {
+                    const selectedFile = imgInput.files[0];
+
+                    let fileReader = new FileReader(); 
+                    fileReader.readAsDataURL(selectedFile); 
+                    fileReader.onloadend = function() { // Convert file to base64 string and save to localStorage
+                        localStorage.setItem(KEY, fileReader.result);
+                        document.getElementById("user_img").src = localStorage.getItem(KEY);
+                        location.reload();
+                    }; 
+                }
+                if (localStorage.getItem(KEY) != null) {
+                    document.getElementById("removePhoto").style.display = "block";
+                    document.getElementById("user_img").src = localStorage.getItem(KEY);
+                }else{
+                    document.getElementById("removePhoto").style.display = "none";
+                }
+            </script>
             <div class="creator">
                 <button id="logout" onClick="window.location.href = 'logout.php'">Logout</button>
             </div>
