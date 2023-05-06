@@ -9,6 +9,17 @@
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
     <script src="https://kit.fontawesome.com/1a8c6dd550.js" crossorigin="anonymous"></script>
     <title>Document</title>
+    <style>
+        @media screen and (max-width: 500px) {
+            .form{
+                width: 90vw;
+            }
+
+            .button button{
+                width: 60%;
+            }
+        }
+    </style>
 </head>
 <body>
     <?php

@@ -11,6 +11,18 @@
     <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.css">
     <title>Log in</title>
 
+    <style>
+        @media screen and (max-width: 500px) {
+            .form{
+                width: 90vw;
+            }
+
+            .button button{
+                width: 60%;
+            }
+        }
+    </style>
+
 </head>
 <body>
     <?php
@@ -44,7 +56,7 @@
             </div>
             <div class="input-field">
                 <input type="password" placeholder="Enter your password" id="passwordInput" name="password" required />
-                <i class="fa-regular fa-lock"></i>
+                <i class="fa-solid fa-lock"></i>
                 <i class="fa-regular fa-eye-slash showHidePassword" onclick="showPassword('passwordInput')"></i>
             </div>
             <div class="checkbox-text">
@@ -67,8 +79,5 @@
     <div class="note">
         <h3>Trinity College Dublin</h3>
     </div>
-    <?php
-    //$dbconn = pg_connect("host=localhost dbname=ReadersListDB password=postgres user=postgres port=5432");
-    ?>
 </body>
 </html>
