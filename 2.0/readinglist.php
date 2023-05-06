@@ -258,6 +258,20 @@
             text-align: center;
         }
 
+        .book-field-pag button{
+            position: relative;
+            color: blanchedalmond;
+            background-color: rgb(7, 70, 33);
+            color: blanchedalmond;
+            height: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .book-field-pag button:hover {
+            background-color: #078c57;
+        }
+
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
@@ -328,6 +342,22 @@
         if(!isset($_SESSION["id"])){echo("<script>window.location.href = 'login.php'</script>");}
     ?>
     
+    <?php
+        require("updatepages.php");
+        require("db_utils.php");
+        $dbconn = connect();
+        
+        if(isset($_POST["current_pag"]) && isset($_POST["bookname"]) && isset($_POST["update_button"])) {
+            change_page($_POST["current_pag"], $_POST["bookname"], $_SESSION["id"]);
+            echo("<script>alert('Page Update eseguito Correttamente');</script>");
+        }
+        if(isset($_POST["finished_button"]) && isset($_POST["bookname"])) {
+            book_finished($_POST["bookname"],$_SESSION["id"]);
+            echo("<script>alert('Book Finished');</script>");
+        }
+        
+    ?>
+
     <div class="grid ">
         <div class="read grid-col">
             <table class="read_table table" id="read_table">
@@ -335,7 +365,6 @@
                     <h2>Read</h2><hr>
                 </th>
                 <?php
-                    require("db_utils.php");
                     $dbconn = connect();
                     if(isset($_POST["book_name"]) && isset($_POST["author_name"]) && isset($_POST["num_pages"]) && isset($_SESSION["id"])){
                         $add = book_addition($_SESSION["id"], $_POST["book_name"], $_POST["author_name"], $_POST["num_pages"]);
@@ -358,22 +387,14 @@
                 ?>
             </table>
         </div>
-        <?php
-            require("updatepages.php");
-            $dbconn = connect();
-            if(isset($_POST["current_pag"]) && isset($_POST["bookname"])) {
-                change_page($_POST["current_pag"], $_POST["bookname"], $_SESSION["id"]);
-                echo("<script>alert('Page Update eseguito Correttamente');</script>");
-            }
-        ?>
         <div class="current grid-col">
             <table class="current_table table" id="current_table">
                 <th>
                     <h2>Reading</h2><hr>
                 </th>
-                <?php /*da cambiare con un ciclo che itera sui risultati della query risultante dal database dei libri*/
+                <?php
                     $dbconn = connect();
-                    $query = "select book,current_page,num_pages from books where id ='".$_SESSION["id"]."' and current_page <> 0";
+                    $query = "select book,current_page,num_pages from books where id ='".$_SESSION["id"]."' and current_page <> 0 and finished is not true";
                     $result = pg_query($query);
                     $num = 0;
                     while($row = pg_fetch_array($result , null , PGSQL_ASSOC)) {
@@ -445,10 +466,13 @@
                 <input name="bookname" id="bookname" type="text" hidden></input>
                 <h2 id="updatetitle"></h2>
                 <div class="book-field">
-                    <input type="number" placeholder="New page" name="current_pag" id="current_page" required>
+                    <input type="number" placeholder="New page" name="current_pag" id="current_page" >
                 </div>
-                <div class="book-field button">
-                    <button type="submit">Update</button>
+                <div class="book-field-pag button">
+                    <button name="update_button" type="submit">Update</button>
+                </div>
+                <div class="book-field-pag button">
+                    <button name="finished_button" type="submit">I've finished this Book</button>
                 </div>
                 <div class="closebutton">
                     <button type="reset">X</button>

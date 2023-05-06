@@ -17,4 +17,10 @@
         $result_c = pg_query($query_c) or die('Error message: ' . pg_last_error());
         pg_free_result($result_c);
     }
+
+    function book_finished($name, $id) {
+        $query = "update books set current_page=num_pages, finished=true where id='".$id."' and book='".$name."'";
+        $result = pg_query($query) or ide('Error message: ' , pg_last_error());
+        pg_free_result($result);
+    }
 ?>
