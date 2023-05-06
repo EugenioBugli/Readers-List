@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.css">
     <link rel=stylesheet href="./login.css" type="text/css">
     <title>Reading List</title>
     <style>
@@ -146,7 +147,8 @@
         }
 
         .progressbar > div {
-            background-color: green;
+            /*background-color: green; before */
+            background-image: linear-gradient(to right, rgba(0, 128, 0,0), rgba(0, 128, 0,1));
             width: 0%;
             /* Adjust with JavaScript */
             height: 20px;
@@ -349,11 +351,11 @@
         
         if(isset($_POST["current_pag"]) && isset($_POST["bookname"]) && isset($_POST["update_button"])) {
             change_page($_POST["current_pag"], $_POST["bookname"], $_SESSION["id"]);
-            echo("<script>alert('Page Update eseguito Correttamente');</script>");
+            //echo("<script>alert('Page Update eseguito Correttamente');</script>");
         }
         if(isset($_POST["finished_button"]) && isset($_POST["bookname"])) {
             book_finished($_POST["bookname"],$_SESSION["id"]);
-            echo("<script>alert('Book Finished');</script>");
+            //echo("<script>alert('Book Finished');</script>");
         }
         
     ?>
@@ -429,11 +431,12 @@
                             echo("<tr id='row1".$num."'>
                             <td>".$row."</td>
                             <td><input type='checkbox' value='1".$num."'></td>
+                            <td><i class='fa-solid fa-play' value='1".$num."'></i></td>
                             </tr>");
                             $num++;
                         }
                     }
-                    pg_close($dbconn);
+                    pg_close($dbconn); 
                 ?>
             </table>
         </div>
