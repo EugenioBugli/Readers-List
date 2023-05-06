@@ -6,6 +6,7 @@ $SESSION_TIME = 5*60;
 if(isset($_SESSION["time"]) && time() - $_SESSION["time"] > $SESSION_TIME){
     //session expired
     session_destroy();
+    header("Refresh:0"); //needed because $_SESSION is still available until refresh
 }else{
     $_SESSION["time"] = time();
 }
@@ -63,7 +64,7 @@ if(isset($_SESSION["time"]) && time() - $_SESSION["time"] > $SESSION_TIME){
         }
     }
 
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1000px) and (min-width: 401px) {
         .header{
             position: absolute;
             padding-left: 100px;
@@ -85,6 +86,42 @@ if(isset($_SESSION["time"]) && time() - $_SESSION["time"] > $SESSION_TIME){
 
         .dropdown-menu{
             padding-left: 40px;
+        }
+    }
+
+    @media screen and (max-width: 400px) {
+        .title{
+            display: none;
+        }
+
+        .header{
+            position: absolute;
+            padding-left: 100px;
+            padding-right: 50px;
+            height: 195px;
+        }
+
+        body{
+            padding-top: 205px;
+        }
+        
+        li {
+            float: none;
+        }
+
+        .username{
+            transition: 0s;
+            padding-left: 60px;
+        }
+
+        .dropdown-menu{
+            display: none;
+        }
+
+        ul {
+            position: absolute;
+            top: 0px;
+            right: 0px;
         }
     }
     
@@ -126,7 +163,6 @@ if(isset($_SESSION["time"]) && time() - $_SESSION["time"] > $SESSION_TIME){
         transition: opacity 0.3s ease-out;
         opacity: 0;
         position: absolute;
-        /*background-color: rgb(1, 56, 15, 0.2);*/
         border-radius: 10px;
         padding-top: 10px;
         padding-right: 20px;

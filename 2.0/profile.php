@@ -7,15 +7,72 @@
     <link rel=stylesheet href="./login.css" type="text/css">
     <title>Profile</title>
     <style>
-        .user_img {
-            width: 40%
+        @media screen and (min-width: 651px) {
+            .grid{
+                grid-template:
+                    'a b'
+                    'c c';
+            }
+
+            .creator button{
+                width: 180px;
+            }
+
+            .user_img {
+                width: 40%;
+                min-width: 200px;
+            }
+        }
+
+        @media screen and (max-width: 650px) {
+            .grid{
+                grid-template:
+                    '. a .'
+                    '. b .'
+                    'c c c';
+            }
+
+            .creator button{
+                width: 100%;
+            }
+
+            .user_img {
+                width: 90%;
+            }
+        }
+
+        @media screen and (min-width: 351px) {
+            .about{
+                font-size: 50px;
+            }
+        }
+
+        @media screen and (max-width: 350px) and (min-width: 251px) {
+            .about{
+                font-size: 30px;
+            }
+        }
+
+        @media screen and (max-width: 250px) {
+            .about{
+                font-size: 20px;
+            }
+        }
+
+        @media screen and (min-width: 451px) {
+            .central-sheet {
+                width:60vw;
+            }
+        }
+
+        @media screen and (max-width: 450px) {
+            .central-sheet {
+                width:80vw;
+            }
         }
 
         .grid {
             display: grid;
-            grid-template:
-            'a b'
-            'c c';
             text-align: center;
             column-gap: 1vw;
             row-gap: 8vh;
@@ -26,13 +83,11 @@
             background-color: rgb(7, 70, 33); 
             box-shadow: 0 0 10px;
             border-radius: 30px;
-            width:60%;
             height: auto;
         }
 
         .about {
             text-align: center;
-            font-size: 50px;
             font-weight: 1000;
             letter-spacing: 1px;
             color:blanchedalmond;
@@ -91,7 +146,6 @@
             color:blanchedalmond;
             background-color: rgba(7, 70, 33,0.622);
             height: 40px;
-            width: 180px;
             font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
