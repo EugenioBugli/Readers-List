@@ -378,17 +378,16 @@
                         if($add == -1) echo("<script>alert('Libro Già Inserito');</script>");
                         else echo("<script>alert('Libro Inserito Correttamente');</script>");
                     }
-                    $query = "select book from books where id ='".$_SESSION["id"]."' and finished is true";
+                    $query = "select book,num_pages from books where id ='".$_SESSION["id"]."' and finished is true";
                     $result = pg_query($query);
                     $num = 0;
-                    while($line = pg_fetch_array($result , null , PGSQL_ASSOC)) {
-                        foreach($line as $row) {
-                            echo("<tr id='row3".$num."'>
-                                <td>".$row."</td>
-                                </tr>");
-                            $num++;
-                            //<td><input type='checkbox' value='3".$num."'></td>
-                        }
+                    while($row = pg_fetch_array($result , null , PGSQL_ASSOC)) {
+                        $value = ((int) $row["num_pages"]) / 100;
+                        echo("<tr id='row3".$num."'>
+                            <td>".$row["book"]." : ".$value."</td>
+                            </tr>");
+                        $num++;
+                        //<td><input type='checkbox' value='3".$num."'></td>
                     }
                     pg_close($dbconn);
                 ?>
@@ -405,16 +404,16 @@
                     $result = pg_query($query);
                     $num = 0;
                     while($row = pg_fetch_array($result , null , PGSQL_ASSOC)) {
-                            $value = ((int)$row["current_page"]) * 100 / ((int) $row["num_pages"]);
-                            $num = number_format((float) $value, 1 , '.', '');
-                            $print = "<tr> <td> <div class='progressbar'><div style='width:".$num."%;'> ".$num." % </div></div> </td> </tr>";
-                            echo("<tr id='row2".$num."'>
-                                <td>".$row["book"]."</td>
-                                </tr>
-                                ".$print."
-                                ");
-                            $num++;
-                            //<td><input type='checkbox' value='3".$num."'></td>
+                        $value = ((int)$row["current_page"]) * 100 / ((int) $row["num_pages"]);
+                        $num = number_format((float) $value, 1 , '.', '');
+                        $print = "<tr> <td> <div class='progressbar'><div style='width:".$num."%;'> ".$num." % </div></div> </td> </tr>";
+                        echo("<tr id='row2".$num."'>
+                            <td>".$row["book"]."</td>
+                            </tr>
+                            ".$print."
+                            ");
+                        $num++;
+                        //<td><input type='checkbox' value='3".$num."'></td>
                     }
                     pg_close($dbconn);
                 ?>

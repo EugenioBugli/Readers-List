@@ -38,6 +38,7 @@
                 $_SESSION["username"] = $ret["username"];//////////////////////
                 $_SESSION["email"] = $ret["email"];
                 $_SESSION["time"] = time();
+                $_SESSION["num_points"] = $ret["num_points"];
             }else{
                 echo("<script>alert('".$ret["res"]."');</script>");
             }
