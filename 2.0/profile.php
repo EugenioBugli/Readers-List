@@ -116,7 +116,6 @@
         
 
         .creator {
-            background-color:blue;
             grid-area: c;
         }
 
@@ -155,6 +154,10 @@
 
         .creator button:hover {
             background-color: red;
+        }
+        
+        .leader {
+            color: blanchedalmond;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -215,6 +218,7 @@
             </script>
             <div class="creator">
                 <button id="logout" onClick="window.location.href = 'logout.php'">Logout</button>
+                <button><a class="leader" href="leaderboard.php">LeaderBoard</a></button>
             </div>
             
             <div class='info infophotogrid'>
@@ -225,13 +229,13 @@
                 <h3 class='link'><?php echo($_SESSION["surname"]); ?></h3><br>
 
                 <h3 class='attrib'>BirthDay:</h3>
-                <p><h3 class='link'><?php echo($_SESSION["birth"]); ?></h3><br>
+                <h3 class='link'><?php echo($_SESSION["birth"]); ?></h3><br>
 
                 <h3 class='attrib'>User from:</h3>
-                <p><h3 class='link'>2023</h3><br>
+                <h3 class='link'>2023</h3><br>
 
                 <h3 class='attrib'>Points Gained:</h3>
-                <p><h3 class='link'>
+                <h3 class='link'>
                     <?php
                         require("db_utils.php");
                         $dbconn = connect();
@@ -250,6 +254,7 @@
                 
                 <i class="fa-solid fa-gear fa-xl fa-spin settings" onclick="window.location.href = 'profilesettings.php';"></i>
             </div>
+            
         </div>
     </div>
 </body>
