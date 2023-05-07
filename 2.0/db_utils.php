@@ -42,14 +42,13 @@
         if(pg_num_rows($result) > 0){
             $nID = pg_fetch_row($result)[0] + 1;
         }
-        $num_points = 0;
         $hashPassword = sha256($password);
         $encName = encrypt($name, $password);
         $encSurname = encrypt($surname, $password);
         $encBirth = encrypt($birth, $password);
         $encUsername = $username; //email cannot be crypted because it is key for the database
         $encEmail = $email; //email cannot be crypted so you can recover it
-        $sql = "INSERT INTO users (ID, name, surname, birth, username, email, password, num_points) VALUES (".$nID.", '".$encName."', '".$encSurname."', '".$encBirth."', '".$encUsername."', '".$encEmail."', '".$hashPassword."' , ".$num_points.")";
+        $sql = "INSERT INTO users (ID, name, surname, birth, username, email, password) VALUES (".$nID.", '".$encName."', '".$encSurname."', '".$encBirth."', '".$encUsername."', '".$encEmail."', '".$hashPassword."')";
         $result = pg_query($sql) or die('Error message: ' . pg_last_error());
         pg_free_result($result);
         pg_close($dbconn);
@@ -69,7 +68,7 @@
             return array("res"=>-2);
         }
 
-        $ret = array("res"=>0, "id"=>$row["id"], "name"=>decrypt($row["name"], $password), "surname"=>decrypt($row["surname"], $password), "birth"=>decrypt($row["birth"], $password), "username"=>$row["username"], "email"=>$row["email"], "num_points"=>$row["num_points"]);
+        $ret = array("res"=>0, "id"=>$row["id"], "name"=>decrypt($row["name"], $password), "surname"=>decrypt($row["surname"], $password), "birth"=>decrypt($row["birth"], $password), "username"=>$row["username"], "email"=>$row["email"]);
 
         pg_free_result($result);
         pg_close($dbconn);
@@ -138,7 +137,7 @@
 
     function connect(){
         try {
-            $dbconn = pg_connect("host=localhost dbname=ReadersListDB password=postgres user=postgres port=5432");
+            $dbconn = pg_connect("host=localhost dbname=ReadersListDB password=filo200011 user=postgres port=5432");
             return $dbconn;
         } Catch (exception $e) {
             die($e->getMessage());

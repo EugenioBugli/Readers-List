@@ -64,10 +64,18 @@
             }
 
             #dialog-books{
+                place-self: center;
+            }
+
+            #dialog-pages{
+                place-self: center;
+            }
+            
+            #dialog-books form{
                 width: 90vw;
             }
 
-            #dialog-books form{
+            #dialog-pages form{
                 width: 90vw;
             }
 
@@ -76,7 +84,11 @@
             }
 
             .book-field button{
-                width:50%;
+                width: 50%;
+            }
+
+            .book-field-pag button{
+                width: 50%;
             }
         }
         .read {
@@ -175,6 +187,10 @@
             margin-left: 26vw;
             margin-right: 26vw;
             margin-bottom: 10vh;
+        }
+
+        #dialog-books{
+            grid-area: e;
         }
 
         .book-form {

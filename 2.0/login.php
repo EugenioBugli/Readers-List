@@ -29,7 +29,7 @@
         require("db_utils.php");
         if(isset($_POST["email"]) && isset($_POST["password"])){
             //login database
-            $ret = signin($_POST["email"], $_POST["password"]);
+            $ret = signin(strtolower($_POST["email"]), $_POST["password"]);
             if($ret["res"] == 0){
                 $_SESSION["id"] = $ret["id"];
                 $_SESSION["name"] = $ret["name"];
@@ -38,9 +38,14 @@
                 $_SESSION["username"] = $ret["username"];//////////////////////
                 $_SESSION["email"] = $ret["email"];
                 $_SESSION["time"] = time();
-                $_SESSION["num_points"] = $ret["num_points"];
             }else{
-                echo("<script>alert('".$ret["res"]."');</script>");
+                if($ret["res"]==-1){
+                    echo("<script>alert('The selected email doesn't correspond to any account');</script>");
+                }elseif($ret["res"]==-2){
+                    echo("<script>alert('Wrong password');</script>");
+                }else{
+                    echo("<script>alert('".$ret["res"]."');</script>");
+                }
             }
         }
         if(isset($_SESSION["username"])){echo("<script>window.location.href = 'profile.php'</script>");} 
@@ -71,13 +76,6 @@
                         e.type = "password"
                 }
             </script>
-            <div class="checkbox-text">
-                <div class="checkbox-content">
-                    <input type="checkbox" />
-                    <label for="logCheck">Remember me</label>
-                </div>
-                <a href="./resetpassword.html" class="form-link">Forgot password?</a>
-            </div>
             <div class="input-field button">
                 <button type="submit">Log in</button>
             </div>

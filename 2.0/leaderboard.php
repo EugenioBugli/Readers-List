@@ -14,6 +14,8 @@
             'a a b'
             'c c c'
             '. d .';
+            width: 100vw;
+            overflow: auto;
         }
         .title {
             grid-area: a
@@ -48,8 +50,7 @@
             border-collapse: collapse;
             grid-area: c;
             box-shadow: 0 0 10px;
-            border-radius: 10px;
-            overflow: hidden;
+            border-radius: 10px;   
         }
 
         th, td {

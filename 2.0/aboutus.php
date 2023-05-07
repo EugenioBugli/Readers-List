@@ -12,7 +12,6 @@
             background-color: rgba(46, 43, 43, 0.522); 
             box-shadow: 0 0 10px;
             border-radius: 30px;
-            width:60%;
             height: auto;
         }
 
@@ -35,19 +34,53 @@
         
         .grid {
             display: grid;
-            grid-template:
-            'a .'
-            'a b'
-            'a .';
             text-align: center;
             column-gap: 8vh;
         }
+
+        @media screen and (min-width: 851px) {
+            .grid{
+                grid-template:
+                    'a .'
+                    'a b'
+                    'a .';
+            }
+
+            .central-sheet {
+                width:60%;
+            }
+
+            .photo img{
+                max-width: 300px;
+            }
+        }
+
+        @media screen and (max-width: 850px) {
+            .grid{
+                grid-template:
+                    '. a .'
+                    'b b b';
+            }
+
+            .central-sheet {
+                width:90%;
+            }
+
+            .photo img{
+                max-width: 250px;
+            }
+        }
+
         .infophotogrid {
             text-align: center;
             position: relative;
         }
         .photo {
             grid-area: a;
+        }
+
+        .photo img{
+            width:90%;
         }
 
         .info {
@@ -82,7 +115,7 @@
 </head>
 <body>
     <?php include("navbar.php"); ?>
-    <div class="central-sheet">
+        <div class="central-sheet">
             <h1 class="about">Creator's Contacts :</h1>
             <hr>
             
@@ -115,7 +148,7 @@
                 </div>
                 <div class="info infophotogrid">
                         <h3 class="attrib">E-Mail:</h3><br>
-                        <p><a class="link" href="mailto:ansalone.1950936@studenti.uniroma1.it">FilippoAnsalone@gmail.com</a></p><br>
+                        <p><a class="link" href="mailto:ansalone.1950936@studenti.uniroma1.it">filippoa2000@gmail.com</a></p><br>
                         
                         <h3 class="attrib">GitHub:</h3><br>
                         <p><a class="link" href="https://github.com/Filippo29">Filippo29</a></p><br>

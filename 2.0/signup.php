@@ -25,14 +25,11 @@
     <?php
         require("db_utils.php");
         if(isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["username"]) && isset($_POST["birth"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confpassword"])){
-            //verify valid input
-
-            ////////////////////////////////
-            $id = signup($_POST["name"], $_POST["surname"], $_POST["birth"], $_POST["username"], $_POST["email"], $_POST["password"]);
+            $id = signup($_POST["name"], $_POST["surname"], $_POST["birth"], $_POST["username"], strtolower($_POST["email"]), $_POST["password"]);
             if($id > 0){
                 echo("<script>window.location.href = 'login.php';</script>");
             }elseif($id == -1){
-                echo('<script>alert("È gia presente un account con l'."'".'email selezionata!");</script>');
+                echo('<script>alert("The selected email has already been used for another account");</script>');
             }elseif($id == -2){
                 echo('<script>alert("The selected username is already taken.");</script>');
             }
@@ -81,12 +78,6 @@
                     animation-fill-mode: forwards;
                 }
             </style>
-            <div class="checkbox-text">
-                <div class="checkbox-content">
-                    <input type="checkbox" />
-                    <label for="logCheck">Remember me</label>
-                </div>
-            </div>
             <div class="input-field button">
                 <button id="confirm" type="submit">Sign Up</button>
             </div>
