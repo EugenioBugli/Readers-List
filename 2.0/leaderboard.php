@@ -111,7 +111,7 @@
 
                 $query = "select username from users where id='".$_SESSION["id"]."' ";
                 $count_fl = "select count(book) from books where id='".$_SESSION["id"]."' and foreign_lang is true";
-                $count_b = "select count(book), sum(num_pages) from books where id='".$_SESSION["id"]."' ";
+                $count_b = "select count(book), sum(current_page) from books where id='".$_SESSION["id"]."' ";
 
                 $result = pg_query($query) or die('Error Message: ' . pg_last_error());
                 $res_fl = pg_query($count_fl) or die('Error Message: ' . pg_last_error());
