@@ -83,8 +83,10 @@
             return -1;
         }
         $pag = 0;
-        $bool = (boolean) filter_var($foreign, FILTER_VALIDATE_BOOLEAN); 
-        $sql = "INSERT INTO books (id, book, num_pages, author, current_page, finished, foreign_lang) VALUES ('".$id."', '".$name."', '".$num_pages."', '".$author."', ".$pag.", false, ".$bool.")";
+        if($foreign == 'on'){
+            $sql = "INSERT INTO books (id, book, num_pages, author, current_page, finished, foreign_lang) VALUES ('".$id."', '".$name."', '".$num_pages."', '".$author."', ".$pag.", false, true)";
+        }
+        else $sql = "INSERT INTO books (id, book, num_pages, author, current_page, finished, foreign_lang) VALUES ('".$id."', '".$name."', '".$num_pages."', '".$author."', ".$pag.", false, false)";
         $result = pg_query($sql) or die('Error message: ' . pg_last_error());
         pg_free_result($result);
         return 1;

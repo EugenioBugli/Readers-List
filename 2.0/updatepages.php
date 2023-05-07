@@ -28,11 +28,13 @@
     }
     
     function update_points($book_name, $id) {
-        $query = "select num_pages from books where book = '".$book_name."' and id='".$id."' ";
+        $query = "select num_pages,foreign_lang from books where book = '".$book_name."' and id='".$id."' ";
         $res = pg_query($query) or die('Error Message: ' . pg_last_error());
         $line = pg_fetch_row($res, null, PGSQL_ASSOC);
         $num_points = ((int) $line["num_pages"]) / 100;
-
+        if($line["foreign_lang"]) {
+            $num_points = $num_points * 2;
+        }
         $sql = "update users set num_points = num_points + ".$num_points." where id='".$id."' ";
         $result = pg_query($sql) or die('Error message: ' . pg_last_error());
         pg_free_result($result);

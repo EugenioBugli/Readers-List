@@ -383,21 +383,19 @@
                 </th>
                 <?php
                     $dbconn = connect();
-                    if(isset($_POST["book_name"]) && isset($_POST["author_name"]) && isset($_POST["num_pages"]) && isset($_SESSION["id"])){
-                        if(isset($_POST["foreign_language"])) {
-                            $checkbox_value = true;
-                        } else {
-                            $checkbox_value = false;
-                        }                    
-                        $add = book_addition($_SESSION["id"], $_POST["book_name"], $_POST["author_name"], $_POST["num_pages"],$checkbox_value);
+                    if(isset($_POST["book_name"]) && isset($_POST["author_name"]) && isset($_POST["num_pages"]) && isset($_SESSION["id"])){                
+                        $add = book_addition($_SESSION["id"], $_POST["book_name"], $_POST["author_name"], $_POST["num_pages"],$_POST["foreign_language"]);
                         if($add == -1) echo("<script>alert('Libro Già Inserito');</script>");
                         else echo("<script>alert('Libro Inserito Correttamente');</script>");
                     }
-                    $query = "select book,num_pages from books where id ='".$_SESSION["id"]."' and finished is true";
+                    $query = "select book,num_pages,foreign_lang from books where id ='".$_SESSION["id"]."' and finished is true";
                     $result = pg_query($query);
                     $num = 0;
                     while($row = pg_fetch_array($result , null , PGSQL_ASSOC)) {
                         $value = ((int) $row["num_pages"]) / 100;
+                        if($row["foreign_lang"] == 't') {
+                            $value = $value *2;
+                        }
                         echo("<tr id='row3".$num."'>
                             <td>".$row["book"]." : ".$value."</td>
                             </tr>");

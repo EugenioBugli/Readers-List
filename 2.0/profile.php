@@ -231,7 +231,21 @@
                 <p><h3 class='link'>2023</h3><br>
 
                 <h3 class='attrib'>Points Gained:</h3>
-                <p><h3 class='link'><?php echo($_SESSION["num_points"]);?></h3><br>
+                <p><h3 class='link'>
+                    <?php
+                        require("db_utils.php");
+                        $dbconn = connect();
+                        $query1 = "select sum(num_pages) from books where finished = true and foreign_lang = false and id='".$_SESSION["id"]."'";
+                        $res1 = pg_query($query1) or die('Error Message: ' . pg_last_error());
+                        $line1 = pg_fetch_row($res1 , null, PGSQL_ASSOC);
+                        $value1 = (int) $line1["sum"];
+
+                        $query2 = "select sum(num_pages) from books where finished = true and foreign_lang = true and id='".$_SESSION["id"]."'";
+                        $res2 = pg_query($query2) or die('Error Message: ' . pg_last_error());
+                        $line2 = pg_fetch_row($res2 , null, PGSQL_ASSOC);
+                        $value2 = 2* (int) $line2["sum"];
+                        echo(($value2 + $value1 ) / 100);
+                    ?></h3><br>
 
                 
                 <i class="fa-solid fa-gear fa-xl fa-spin settings" onclick="window.location.href = 'profilesettings.php';"></i>
