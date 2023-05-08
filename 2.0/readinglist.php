@@ -6,15 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.css">
-    <link rel=stylesheet href="./login.css" type="text/css">
+    <link rel=stylesheet href="./style.css" type="text/css">
     <title>Reading List</title>
-    <style>
-        .grid {
-            display: grid;
-            text-align: center;
-            grid-column-gap: 5vw;
-            grid-row-gap: 8vh;
-        }
+    <style> /* responsiveness */
         @media screen and (max-width: 800px) and (min-width: 501px) {
             .grid {
                 grid-template:
@@ -90,6 +84,14 @@
             .book-field-pag button{
                 width: 50%;
             }
+        }
+    </style>
+    <style>
+        .grid {
+            display: grid;
+            text-align: center;
+            grid-column-gap: 5vw;
+            grid-row-gap: 8vh;
         }
         .read {
             grid-area: a;

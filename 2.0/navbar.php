@@ -11,48 +11,7 @@ if(isset($_SESSION["time"]) && time() - $_SESSION["time"] > $SESSION_TIME){
     $_SESSION["time"] = time();
 }
 ?>
-<style>
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: auto; /* or 80px */
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 99;
-        background-color: rgb(7, 70, 33);
-    }
-
-    .title {
-        color: blanchedalmond;
-    }
-    .navigation a{
-        position: relative;
-        font-size: 1.1em;
-        color:blanchedalmond;
-        font-weight: 500;
-        margin-left: 50px;
-    }
-    
-    .navigation a::after{
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: -6px;
-        width: 100%;
-        height: 3px;
-        background-color: blanchedalmond;
-        transform-origin: right;
-        transform: scaleX(0);
-        transition: tranform 0.5s;
-    }
-    
-    .navigation a:hover::after {
-        transform: scaleX(1);
-    }
-
+<style> /* responsiveness */
     @media screen and (min-width: 1001px) {
         .header{
             position: fixed;
@@ -123,6 +82,47 @@ if(isset($_SESSION["time"]) && time() - $_SESSION["time"] > $SESSION_TIME){
             top: 0px;
             right: 0px;
         }
+    }
+</style>
+<style>
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 99;
+        background-color: rgb(7, 70, 33);
+    }
+
+    .title {
+        color: blanchedalmond;
+    }
+    .navigation a{
+        position: relative;
+        font-size: 1.1em;
+        color:blanchedalmond;
+        font-weight: 500;
+        margin-left: 50px;
+    }
+    
+    .navigation a::after{
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 3px;
+        background-color: blanchedalmond;
+        transform-origin: right;
+        transform: scaleX(0);
+        transition: tranform 0.5s;
+    }
+    
+    .navigation a:hover::after {
+        transform: scaleX(1);
     }
     
     li a {

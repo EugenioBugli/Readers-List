@@ -137,7 +137,7 @@
 
     function connect(){
         try {
-            $dbconn = pg_connect("host=localhost dbname=ReadersListDB password=postgres user=postgres port=5432");
+            $dbconn = pg_connect("host=localhost dbname=ReadersListDB password=filo200011 user=postgres port=5432");
             return $dbconn;
         } Catch (exception $e) {
             die($e->getMessage());

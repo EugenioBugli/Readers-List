@@ -4,40 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel=stylesheet href="./login.css" type="text/css">
+    <link rel=stylesheet href="./style.css" type="text/css">
     <title>About Us</title>
-    <style>
-        .central-sheet {
-            position: relative;
-            background-color: rgba(46, 43, 43, 0.522); 
-            box-shadow: 0 0 10px;
-            border-radius: 30px;
-            height: auto;
-        }
-
-        .about {
-            text-align: center;
-            font-size: 50px;
-            font-weight: 1000;
-            letter-spacing: 1px;
-            color:blanchedalmond;
-        }
-
-        hr {
-            display: block;
-            height: 1px;
-            border: 0;
-            border-top: 5px solid blanchedalmond;
-            margin: 1em 0;
-            padding: 0;
-        }
-        
-        .grid {
-            display: grid;
-            text-align: center;
-            column-gap: 8vh;
-        }
-
+    <style> /* responsiveness */
         @media screen and (min-width: 851px) {
             .grid{
                 grid-template:
@@ -69,6 +38,38 @@
             .photo img{
                 max-width: 250px;
             }
+        }
+    </style>
+    <style>
+        .central-sheet {
+            position: relative;
+            background-color: rgba(46, 43, 43, 0.522); 
+            box-shadow: 0 0 10px;
+            border-radius: 30px;
+            height: auto;
+        }
+
+        .about {
+            text-align: center;
+            font-size: 50px;
+            font-weight: 1000;
+            letter-spacing: 1px;
+            color:blanchedalmond;
+        }
+
+        hr {
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 5px solid blanchedalmond;
+            margin: 1em 0;
+            padding: 0;
+        }
+        
+        .grid {
+            display: grid;
+            text-align: center;
+            column-gap: 8vh;
         }
 
         .infophotogrid {
