@@ -160,6 +160,7 @@
         .leader {
             color: blanchedalmond;
         }
+
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.css">
@@ -217,7 +218,8 @@
                     document.getElementById("removePhoto").style.display = "none";
                 }
             </script>
-            <div class="creator">
+            <div class="creator"> 
+                <button><a class="fa-solid fa-history fa-xl" href="history.php" style="color:blanchedalmond"></a></button>
                 <button id="logout" onClick="window.location.href = 'logout.php'">Logout</button>
                 <button><a class="leader" href="leaderboard.php">LeaderBoard</a></button>
             </div>
@@ -250,9 +252,10 @@
                         $line2 = pg_fetch_row($res2 , null, PGSQL_ASSOC);
                         $value2 = 2* (int) $line2["sum"];
                         echo(($value2 + $value1 ) / 100);
-                    ?></h3><br>
+                    ?>
+                </h3><br>
 
-                
+                <h3 class="attrib">Settings</h3>
                 <i class="fa-solid fa-gear fa-xl fa-spin settings" onclick="window.location.href = 'profilesettings.php';" style="color:blanchedalmond"></i>
             </div>
             

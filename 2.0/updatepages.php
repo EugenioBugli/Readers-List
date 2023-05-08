@@ -1,13 +1,44 @@
 <?php
-    function ask_pages($id, $name) {
-        $query = "select num_pages from books where id ='".$id."' and book='".$name."' ";
+    function history($id) {
+        $query = "select book,author,num_pages,foreign_lang from books where id ='".$id."' and finished is true";
         $result = pg_query($query);
         while($line = pg_fetch_row($result, null , PGSQL_ASSOC)) {
-            echo("
-                <div class='book-field'>
-                <h2>".$name." has a total of ".$line["num_pages"]." pages</h2>
-                </div>
+            if($line["foreign_lang"] == 't') {
+                echo("
+                <tr>
+                    <td>
+                    ".$line["book"]."
+                    </td>
+                    <td>
+                    ".$line["author"]."
+                    </td>
+                    <td>
+                    ".$line["num_pages"]."
+                    </td>
+                    <td>
+                    <i class='fa-solid fa-check' style='color:blanchedalmond'></i>
+                    </td>
+                </tr>
                 ");
+            }
+            else {
+                echo("
+                <tr>
+                    <td>
+                    ".$line["book"]."
+                    </td>
+                    <td>
+                    ".$line["author"]."
+                    </td>
+                    <td>
+                    ".$line["num_pages"]."
+                    </td>
+                    <td>
+                    <i class='fa-solid fa-x' style='color:blanchedalmond'></i>
+                    </td>
+                </tr>
+                ");
+            }
         }
     }
 
