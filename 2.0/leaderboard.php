@@ -15,7 +15,7 @@
             'c c c'
             '. d .';
             width: 100vw;
-            overflow: auto;
+            overflow: auto;  /* show scrollbar if needed */
         }
         .title {
             grid-area: a

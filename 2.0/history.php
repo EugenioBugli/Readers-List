@@ -7,6 +7,10 @@
     <link rel=stylesheet href="./style.css" type="text/css">
     <title>Document</title>
     <style>
+        .history{
+            overflow: auto;  /* show scrollbar if needed */
+        }
+
         .history-table {
             border-collapse: collapse;
             grid-area: c;

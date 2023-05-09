@@ -7,29 +7,58 @@
     <link rel=stylesheet href="./style.css" type="text/css">
     <title>Reader's List</title>
     <style>
+        @media screen and (min-width: 1001px) {
+            .home-text{
+                width: 60vw;
+            }
+        }
+        @media screen and (max-width: 1000px) {
+            .home-text{
+                width: 80vw;
+            }
+        }
+        @media screen and (min-width: 601px) {
+            .home-text{
+                grid-template: 
+                'a a'
+                'b c'
+                'd e';
+            }
+        }
+        @media screen and (max-width: 600px) {
+            .home-text{
+                padding: 3vw;
+                grid-template: 
+                'a a a'
+                '. b .'
+                '. c .'
+                '. d .'
+                '. e .';
+            }
+        }
+        @media screen and (max-width: 350px) {
+            img{
+                display: none;
+            }
+        }
+    </style>
+    <style>
         .home-text {
             background-image: linear-gradient(to top, rgba(7, 70, 33,0), rgba(7, 70, 33,1));
-            /*background-color: rgba(7,70,33,0.8);*/
             box-shadow: 0 0 10px;
-            overflow: hidden;
-            width: 60vw;
-            height: 60vh;
-            grid-template: 
-            'a a'
-            'b c'
-            'd e';
+            overflow-x: hidden;
+            overflow-y: auto; /* show scrollbar if needed */
+            height: 80vh;
             display: grid;
             grid-template: auto;
+            row-gap: 10px;
+            column-gap: 10px;
         }
         
         .title-desc {
             font-weight: 1000;
             font-size: 40px;
             grid-area: a;
-            margin-right: auto;
-            margin-left: auto;
-            margin-top: auto;
-            margin-bottom: auto;
         }
 
         h2 {
@@ -42,21 +71,15 @@
         .text1 {
             grid-area: c;
             background-color: blue;
-            margin-right: auto;
-            margin-left: auto;
-            margin-top: auto;
-            margin-bottom: auto;
-            white-space: initial;
         }
 
         .text2 {
             grid-area: d;
             background-color: blue;
-            margin-right: auto;
-            margin-left: auto;
-            margin-top: auto;
-            margin-bottom: auto;
-            white-space: initial;
+        }
+
+        .text1.text2{
+            border-radius: 10px;
         }
 
         img {
@@ -66,29 +89,23 @@
 
         .gif {
             grid-area: e;
-            margin-right: auto;
-            margin-left: auto;
-            margin-top: auto;
-            margin-bottom: auto;
         }
 
         figure {
             grid-area: b;
-            margin-right: auto;
-            margin-left: auto;
             margin-top: auto;
             margin-bottom: auto;
         }
 
         blockquote {
             margin: 0;
+            background-color: rgb(47, 79, 79);
+            border-radius: 5px;
         }
 
         blockquote q {
             padding: 40px;
-            background: rgb(47, 79, 79);
             color: blanchedalmond;
-            border-radius: 5px;
             font-size: 20px;
             font-weight: 700;
         }
