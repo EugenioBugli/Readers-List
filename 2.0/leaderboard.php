@@ -82,6 +82,20 @@
             width: auto;
         }
 
+        .pos1{
+            color: gold;
+            display: block !important;
+        }
+
+        .pos2{
+            color: silver;
+            display: block !important;
+        }
+
+        .pos3{
+            color: #CD7F32; /* bronze */
+            display: block !important;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
@@ -192,10 +206,15 @@
                         where u.id = ".$line["id"]."" ;
                     $res_p = pg_query($query_points) or die('Error Message: ' . pg_last_error());
                     $points = pg_fetch_row($res_p, NULL, PGSQL_ASSOC);
+                    $style = "";
+                    if($line["id"] == $_SESSION["id"]){
+                        $style = "style='background-color: rgba(7, 70, 33, 0.5);'";
+                    }
                     echo("
-                        <tr>
+                        <tr ".$style.">
                             <td class='numb'>
                             ".$num."
+                            <i class='fa-solid fa-medal pos".$num."' style='display: none;'></i>
                             </td>
                             <td>
                             ".$line["username"]."
