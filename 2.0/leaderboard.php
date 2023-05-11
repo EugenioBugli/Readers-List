@@ -73,6 +73,15 @@
             background-color: rgba(46, 43, 43, 0.422);
         }
 
+        .filter-selection button {
+            color: blanchedalmond;
+            background-color: rgb(7, 70, 33);
+            border: none;
+            outline: none;
+            font-size: 20px;
+            width: auto;
+        }
+
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
@@ -109,67 +118,83 @@
                 require("db_utils.php");
                 $dbconn = connect();
 
-                $query = "select username from users where id='".$_SESSION["id"]."' ";
-                $count_fl = "select count(book) from books where id='".$_SESSION["id"]."' and foreign_lang is true";
-                $count_b = "select count(book), sum(current_page) from books where id='".$_SESSION["id"]."' ";
+                $query = "with num_libri as (
+                        select u.id, count(b.book) as num , sum(b.current_page) as pag
+                        from users u join books b on b.id=u.id
+                        group by u.id
+                        )
+                        select u.username,u.id,cast (count(b.book)::decimal / n.num::decimal * 100 as decimal(1000,1)) as percentage, n.num as num_books , n.pag as num_pages
+                        from users u join books b on b.id=u.id join num_libri n on n.id = u.id
+                        where b.foreign_lang is true
+                        group by u.username,n.num,n.pag,u.id
+                        union
+                        select u.username,u.id, 0 , 0 , 0
+                        from users u
+                        where (
+                                select count(books)
+                                from books
+                                where id=u.id
+                                ) = 0";
 
                 $result = pg_query($query) or die('Error Message: ' . pg_last_error());
-                $res_fl = pg_query($count_fl) or die('Error Message: ' . pg_last_error());
-                $res_b = pg_query($count_b) or die('Error Message: ' . pg_last_error());
-
-                $line = pg_fetch_row($result, null, PGSQL_ASSOC);
-                $fl = pg_fetch_row($res_fl, null, PGSQL_ASSOC);
-                $num_fl = (int) $fl["count"]; //# foreign language
-
-                $books = pg_fetch_row($res_b, null, PGSQL_ASSOC);
-                $num_b = (int) $books["count"]; //total books
-                $num_p = (int) $books["sum"]; //total pages
-
-                $percentage = ($num_fl / $num_b) * 100;
-                $percentage =  number_format((float) $percentage, 1 , '.', '');
-
-                $query1 = "select sum(num_pages) from books where finished = true and foreign_lang = false and id='".$_SESSION["id"]."'";
-                $res1 = pg_query($query1) or die('Error Message: ' . pg_last_error());
-                $line1 = pg_fetch_row($res1 , null, PGSQL_ASSOC);
-                $value1 = (int) $line1["sum"];
-
-                $query2 = "select sum(num_pages) from books where finished = true and foreign_lang = true and id='".$_SESSION["id"]."'";
-                $res2 = pg_query($query2) or die('Error Message: ' . pg_last_error());
-                $line2 = pg_fetch_row($res2 , null, PGSQL_ASSOC);
-                $value2 = 2* (int) $line2["sum"];
-                $points = ($value2 + $value1 ) / 100;
                 $num = 1;
-                echo("
-                    <tr>
-                        <td class='numb'>
-                        ".$num."
-                        </td>
-                        <td>
-                        ".$line["username"]."
-                        </td>
 
-                        <td>
-                        ".$num_b."
-                        </td>
+                while($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
+                    $query_points = "with basic as(		
+                        select u.id, cast(sum(b.num_pages) / 100 as decimal(1000,2)) as normal_p
+                        from books b join users u on u.id = b.id
+                        where b.finished is true and foreign_lang is false
+                        group by u.id
+                        )
+                        select u.username, cast(sum(b.num_pages) / 50 as decimal(1000,2)) + a.normal_p as points
+                        from books b join users u on u.id = b.id join basic a on a.id = u.id
+                        where b.finished is true and foreign_lang is true and u.id = ".$line["id"]."
+                        group by u.username,a.normal_p
+                        union
+                        select u.username, 0
+                        from users u
+                        where (
+                            select count(books)
+                            from books
+                            where id=u.id
+                            ) = 0 and u.id = ".$line["id"]."" ;
+                    $res_p = pg_query($query_points) or die('Error Message: ' . pg_last_error());
+                    $points = pg_fetch_row($res_p, NULL, PGSQL_ASSOC);
+                    echo("
+                        <tr>
+                            <td class='numb'>
+                            ".$num."
+                            </td>
+                            <td>
+                            ".$line["username"]."
+                            </td>
 
-                        <td>
-                        ".$percentage."
-                        </td>
+                            <td>
+                            ".$line["num_books"]."
+                            </td>
 
-                        <td>
-                        ".$num_p."
-                        </td>
+                            <td>
+                            ".$line["percentage"]."
+                            </td>
 
-                        <td>
-                        ".$points."
-                        </td>
-                    </tr>
-                ");
-                $num++;
+                            <td>
+                            ".$line["num_pages"]."
+                            </td>
+
+                            <td>
+                            ".$points["points"]."
+                            </td>
+                        </tr>
+                    ");
+                    $num++;
+                }
             ?>
         </table>
         <div class="filter-selection">
-            <h2>Filtri per la tabella: max_punti , num_libri , % foreign</h2>
+            <button>Num Books</button>
+            <button>% foreign</button>
+            <button>Points</button>
+            <button>Num Pages</button>
         </div>
     </div>
 </body>
