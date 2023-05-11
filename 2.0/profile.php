@@ -155,8 +155,12 @@
             outline: none;
         }
 
-        .creator button:hover {
+        .creator .red:hover {
             background-color: red;
+        }
+
+        .creator .green:hover {
+            background-color: green;
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -180,7 +184,7 @@
                 </div>
                 "); ?>
                 <input type="file" id="imgupload" accept="image/png, image/gif, image/jpeg" style="display:none"/> 
-                <i class="fa-solid fa-ellipsis" title="Change image" onClick="changePhoto()" style="color:blanchedalmond;"></i>
+                <i class="fa-solid fa-image" title="Change image" onClick="changePhoto()" style="color:blanchedalmond;"></i>
                 <i class="fa-solid fa-x" title="Remove image" id="removePhoto" onClick="removePhoto()" style="color:blanchedalmond;"></i>
             </div>
             <script>
@@ -216,10 +220,10 @@
                 }
             </script>
             <div class="creator"> 
-                <button><a class="fa-solid fa-history fa-xl" title="History" href="history.php" style="color:blanchedalmond; text-decoration:none;"></a></button>
-                <button><a class="fa-solid fa-ranking-star fa-xl" title="Leaderboard" href="leaderboard.php" style="color:blanchedalmond; text-decoration:none;"></a></button>
-                <button onClick="window.location.href = 'logout.php'"><a class="fa-solid fa-sign-out fa-xl" title="sign out" href="logout.php" style="color:blanchedalmond; text-decoration:none;"></a></button>
-                <button onClick="deleteUser();"><a class="fa-solid fa-trash fa-xl" title="Delete account"></a></button>
+                <button class="green"><a class="fa-solid fa-history fa-xl" title="History" href="history.php" style="color:blanchedalmond; text-decoration:none;"></a></button>
+                <button class="green"><a class="fa-solid fa-ranking-star fa-xl" title="Leaderboard" href="leaderboard.php" style="color:blanchedalmond; text-decoration:none;"></a></button>
+                <button class="red" onClick="window.location.href = 'logout.php'"><a class="fa-solid fa-sign-out fa-xl" title="sign out" href="logout.php" style="color:blanchedalmond; text-decoration:none;"></a></button>
+                <button class="red" onClick="deleteUser();"><a class="fa-solid fa-trash fa-xl" title="Delete account"></a></button>
             </div>
             <script>
                 //delete account
