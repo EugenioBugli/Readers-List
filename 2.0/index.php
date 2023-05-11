@@ -44,7 +44,7 @@
     </style>
     <style>
         .home-text {
-            background-color: rgba(7, 70, 33, 0.6);
+            background-color: rgba(46, 43, 43, 0.822);
             box-shadow: 0 0 10px;
             overflow-x: hidden;
             overflow-y: auto; /* show scrollbar if needed */
@@ -136,8 +136,8 @@
         <figure>
             <blockquote>
                 <q>A room without books is like a body without a soul.</q>
+                <figcaption>—Marcus Tullius Cicero</figcaption>
             </blockquote>
-            <figcaption>—Marcus Tullius Cicero</figcaption>
         </figure>
 
         <img class="gif" src="https://7551bdfc54adf45425bb-e1819ba959867bdb3382b3652a5f5ff1.ssl.cf5.rackcdn.com/animations/467/1435256441-Young_animation_education062515_02.gif">

@@ -153,7 +153,7 @@ if(isset($_SESSION["time"]) && time() - $_SESSION["time"] > $SESSION_TIME){
     }
 
     ul .dropdown a {
-        color: #fff;
+        color: blanchedalmond;
         text-decoration: none;
     }
 

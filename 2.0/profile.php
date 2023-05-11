@@ -81,7 +81,7 @@
 
         .central-sheet {
             position: relative;
-            background-color: rgba(7, 70, 33, 0.8); 
+            background-color: rgba(46, 43, 43, 0.822); 
             box-shadow: 0 0 10px;
             border-radius: 30px;
             height: auto;
@@ -146,7 +146,7 @@
         }
         .creator button{
             color:blanchedalmond;
-            background-color: rgba(7, 70, 33,0.622);
+            background-color: transparent;
             height: 40px;
             font-size: 16px;
             cursor: pointer;
@@ -177,7 +177,7 @@
         <div class='grid'>
 
             <div class='photo infophotogrid'>
-                <img class='user_img' id="user_img" src='https://th.bing.com/th/id/OIP.q-cdNfHrqcd8sGbscdNjzQHaKx?pid=ImgDet&rs=1'>
+                <img class='user_img' id="user_img" src='https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392?k=6&m=1223671392&s=170667a&w=0&h=zP3l7WJinOFaGb2i1F4g8IS2ylw0FlIaa6x3tP9sebU='>
                 <?php echo("
                 <div class='user'>
                 <h3>".$_SESSION["username"]."</h3>
@@ -222,7 +222,7 @@
             <div class="creator"> 
                 <button class="green"><a class="fa-solid fa-history fa-xl" title="History" href="history.php" style="color:blanchedalmond; text-decoration:none;"></a></button>
                 <button class="green"><a class="fa-solid fa-ranking-star fa-xl" title="Leaderboard" href="leaderboard.php" style="color:blanchedalmond; text-decoration:none;"></a></button>
-                <button class="red" onClick="window.location.href = 'logout.php'"><a class="fa-solid fa-sign-out fa-xl" title="sign out" href="logout.php" style="color:blanchedalmond; text-decoration:none;"></a></button>
+                <button class="red" onClick="window.location.href = 'logout.php'"><a class="fa-solid fa-sign-out fa-xl" title="Logout" href="logout.php" style="color:blanchedalmond; text-decoration:none;"></a></button>
                 <button class="red" onClick="deleteUser();"><a class="fa-solid fa-trash fa-xl" title="Delete account"></a></button>
             </div>
             <script>
