@@ -222,7 +222,16 @@
                 <button><a class="fa-solid fa-history fa-xl" href="history.php" style="color:blanchedalmond"></a></button>
                 <button id="logout" onClick="window.location.href = 'logout.php'">Logout</button>
                 <button><a class="leader" href="leaderboard.php">LeaderBoard</a></button>
+                <button onClick="deleteUser();"><a class="fa-solid fa-trash"></a></button>
             </div>
+            <script>
+                //delete account
+                function deleteUser(){
+                    if(confirm("Sei sicuro di voler eliminare il tuo account? Questa azione è IRREVERSIBILE")){
+                        window.location.href = 'deleteaccount.php';
+                    }
+                }
+            </script>
             
             <div class='info infophotogrid'>
                 <h3 class='attrib'>Name:</h3>

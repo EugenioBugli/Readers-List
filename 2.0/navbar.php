@@ -86,7 +86,6 @@ if(isset($_SESSION["time"]) && time() - $_SESSION["time"] > $SESSION_TIME){
 </style>
 <style>
     .header {
-        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
