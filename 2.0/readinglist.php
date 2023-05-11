@@ -312,11 +312,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         $(document).ready(function(){
-            //obj = $("<tr> <td> <div id='progressbar'><div>0%</div></div> </td> </tr>");
-
             $("#want_table button").click(function(){
-                e = $("#row"+this.value);
-                obj = $("<tr> <td> <div class='progressbar'><div>0%</div></div> </td> </tr>");
+                let e = $("#row"+this.value);
+                let obj = $("<tr> <td> <div class='progressbar'><div>0%</div></div> </td> </tr>");
                 $(e).fadeOut();
                 setTimeout(() => {
                     $("#current_table").append($(e));
