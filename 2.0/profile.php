@@ -244,9 +244,6 @@
                 <h3 class='attrib'>BirthDay:</h3>
                 <h3 class='link'><?php echo($_SESSION["birth"]); ?></h3><br>
 
-                <h3 class='attrib'>User from:</h3>
-                <h3 class='link'>2023</h3><br>
-
                 <h3 class='attrib'>Points Gained:</h3>
                 <h3 class='link'>
                     <?php

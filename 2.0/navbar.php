@@ -2,10 +2,11 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-$SESSION_TIME = 5*60;
+$SESSION_TIME = 20*60;
 if(isset($_SESSION["time"]) && time() - $_SESSION["time"] > $SESSION_TIME){
     //session expired
     session_destroy();
+    session_abort();
     header("Refresh:0"); //needed because $_SESSION is still available until refresh
 }else{
     $_SESSION["time"] = time();
