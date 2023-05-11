@@ -48,7 +48,7 @@
             <th>Book</th>
             <th>Author</th>
             <th>Number Of Pages</th>
-            <th>Foreing language</th>
+            <th>Foreign language</th>
             <?php
                 require("db_utils.php");
                 require("updatepages.php");

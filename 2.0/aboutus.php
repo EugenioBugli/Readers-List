@@ -123,7 +123,7 @@
             <div class="grid">
             
                 <div class="photo infophotogrid">
-                    <img src="https://th.bing.com/th/id/OIP.q-cdNfHrqcd8sGbscdNjzQHaKx?pid=ImgDet&rs=1">
+                    <!--<img src="https://th.bing.com/th/id/OIP.q-cdNfHrqcd8sGbscdNjzQHaKx?pid=ImgDet&rs=1">-->
                     <h3 class="creator">Eugenio Bugli</h3>
                 </div>
                 <div class="info infophotogrid ">
@@ -144,7 +144,7 @@
             <div class="grid">
 
                 <div class="photo infophotogrid">
-                    <img src="https://th.bing.com/th/id/OIP.q-cdNfHrqcd8sGbscdNjzQHaKx?pid=ImgDet&rs=1">
+                    <!--<img src="https://th.bing.com/th/id/OIP.q-cdNfHrqcd8sGbscdNjzQHaKx?pid=ImgDet&rs=1">-->
                     <h3 class="creator">Filippo Ansalone</h3>
                 </div>
                 <div class="info infophotogrid">

@@ -132,80 +132,84 @@
                 require("db_utils.php");
                 $dbconn = connect();
 
-                $query = "with num_libri as (
-                    select u.id, count(b.book) as num , sum(b.current_page) as pag
-					from users u join books b on b.id=u.id
-					group by u.id
-					union
-					select u.id, 0, 0
-					from users u
-					where (
-							select count(books)
-        					from books
-        					where id=u.id
-        					) = 0
-                    ),
-		            num_for as(							
-                    select u.id , count(b.book) as fore
-                    from users u join books b on b.id = u.id
-                    where foreign_lang is true
+               
+                $num = 1;
+
+                $query_points = "with basic_p as(		
+                    select u.id, cast(sum(b.num_pages) / 100 as decimal(1000,2)) as normal_p
+                    from books b join users u on u.id = b.id
+                    where b.finished is true and foreign_lang is false
                     group by u.id
                     union
                     select u.id , 0
                     from users u
-                    where (select count(book)
-                        from books
-                        where foreign_lang is true) = 0
+                    where (
+                            select count(book)
+                            from books
+                            where finished is true and foreign_lang is false and id = u.id
+                    ) = 0
+                    ),
+                    for_p as(
+                    select u.id, cast(sum(b.num_pages) / 50 as decimal(1000,2)) as double_p
+                    from books b join users u on u.id = b.id
+                    where b.finished is true and foreign_lang is true
+                    group by u.id
+                    union
+                    select u.id , 0
+                    from users u
+                    where (
+                            select count(book)
+                            from books
+                            where finished is true and foreign_lang is true and id = u.id
+                    ) = 0
                     )
-                        select u.username,u.id,cast (f.fore::decimal / n.num::decimal * 100 as decimal(1000,1)) as percentage, n.num as num_books , n.pag as num_pages
-                        from users u join books b on b.id=u.id join num_libri n on n.id = u.id join num_for f on f.id = u.id
+                    
+                    select u.id,f.double_p + b.normal_p as points
+                    from users u join basic_p b on b.id = u.id join for_p f on f.id = u.id
+                    order by points desc" ;
+
+                $res_p = pg_query($query_points) or die('Error Message: ' . pg_last_error());
+
+                while($points = pg_fetch_array($res_p, null, PGSQL_ASSOC)) {
+                    $query = "with num_libri as (
+                        select u.id, count(b.book) as num , sum(b.current_page) as pag
+                        from users u join books b on b.id=u.id
+                        group by u.id
                         union
-                        select u.username,u.id, 0.0 , 0 , 0
+                        select u.id, 0, 0
                         from users u
                         where (
                                 select count(books)
                                 from books
                                 where id=u.id
-                                ) = 0";
-
-                $result = pg_query($query) or die('Error Message: ' . pg_last_error());
-                $num = 1;
-
-                while($line = pg_fetch_array($result, null, PGSQL_ASSOC)) {
-                    $query_points = "with basic_p as(		
-                        select u.id, cast(sum(b.num_pages) / 100 as decimal(1000,2)) as normal_p
-                        from books b join users u on u.id = b.id
-                        where b.finished is true and foreign_lang is false
-                        group by u.id
-                        union
-                        select u.id , 0
-                        from users u
-                        where (
-                                select count(book)
-                                from books
-                                where finished is true and foreign_lang is false and id = u.id
-                        ) = 0
+                                ) = 0
                         ),
-                        for_p as(
-                        select u.id, cast(sum(b.num_pages) / 50 as decimal(1000,2)) as double_p
-                        from books b join users u on u.id = b.id
-                        where b.finished is true and foreign_lang is true
+                        num_for as(							
+                        select u.id , count(b.book) as fore
+                        from users u join books b on b.id = u.id
+                        where foreign_lang is true
                         group by u.id
                         union
                         select u.id , 0
                         from users u
-                        where (
-                                select count(book)
-                                from books
-                                where finished is true and foreign_lang is true and id = u.id
-                        ) = 0
+                        where (select count(book)
+                            from books
+                            where foreign_lang is true) = 0
                         )
-                        
-                        select u.id,f.double_p + b.normal_p as points
-                        from users u join basic_p b on b.id = u.id join for_p f on f.id = u.id
-                        where u.id = ".$line["id"]."" ;
-                    $res_p = pg_query($query_points) or die('Error Message: ' . pg_last_error());
-                    $points = pg_fetch_row($res_p, NULL, PGSQL_ASSOC);
+                            select u.username,u.id,cast (f.fore::decimal / n.num::decimal * 100 as decimal(1000,1)) as percentage, n.num as num_books , n.pag as num_pages
+                            from users u join books b on b.id=u.id join num_libri n on n.id = u.id join num_for f on f.id = u.id
+                            where u.id = ".$points["id"]."
+                            union
+                            select u.username,u.id, 0.0 , 0 , 0
+                            from users u
+                            where (
+                                    select count(books)
+                                    from books
+                                    where id=u.id
+                                    ) = 0";
+    
+                    $result = pg_query($query) or die('Error Message: ' . pg_last_error());
+                    $line = pg_fetch_row($result, null, PGSQL_ASSOC);
                     $style = "";
                     if($line["id"] == $_SESSION["id"]){
                         $style = "style='background-color: rgba(7, 70, 33, 0.5);'";
