@@ -128,7 +128,6 @@
                     surname='".encrypt($_SESSION["surname"], $new)."',
                     birth='".encrypt($_SESSION["birth"], $new)."',
                     password='".sha256($new)."' where id='".$_SESSION["id"]."' ";
-        echo($query);
         $query_result = pg_query($query) or die('Error Message: ' . preg_last_error());
         pg_free_result($query_result);
         pg_close($dbconn);

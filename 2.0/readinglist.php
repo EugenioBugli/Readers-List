@@ -107,7 +107,8 @@
             background-color: rgba(46, 43, 43, 0.522); 
             box-shadow: 0 0 10px;
             border-radius: 30px;
-            overflow: hidden;
+            max-height: 60vh;
+            overflow: auto;
         }
 
         hr {
