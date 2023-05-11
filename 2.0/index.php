@@ -44,7 +44,7 @@
     </style>
     <style>
         .home-text {
-            background-color: rgba(7, 70, 33, 0.3);
+            background-color: rgba(7, 70, 33, 0.6);
             box-shadow: 0 0 10px;
             overflow-x: hidden;
             overflow-y: auto; /* show scrollbar if needed */
