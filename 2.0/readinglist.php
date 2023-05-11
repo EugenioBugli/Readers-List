@@ -465,7 +465,7 @@
                         foreach($line as $row) {
                             echo("<tr id='row1".$num."'>
                             <td>".$row."</td>
-                            <td><button class='fa-solid fa-play' value='1".$num."'></button></td>
+                            <td><button class='fa-solid fa-play' value='1".$num."' style='background-color:transparent; color:blanchedalmond; border:none '></button></td>
                             </tr>");
                             $num++;
                             //alcune prove
