@@ -81,7 +81,7 @@
 
         .central-sheet {
             position: relative;
-            background-color: rgb(7, 70, 33); 
+            background-color: rgba(7, 70, 33, 0.8); 
             box-shadow: 0 0 10px;
             border-radius: 30px;
             height: auto;
@@ -109,6 +109,8 @@
         }
         .photo {
             grid-area: a;
+            margin-top: auto;
+            margin-bottom: auto;
         }
 
         .info {
@@ -156,11 +158,6 @@
         .creator button:hover {
             background-color: red;
         }
-        
-        .leader {
-            color: blanchedalmond;
-        }
-
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="fontawesome-free-6.4.0-web/css/all.css">
@@ -183,8 +180,8 @@
                 </div>
                 "); ?>
                 <input type="file" id="imgupload" accept="image/png, image/gif, image/jpeg" style="display:none"/> 
-                <i class="fa-solid fa-ellipsis" onClick="changePhoto()"></i>
-                <i class="fa-solid fa-x" id="removePhoto" onClick="removePhoto()"></i>
+                <i class="fa-solid fa-ellipsis" title="Change image" onClick="changePhoto()" style="color:blanchedalmond;"></i>
+                <i class="fa-solid fa-x" title="Remove image" id="removePhoto" onClick="removePhoto()" style="color:blanchedalmond;"></i>
             </div>
             <script>
                 //script for profile image handling
@@ -219,10 +216,10 @@
                 }
             </script>
             <div class="creator"> 
-                <button><a class="fa-solid fa-history fa-xl" href="history.php" style="color:blanchedalmond"></a></button>
-                <button id="logout" onClick="window.location.href = 'logout.php'">Logout</button>
-                <button><a class="leader" href="leaderboard.php">LeaderBoard</a></button>
-                <button onClick="deleteUser();"><a class="fa-solid fa-trash"></a></button>
+                <button><a class="fa-solid fa-history fa-xl" title="History" href="history.php" style="color:blanchedalmond; text-decoration:none;"></a></button>
+                <button><a class="fa-solid fa-ranking-star fa-xl" title="Leaderboard" href="leaderboard.php" style="color:blanchedalmond; text-decoration:none;"></a></button>
+                <button onClick="window.location.href = 'logout.php'"><a class="fa-solid fa-sign-out fa-xl" title="sign out" href="logout.php" style="color:blanchedalmond; text-decoration:none;"></a></button>
+                <button onClick="deleteUser();"><a class="fa-solid fa-trash fa-xl" title="Delete account"></a></button>
             </div>
             <script>
                 //delete account
@@ -264,8 +261,7 @@
                     ?>
                 </h3><br>
 
-                <h3 class="attrib">Settings</h3>
-                <i class="fa-solid fa-gear fa-xl fa-spin settings" onclick="window.location.href = 'profilesettings.php';" style="color:blanchedalmond"></i>
+                <i class="fa-solid fa-gear fa-xl fa-spin settings" title="Settings" onclick="window.location.href = 'profilesettings.php';" style="color:blanchedalmond"></i>
             </div>
             
         </div>
