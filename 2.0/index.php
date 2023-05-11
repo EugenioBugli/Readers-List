@@ -99,7 +99,8 @@
 
         blockquote {
             margin: 0;
-            background-color: rgb(47, 79, 79);
+            /*background-color: rgb(47, 79, 79);*/
+            background-color: rgb(7,70,33);
             border-radius: 5px;
         }
 
@@ -122,7 +123,7 @@
     <?php include("navbar.php"); ?>
     <div class="home-text">
         <h2 class="title-desc">
-            Questo sito web permette di creare una Reading List
+           This website let you create your Reading List
         </h2>
         <br>
         <div class="text1">
@@ -136,7 +137,7 @@
         <figure>
             <blockquote>
                 <q>A room without books is like a body without a soul.</q>
-                <figcaption>—Marcus Tullius Cicero</figcaption>
+                <figcaption>-Marcus Tullius Cicero-</figcaption>
             </blockquote>
         </figure>
 
@@ -145,7 +146,7 @@
         <div class="text2">
             <h2>
                 <strong>All Reader's List users are competing with each other!</strong>
-                 in fact, each reader has the opportunity to deal with all the other people who have the same passion.
+                 In fact, each reader has the opportunity to deal with all the other people who have the same passion.
             </h2>
         </div>
     </div>
