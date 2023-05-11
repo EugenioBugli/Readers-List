@@ -49,6 +49,8 @@
             overflow-x: hidden;
             overflow-y: auto; /* show scrollbar if needed */
             height: 80vh;
+            max-height: 500px;
+            border-radius: 10px;
             display: grid;
             grid-template: auto;
             row-gap: 10px;
