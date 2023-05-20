@@ -6,7 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel=stylesheet href="style.css" type="text/css">
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="https://kit.fontawesome.com/1a8c6dd550.js" crossorigin="anonymous"></script>
     <title>Document</title>
     <style> /* responsiveness */
@@ -59,7 +63,7 @@
                 <input type="text" placeholder="Enter your Email" name="email" id="emailInput" required />
             </div>
             <div class="input-field">
-                <input type="password" placeholder="Enter your Password" id="passwordInput" name="password" required />
+                <input data-toggle="tooltip" type="password" placeholder="Enter your Password" id="passwordInput" name="password" required />
                 <i class="fa-regular fa-eye-slash showHidePassword" onclick="showPassword('passwordInput')"></i>
             </div>
             <div class="input-field">
@@ -82,6 +86,17 @@
                 <button id="confirm" type="submit">Sign Up</button>
             </div>
             <script src="passwordValidator.js"></script>
+
+            <script> //script for showing tooltip when password is invalid
+                i = 0
+                $("#passwordInput").hover(function(){
+                    if(!isPasswordValid(document.getElementById("passwordInput"))){
+                        $(this).tooltip({placement: "bottom", title: "Your password must contain at least: a lower case character, an upper case character, a number."}); 
+                    }else{
+                        $(this).tooltip('dispose');
+                    }
+                });
+            </script>
 
             <div class="login-signup">
                 <p>Already have an account? <a href="./login.php">Log in</a></p>

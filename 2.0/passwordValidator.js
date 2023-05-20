@@ -4,7 +4,6 @@ document.getElementById("confirm").disabled = true;
 document.getElementById("confirm").style.opacity = 0.3;
 
 const passwordHandler = function(e){ 
-    //hover.innerHTML = message;
     if(isPasswordValid(e.target)){
         e.target.style.borderTop = "transparent";
         e.target.classList.add("fadeOKanimation");
@@ -40,16 +39,12 @@ function isPasswordValid(e){
     lowerCase = false;
     upperCase = false;
     digit = false;
-    
-    let message = "Your password must contain at least:";
 
     s = e.value;
     if(s.length < 8){
         e.classList.remove("fadeOKanimation")
-        message = "Your password must be at least 8 characters long";
         e.style.borderColor = colorError;
         e.style.borderTop = "transparent";
-        //isPasswordValid = false;
         return;
     }
     for(let i = 0; i < s.length; i++){
@@ -62,15 +57,6 @@ function isPasswordValid(e){
         if(s.charAt(i) >= '0' && s.charAt(i) <= '9') {
             digit = true;
         }
-    }
-    if(!lowerCase){
-        message += "<br>- one lower case character.";
-    }
-    if(!upperCase){
-        message += "<br>- one upper case character.";
-    }
-    if(!digit){
-        message += "<br>- one number.";
     }
     return lowerCase && upperCase && digit;
 }
