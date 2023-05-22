@@ -7,6 +7,7 @@ const passwordHandler = function(e){
     if(isPasswordValid(e.target)){
         e.target.style.borderTop = "transparent";
         e.target.classList.add("fadeOKanimation");
+        $("#passwordInput").tooltip('dispose');
     }else{
         e.target.classList.remove("fadeOKanimation")
         e.target.style.borderBottomColor = colorError;
