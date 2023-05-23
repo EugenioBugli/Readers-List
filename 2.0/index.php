@@ -103,6 +103,7 @@
             /*background-color: rgb(47, 79, 79);*/
             background-color: rgb(7,70,33);
             border-radius: 5px;
+            text-align: center;
         }
 
         blockquote q {
