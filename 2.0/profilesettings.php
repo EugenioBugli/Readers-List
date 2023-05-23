@@ -167,7 +167,7 @@
                 </div>
                 <div class="change-field button">
                     <button type="submit">Apply Changes</button>
-                    <button type="reset">Back to Profile</button>
+                    <button type="reset"><a title="Profile" href="profile.php" style="color:blanchedalmond; text-decoration:none;">Back to Profile</a></button>
                 </div>
             </form>
         </div>
@@ -184,7 +184,7 @@
                 </div>
                 <div class="change-field button">
                     <button type="submit">Apply Changes</button>
-                    <button type="reset">Back to Profile</button>
+                    <button type="reset"><a title="Profile" href="profile.php" style="color:blanchedalmond; text-decoration:none;">Back to Profile</a></button>
                 </div>
             </form>
         </div>
