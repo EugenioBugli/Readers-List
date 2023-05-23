@@ -12,9 +12,8 @@
         .grid {
             display: grid;
             grid-template:
-            'a a b'
-            'c c c'
-            '. d .';
+            'a a a'
+            'c c c';
             width: 100vw;
             overflow: auto;  /* show scrollbar if needed */
         }
@@ -24,27 +23,6 @@
         .title h1 {
             font-size: 35px;
             font-weight: 1000;
-        }
-        .filter {
-            grid-area: b;
-        }
-
-        .filter-selection {
-            grid-area: d;
-            background-color: rgba(46, 43, 43, 0.422);
-            transform: scale(0);
-            text-align: center;
-        }
-
-        .filter button{
-            color: blanchedalmond;
-            background-color: transparent;
-            color: blanchedalmond;
-            height: 50px;
-            font-size: 26px;
-            float: right;
-            border: none;
-            outline: none;
         }
 
         .board-table {
@@ -72,15 +50,6 @@
 
         tr {
             background-color: rgba(46, 43, 43, 0.422);
-        }
-
-        .filter-selection button {
-            color: blanchedalmond;
-            background-color: rgb(7, 70, 33);
-            border: none;
-            outline: none;
-            font-size: 20px;
-            width: auto;
         }
 
         .pos1{
@@ -116,10 +85,6 @@
 
         <div class="title">
             <h1>LeaderBoard</h1>
-        </div>
-
-        <div class="filter">
-            <button class="fa fa-filter"></button> 
         </div>
 
         <table class="board-table">
@@ -246,12 +211,6 @@
                 }
             ?>
         </table>
-        <div class="filter-selection">
-            <button>Num Books</button>
-            <button>% foreign</button>
-            <button>Points</button>
-            <button>Num Pages</button>
-        </div>
     </div>
 </body>
 </html>
