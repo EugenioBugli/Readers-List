@@ -12,7 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://kit.fontawesome.com/1a8c6dd550.js" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <link rel="icon" type="image/png" href="../openbook.png">
+    <title>Sign Up</title>
     <style> /* responsiveness */
         @media screen and (max-width: 500px) {
             .form{
