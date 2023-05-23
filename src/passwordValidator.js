@@ -16,8 +16,15 @@ const passwordHandler = function(e){
     checkForm();
 }
 
+const confirmpasswordHandler = function(e){
+    checkForm();
+}
+
 let pwd = document.getElementById("passwordInput");
 pwd.addEventListener('input', passwordHandler);
+
+let confpwd = document.getElementById("confirmInput");
+confpwd.addEventListener('input', confirmpasswordHandler);
 
 const emailHandler = function(e){
     checkForm();
@@ -34,6 +41,14 @@ function showPassword(id){
         e.type = "text"
     else
         e.type = "password"
+}
+
+function passwordsCorrespond(){
+    s = document.getElementById("confirmInput").value;
+    if (s == document.getElementById("passwordInput").value){
+        return true;
+    }
+    return false;
 }
 
 function isPasswordValid(e){
@@ -64,12 +79,13 @@ function isPasswordValid(e){
 
 function checkForm(){
     let pwd = isPasswordValid(document.getElementById("passwordInput"));
+    let conf = passwordsCorrespond();
     let isEmailValid = document.getElementById("emailInput").value
             .toLowerCase()
             .match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
 
     let confirm = document.getElementById("confirm");
-    if(pwd && isEmailValid){
+    if(pwd && conf && isEmailValid){
         confirm.disabled = false;
         confirm.style.opacity = 1;
     }else{
