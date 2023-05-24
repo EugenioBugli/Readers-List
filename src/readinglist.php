@@ -323,7 +323,7 @@
                     $(e).fadeIn();
                     $(e).find("button").hide();
                 }, 400); //400 is the default duration for fadeOut
-                $(this).prop("checked",false);
+                
                 
                 //need to change the id 
 
@@ -334,15 +334,6 @@
                     document.getElementById("bookname").value = e.text().trim();
                     document.getElementById("updatetitle").innerHTML = "Update your current page for ".concat(e.text());
                 });
-            });
-            $("#current_table input[type='checkbox']").click(function(){
-                e = $("#row"+this.value);
-                $(e).fadeOut();
-                setTimeout(() => {
-                    $("#read_table").append($(e));
-                    $(e).fadeIn();
-                }, 400); //400 is the default duration for fadeOut
-                $(this).prop("checked",false);
             });
 
             $(".progressbar").each(function(){
