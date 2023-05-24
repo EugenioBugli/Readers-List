@@ -24,7 +24,7 @@ if(isset($_SESSION["time"]) && time() - $_SESSION["time"] > $SESSION_TIME){
         }
     }
 
-    @media screen and (max-width: 1000px) and (min-width: 401px) {
+    @media screen and (max-width: 1000px) and (min-width: 511px) {
         .header{
             position: absolute;
             padding-left: 100px;
@@ -49,7 +49,7 @@ if(isset($_SESSION["time"]) && time() - $_SESSION["time"] > $SESSION_TIME){
         }
     }
 
-    @media screen and (max-width: 400px) {
+    @media screen and (max-width: 510px) {
         .title{
             display: none;
         }
