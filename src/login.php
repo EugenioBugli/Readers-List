@@ -86,9 +86,5 @@
             </div>
         </form>
     </div>
-
-    <div class="note">
-        <h3>Trinity College Dublin</h3>
-    </div>
 </body>
 </html>

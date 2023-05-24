@@ -125,10 +125,3 @@ body {
   .login-signup {
     text-align: center;
   }
-
-  .note {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    color:blanchedalmond ;
-  }
