@@ -244,7 +244,6 @@
         }
         .closebutton button{
             color:blanchedalmond;
-            /*background-color: rgba(7, 70, 33,0.622);*/
             background-color: transparent;
             height: 30px;
             width: 30px;
@@ -409,7 +408,6 @@
                             <td>".$row["book"]." : ".$value."</td>
                             </tr>");
                         $num++;
-                        //<td><input type='checkbox' value='3".$num."'></td>
                     }
                     pg_close($dbconn);
                 ?>
@@ -435,7 +433,6 @@
                             ".$print."
                             ");
                         $num++;
-                        //<td><input type='checkbox' value='3".$num."'></td>
                     }
                     pg_close($dbconn);
                 ?>
@@ -459,8 +456,6 @@
                             <td><button class='fa-solid fa-play' value='1".$num."' style='background-color:transparent; color:blanchedalmond; border:none '></button></td>
                             </tr>");
                             $num++;
-                            //alcune prove
-                            //<td><input type='checkbox' value='1".$num."'></td>
                         }
                     }
                     pg_close($dbconn); 
