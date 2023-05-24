@@ -68,13 +68,6 @@
         }
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script>
-        $(document).ready(function(){
-            $(".filter button").click(function() {
-                $(".filter-selection").css('transform','scale(1)');
-            });
-        });
-    </script>
 </head>
 <body>
     <?php 
