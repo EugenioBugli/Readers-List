@@ -44,9 +44,18 @@
 
     function change_page($number, $name, $id) {
         $page = (int) $number;
-        $query_c = "update books set current_page=".$page." where id='".$id."' and book='".$name."'";
-        $result_c = pg_query($query_c) or die('Error message: ' . pg_last_error());
-        pg_free_result($result_c);
+        $query_check = "select num_pages from books where id='".$id."' and book='".$name."'";
+        $result_check = pg_query($query_check) or die('Error Message: ' . pg_last_error());
+        $line = pg_fetch_row($result_check, null, PGSQL_ASSOC);
+        if( $page >= (int) $line["num_pages"]) {
+            book_finished($name,$id);
+            pg_free_result($result_check);
+        }
+        else {
+            $query_c = "update books set current_page=".$page." where id='".$id."' and book='".$name."'";
+            $result_c = pg_query($query_c) or die('Error message: ' . pg_last_error());
+            pg_free_result($result_c);
+        }
     }
 
     function book_finished($name, $id) {
