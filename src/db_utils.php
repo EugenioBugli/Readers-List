@@ -93,7 +93,7 @@
 
     function verify_pwd($id, $password){
         $dbconn = connect();
-        $sql = "select count(id) from users where password='".sha256($password)."'";
+        $sql = "select count(id) from users where password='".sha256($password)."' and id='".$id."'";
         $result = pg_query($sql) or die('Error message: ' . pg_last_error());
         if(pg_fetch_row($result)[0] == 0){
             return FALSE; // wrong password
@@ -113,7 +113,7 @@
                     surname='".encrypt($surname, $password)."',
                     email='".$email."',
                     username='".$user."' where id='".$id."' ";
-        $query_result = pg_query($query) or die('Error Message: ' . preg_last_error());
+        $query_result = pg_query($query) or die('Error Message: ' . pg_last_error());
         pg_free_result($query_result);
         pg_close($dbconn);
         return 0;
@@ -128,7 +128,7 @@
                     surname='".encrypt($_SESSION["surname"], $new)."',
                     birth='".encrypt($_SESSION["birth"], $new)."',
                     password='".sha256($new)."' where id='".$_SESSION["id"]."' ";
-        $query_result = pg_query($query) or die('Error Message: ' . preg_last_error());
+        $query_result = pg_query($query) or die('Error Message: ' . pg_last_error());
         pg_free_result($query_result);
         pg_close($dbconn);
         return 0;

@@ -61,8 +61,6 @@
     function book_finished($name, $id) {
         $query = "update books set current_page=num_pages, finished=true where id='".$id."' and book='".$name."'";
         $result = pg_query($query) or die('Error message: ' . pg_last_error());
-        //need to add :
-        //ogni volta che un libro viene finito bisogna aggiungere i punti ottenuti al punteggio dell'username
         pg_free_result($result);
     }
 ?>

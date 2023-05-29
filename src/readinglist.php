@@ -324,7 +324,7 @@
                 }, 400); //400 is the default duration for fadeOut
                 
                 
-                //need to change the id 
+                
 
                 obj.click(function(){
                     $("#dialog-pages").css('transform','scale(1)');
